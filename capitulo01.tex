@@ -1,0 +1,79 @@
+\chapter[Capítulo 1. Introducción]{Introducción}
+\pagestyle{fancy}
+
+\section{Introducción}
+
+El agua dulce es el recurso más importante para la humanidad, es un recurso indispensable de todas las actividades sociales, económicas y ambientales, es una condición para toda la vida en nuestro planeta.
+Debido a la contaminación de múltiples fuentes se generan impactos que alteran la composición y calidad de los recursos hídricos causando daños al medio ambiente y a los ecosistemas en general, todo esto conlleva a una serie de consecuencias y daños de carácter reversibles e irreversibles.
+
+En el pa\'is, actualmente hay una gran cantidad de f\'abricas e industrias que expulsan sus aguas residuales a los afluentes sin previos trabajos de depuraci\'on en plantas de tratamientos u otros m\'etodos, por un gran d\'eficit de fiscalizaci\'on ambiental.
+
+%
+%
+%PENDIENTE Hablar de sistemas de medición de de calidad del agua. PENDIENTE
+%
+%
+
+El presente trabajo final de grado (TFG) proponer el dise\~no y fabricación de una sonda, aplicado al monitoreo de calidad del agua mediante sensores que mida el potencial del hidr\'ogeno (PH), temperatura (T), oxigeno disuelto(DO), potencial de oxido reducci\'on (OPR), conductividad el\'ctrica (CE).
+ 
+%Hablar del proyecto PINV15-177 
+En el marco del proyecto  PINV 15-177 - Veh\'iculo Aut\'onomo de Superficie (ASV) para el estudio de calidad del agua en lagos y lagunas, desarrollado en el Laboratorio de Sistemas Distribuido (LSD) perteneciente a la Facultad de Ingenier\'ia de una Universidad Nacional de Asunci\'on (FIUNA) con sede en el Centro de Innovaci\'on Tecnol\'ogica (CITEC), se pretende que de forma aut\'onoma recorra y establezca paradas para obtener lecturas de los sensores a varios niveles de profundidad de esta forma poder crear una columna de medición de los parámetros fisicoquímicos del agua georeferenciado.
+
+El TFG  se organiza en seis cap/'itulos, desarrollados de la siguiente manera. 
+El Capítulo 1, se presenta los objetivos generales y espec\'ificos del TFG,  y breve an\'alisis de la problem\'atica y se establece el alcance del trabajo realizado.
+El Capítulo 2, describe los principales antecedentes sobre sobre el monitoreo de recursos h\'idricos, adem\'as de las definiciones relevantes. 
+El Capítulo 3, presenta dise\~no y planificaci\'on del proyecto y sus partes.
+El Capítulo 4, presenta lo concerniente al desarrollo del sistema y la integraci\'on de todos sus componentes.   
+El Capítulo 5, presenta las pruebas y resultados obtenidos de la sonda. 
+Capítulo 6,  presentara las conclusiones obtenidas y recomendaciones.
+
+\section{Objetivo General}
+Dise\~nar una sonda y sistema de despliegue para medici\'on a multin\'iveles de factores f\'isicoqu\'imicos de recursos h\'idricos.
+\section{Objetivos Específicos}
+
+\begin{itemize}
+	\item Dise\~no mec\'anico de la sonda que contendr\'a a los sensores de CE, pH, OD, OPR, T.
+    \item Investigar y fabricar  la sonda en el material apto.
+    \item Realizar pruebas en ambientes controlados.
+    \item Dise\~no del sistema de descenso para muestreo a multiniveles.
+    \item Dise\~no de una interfaz gr\'afica y almacenamiento en base de datos.  
+    \item Realizar pruebas en el lago Ypakarai.
+
+\end{itemize}
+
+\section{Problem\'atica} 
+
+Las t\'ecnicas tradicionales de muestreo de aguas por lo general pueden resultar bastante engorrosa y lentas. En muchas ocasiones se pierde tiempo analizando lugares donde no eran necesario de forma directa, tardando en detectar a tiempo el origen de los agentes contaminantes.  
+ 
+El presente TFG, ofrece una soluci\'on de automatizaci\'on del proceso de toma de muestras y almacenamiento en una base de datos, con una precisi\'on suficiente para poder determinar lugares donde se presentan alteraci\'on y de esta forma delimitar m\'as los muestreos con t\'ecnicas mas espec\'ificas y de esta forma hacer un muestreo mas eficiente.
+La sonda diseñada podr\'a ser adaptado para operar con cualquier tipo de vehículo acu\'atico, y realizar\'a el muestreo en tiempo real.  
+
+\section{Alcance}
+El TFG comprende el dise\~no y fabricaci\'on de una sonda con los sensores de pH, CE,T, DO,OPR, con autonom\'ia energ\'etica propia, capaz de realizar muestreos de fluidos en tiempo real, almacenarlo en un a base de datos local y transmitir cuando este conectado a una red con internet. 
+El sistema de descenso incluye una gr\'ua para poder medir a multiniveles, y sensores ultras\'onicos fijos para medici/'on de profundidad y otro sensor ultras\'onico m\'ovil para detección de obst\'aculos.  
+El modo de opraci\'on sera autom\'atico, predefinido por el usuario.
+
+
+\section{Estado del arte}
+
+%% Faltan Conectores 
+
+Tomando como referencia los trabajos realizados por Hitz y otros \cite{hitz2012design}, presentaron un novedoso buque de superficie autónomo (ASV, del ingl\'es Autonomous Surface Vehicles) que fue dise\~nado y fabricado especialmente para el monitoreo de los recursos h\'idricos, recursos que se enfrentan a la creciente amenaza de la proliferaci\'on masiva (florac\'on) de cianobacterias nocivas. La sonda debe de ser intuitiva y de f\'acil manejo, aplicado al monitoreo de calidad del agua mediante sensores que midan el PH, la temperatura, el ox\'igeno disuelto,  ORP, conductividad el\'ectrica y color RGB. 
+
+Albarrac\'in, A. y otros \cite{samaniegodevelopment}, especifican que el desarrollo de este sistema de monitorizaci\'on de la calidad del agua permiti\'o conocer y almacenar los datos recolectados de los sitios remotos en tiempo real considerando la sincronizaci\'on entre el tiempo de sleep de los m\'odulos y el tiempo de respuesta de los sensores. 
+
+Torres, D. \cite{torres2009diseno} manifiesta que estudiar las t\'ecnicas de medici\'on de los par\'ametros de calidad de agua y las variaciones de los mismos, permitieron que el sistema electr\'onico dise\~nado se tomar\'a como modelo para la medici\'on de los par\'ametros de calidad de agua en cualquier punto sobre el río Cauca del Valle Del Cauca (Colombia).
+
+R.G. Jones \cite{jones2002measurements}, ha desarrollado un sistema de referencia para la medici\'on de la conductividad del agua, el m\'etodo se basa en la medici\'on de la resistencia de una columna de agua de dimensiones conocidas con precisión. Hay un efecto de polarización del electrodo y la convención es extrapolar la conductividad en funci\'on de la frecuencia inversa para encontrar el valor en frecuencia inversa cero. Las mediciones pueden realizarse con una incertidumbre de aproximadamente 0,14.
+
+Casper y otros\cite{casper2007combining}, realizaron el seguimiento y la evaluaci\'on, especialmente la identificaci\'on de patrones o tendencias espaciales en la qu\'imica del agua (temperatura, conductividad, salinidad, turbidez, clorofila, materia org\'anica disuelta y los gases disueltos) con el uso de una innovadora combinaci\'on de veh\'iculos no tripulados de superficie (USV) y t\'ecnicas de an\'alisis geoespaciales a modo de demostrar que la percepci\'on de que los par\'ametros de muestreo y an\'alisis a intervalos regularmente espaciados sobre la superficie de un sistema fluvial ser\'an representativos de las tendencias generales, sin embargo, la estrategia de muestreo est\'andar asume tanto que los par\'ametros cambiar\'a de una manera longitudinal y aguas abajo y que la media de un par\'ametro es el nivel donde se producen impactos negativos. 
+
+Li, Meilin y otros\cite{li2012design}, presentan en este trabajo, el dise\~no y la implementaci\'on de un nuevo sistema USV reconstruido desde una lancha para proporcionar comodidad para los experimentos de control de aut\'onomas de futuros. El nuevo sistema USV dise\~nado se compone de tres partes: cuerpo principal, el sistema de control de ordenador de a bordo y el sistema de control de tierra. 
+
+ Mastmija y otros\cite{masmitja2010development}, proponen en este trabajo, el desarrollo de un sistema de control para un veh\'iculo submarino autónomo dedicado a la observaci\'on de los oc\'eanos. El veh\'iculo, un h\'ibrido entre veh\'iculos submarinos aut\'onomos (AUV) y Veh\'iculos de superficie Aut\'onomo (ASV), se mueve sobre la superficie del mar y hace inmersiones verticales para obtener perfiles de una columna de agua, de acuerdo con un plan preestablecido. El desplazamiento del veh\'iculo en la superficie permite la navegaci\'on por GPS y la comunicaci\'on de telemetr\'ia por radio-modem. El sistema de control est\'a basado en un equipo integrado est\'a dise\~nado y desarrollado para este veh\'iculo que permite la navegaci\'n aut\'onoma de un veh\'iculo. Este sistema de control se ha dividido en subsistemas de navegaci\'on, propulsi\'on, de seguridad y de adquisici\'on de datos. Dado su alto rendimiento, la incorporaci\'on de algoritmos de control de trayectoria es factible. Tambi\'en, hardware y software espec\'ificos dise\~nados para el correcto funcionamiento de los sensores y propulsores.
+
+Andrew J. y otros \cite{skinner2006using}, han desarrollado un sensor de temperatura de bajo costo que puede ser configurado en "cadenas" sumergibles distribuyé\'endolos a lo largo de un simple cable de tres hilos. El sensor ha demostrado ser capaz de entregar las mediciones de temperatura altamente coincidentes simult\'aneas a una resoluci\'on de unas pocas mil\'esimas de un grado, con una coincidencia mejor que 0.01  \textsuperscript{o}C y una incertidumbre de la medici\'on de aproximadamente 0,05  \textsuperscript{o}C. Una t\'ecnica para generar un recuento estandarizado frente a la curva de temperatura se ha desarrollado utilizando el m\'etodo de diferencias finitas.
+
+Borden  y otros \cite{borden2012long},  describieron en este documento un m\'etodo para emplear m\'odems ac\'usticos subacu\'aticos para el intercambio de datos e informaci\'on  de control entre un AUV sumergida y el operador. Ejemplos de datos que ser\'ian de  inter\'es para un operador AUV podr\'ian consistir en: estado de carga de la bater\'ia, el rumbo del veh\'iculo, la profundidad del veh\'iculo, y la distancia acumulada recorrida. Este  tipo de datos puede ser transferido a través de comunicaciones acústicas subacu\'aticas, eliminando la  necesidad de que el veh\'iculo a la superficie de forma rutinaria y transmitir estos datos a trav\'es del aire. M\'odems ac\'usticos subacuáticos se pueden emplear de baja frecuencia (9 a 13 kHz) ac\'ustica para lograr  una comunicación efectiva. Las distancias de transmisi\'on de m\'as de 5000 metros se  pueden lograr con frecuencias en este rango.
+
+ P.Ramos y Otros \cite{ramos2008four} se presenta un nuevo sensor de cuatro electrodos para mediciones de conductividad del agua. Adem\'as del sensor en s\'i, todo el acondicionamiento de la se\~nal se implementa junto con el procesamiento de la se\'~nal de las salidas del sensor para determinar la conductividad del agua. El sensor est\'a dise\~nado para mediciones de conductividad en el rango de 50 mS / m hasta 5 S / m a trav\'es de la colocaci\'on correcta de los cuatro electrodos dentro del tubo por donde fluye el agua. El prototipo implementado es capaz de suministrar al sensor la corriente necesaria a la frecuencia de medici\'on, adquiriendo las señales sinusoidales a trav\'es de los electrodos de voltaje del sensor y a trav\'es de una impedancia de muestreo para determinar la corriente. Tambi\'en se incluye un sensor de temperatura en el sistema para medir la temperatura del agua y, por lo tanto, compensar la dependencia de la temperatura de la conductividad del agua.

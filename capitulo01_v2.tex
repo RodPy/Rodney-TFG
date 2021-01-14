@@ -1,0 +1,86 @@
+% [RR] FECHA DE HOY jaja 28/09/ 20 :(
+
+
+\chapter[Capítulo 1. Introducción]{Introducción}
+\pagestyle{fancy}
+
+\section{Introducción}
+
+El agua dulce es el recurso más importante para la humanidad, indispensable de todas las actividades sociales, económicas y ambientales, es una sustancia necesaria para la vida en nuestro planeta. Se lo puede encontrar en la naturaleza en sus tres estados (solido, liquido y gaseoso) y conforma la  mayor parte de la superficie del planeta. Desde el inicio de los tiempos estuvimos en contacto con el agua, como fuente de hidrataci\'on, medio de transporte, agricultura, ganader\'ia, materia prima, etc., con el correr de los tiempos pudimos observar como el agua a sufrido una serie de alteraciones debido a la explotaci\'on abusivas por estas actividades, hace relativamente poco tiempo le hemos dado la importancia para estudiar la forma como impactamos y como altera el ecosistema natural, regular varios aspectos con tratados nacionales, internacionales, con el fin de preservar y no alterar mucho los ecosistemas naturales. %Proceso
+
+%[RR]Esta primera parte lo probable es que cambie, con cosas del cap2, le agregue temporalmente el conector para mejorar su nexo 
+
+La humanidad ha sido testigo de como se  perdieron  ecosistemas completos, extingui\'endose fauna, flora, aparici\'on enfermedades que diezmaron poblaciones, a causa de la contaminaci\'on generada, que alteraban los ecosistemas, y esto modificaba la calidad de los recursos h\'idricos, causando d\~nos al medio ambiente y una serie de consecuencias muchas veces irreversibles. 
+
+El Paraguay es un pa\'is rico en recursos naturales, est\'a ubicado en el n\'umero 30, con unos 336 $km^{3}$ de agua dulce dentro de su territorio. El acu\'ifero Guaran\'i es la tercera mayor reserva de agua dulce del mundo, compartido con Brasil, Argentina y Uruguay, con 70.000 $km^{2}$ de superficie en Paraguay \cite{stp_Agua}. Por ello es de vital importancia que se tengan pol\'iticas publicas y departamentos que velen por esos recursos.Es esencial el monitorio de los recursos h/'idiricos para así detectar cambios y tomar las acciones requeridas a tiempo.
+
+En el pa\'is, actualmente existen una gran cantidad de f\'abricas e industrias que expulsan sus desechos residuales a los afluentes sin previos trabajos de depuraci\'on en plantas de tratamientos u otros m\'etodos, que no son controlados y regulados por un gran d\'eficit de fiscalizaci\'on ambiental. 
+
+
+%
+%
+%PENDIENTE Hablar de sistemas de medición de de calidad del agua. PENDIENTE
+% [ML] OKI
+% [RR] Creo que esto voy a hablar mejor en el cap 2
+%
+
+El presente trabajo final de grado (TFG) proponer el dise\~no y fabricación de una sonda, aplicado al monitoreo de calidad del agua mediante sensores, para la medici\'on autom\'atica del potencial del hidr\'ogeno (PH), temperatura (T), oxigeno disuelto(DO), potencial de oxido reducci\'on (OPR), conductividad el\'ctrica (CE). Los cuales seg\'un est\'andares nacionales e internaciones son indicadores b\'asicos para analizar el estado del recurso h\'idrico y poder inferir sobre la calidad del mismo.  
+
+
+%Hablar del proyecto PINV15-177 
+El presente TFG se enmarca en el proyecto PINV 15-177 - Veh\'iculo Aut\'onomo de Superficie (ASV) para el estudio de calidad del agua en lagos y lagunas, desarrollado en el Laboratorio de Sistemas Distribuido (LSD) perteneciente a la Facultad de Ingenier\'ia de una Universidad Nacional de Asunci\'on (FIUNA) con sede en el Centro de Innovaci\'on Tecnol\'ogica (CITEC). El ASV proporciona m\'as automatizaci\'on para el muestreo, transportando la sonda hasta la locaci\'on deseada, georeferenciar los datos obtenidos y capacidad de sensado a diferentes niveles de profundidad. Monitorear de manera regular las fuentes de agua puede ayudar a identificar problemas potenciales antes de que generen algún daño.
+%%[ ]
+
+El TFG  se organiza en cinco cap/'itulos, desarrollados de la siguiente manera. 
+El Capítulo uno, se presentar\'a los objetivos generales y espec\'ificos del TFG,  y breve an\'alisis de la problem\'atica y se establece el alcance del trabajo realizado.
+El Capítulo dos, describe los principales antecedentes sobre sobre el monitoreo de recursos h\'idricos, adem\'as de las definiciones relevantes.
+El Capítulo tres, se desarrolla el dise\~no de las parte, lo concerniente al desarrollo del sistema y la integraci\'on de todos sus componentes.   
+El Capítulo cuatro, se desarrolla las pruebas realizadas y resultados obtenidos con la sonda. 
+Capítulo cinco,  presentar\'a las conclusiones obtenidas y recomendaciones.
+%[RR] Yo metí todo dentro de "sistema " realmente , podria agregar una descripción mas detallada para que se entienda lo que abarca  
+
+\section{Objetivo General}
+Dise\~no e Implementaci\'on una sonda y sistema de despliegue para medici\'on a multin\'iveles de factores f\'isicoqu\'imicos de recursos h\'idricos.
+
+
+\section{Objetivos Específicos}
+\begin{itemize}
+	\item Dise\~no mec\'anico de la sonda que contendr\'a a los sensores de CE, pH, OD, OPR, T.
+    \item Investigaci\'on y fabricaci\'on  la sonda en el material apto.
+    % [RR] Yo primero hice el diseño para impresora 3D y después vi como fabricar, onda lo que queria es el motivo de la impresión 3D y comprar en el mecanizado convencional, yo use ambos 
+    \item Ejecuci\'on de pruebas en ambientes controlados.
+    \item Dise\~no del sistema de descenso para muestreo a multiniveles.
+    \item Dise\~no de una interfaz gr\'afica y almacenamiento en base de datos.  
+    \item Ejecuci\'on de pruebas de campo en el lago Ypakarai.
+
+\end{itemize}
+
+\section{Problem\'atica} 
+
+Las t\'ecnicas tradicionales de muestreo  de aguas  pueden de forma manual, resultar bastante engorrosos,lentos y costoso por los preparativos log\'isticos anterior y posterior a la campa\~na de muestro, por lo general se limitan a unas pocas muestras para su posterior análisis. Estos  procedimientos muchas veces enlentecen localizar r\'apidamente de donde provienen los contaminante y conocer le estado real del cuerpo de agua analizado. El acceso a estos datos analizados no son de fácil acceso y est/'an acompa/~nados de burocracia.  
+
+
+% [RR] Cambie varias cosas,pendiente de mejorar mas explicando los problemas 
+ 
+El presente TFG, pretende entregar al campo de monitoreo y sensado de recursos h\'idricos, un dispositivo practico, escalable, port\'atil, inal\'ambrico, de respuesta r\'apida, de f\'acil uso, que almacene los datos recolectado en una base de datos local y pueda transmitir en tiempo real a alguna alguna estación remota, generando automáticamente un reporte una vez concluida el trabajo. 
+
+La sonda diseñada podr\'a ser adaptado para operar con el ASV del proyecto PINV15-177, obteniendo de este sus datos georeferenciales.Ofrecerá una soluci\'on de automatizaci\'on del proceso de toma de muestras, optimizando  las campan\~nas de verificaci\'on, con menos log\'istica, menos costas y m\'as r\'apidas,  mucho m\'as puntos de muestro y generación automática de reporte cuando sea necesario.
+
+%[RR] Reescribí todo 
+
+\section{Alcance}
+El TFG comprende el dise\~no mec\'anico, el\'ectrico, elect\'onico, control y fabricaci\'on de una sonda, que tenga incorporados los sensores de pH, CE,T, DO,OPR, con autonom\'ia energ\'etica propia, capaz de hacer muestreo de fluidos en tiempo real, configurados de forma manual o autom\'atico sincronizado con una ruta de alg\'un ASV, almacenando los datos obtenidos en una base de datos local con la posibilidad de transmitirlos a una estaci\'on de base remota. 
+
+Para el sensado a multiniveles de profundidades, se dise\~no e implement\'o un sistema compuesto por dos sonares, uno fijo para detectar la profundidad en el punto de medici\'on y otro m\'ovil como detector de obst\'aculos, un molinete el\'ectrico con la capacidad suficiente para soportar el peso de la sonda.
+
+El sistema de descenso se comunican de forma inalambrica con la sonda, y se pueden controlar de forma remota, siempre cuando este conectada a una red wifi con internet.
+
+El modo de opraci\'on podria ser autom\'atico o manual, predefinido por el usuario.
+
+%[RR]Cambie varias cosas 
+
+
+
+%\section{Estado del arte}
+
+%[RR] Me gustaría cerrar por de pronto este capitulo, es justo eso como mencionabas son las referencias para cuando empecé a trabajar, no tienen contexto entre sí, y supongo de ni deberían jaja, yo hice copy paste para tener más a mano cuando quiera usarlos, voy a hacer las correcciones que me sugerís . Arigato  . Me reí bastate en esta parte jajajaa

@@ -1,156 +1,170 @@
-\chapter[Capítulo 3. Metodolog\'ia.]{Metodologia}
-\pagestyle
+ 47675896 i\chapter[Metodolog\'ia.]{Metodologia}
+\pagestyle{fancy}
 
+En este cap\'itulo se describen las consideraciones tenidas en cuenta para el desarrollo de la sonda, el diseño mec\'anico, el\'ectrico, electr\'onico, control y comunicaci\'on de cada uno de los componentes que componen la sonda y su sistema de despliegue. Adem\'as de los diagramas, algoritmos de funcionamiento y el caso de aplicaci\'on en el PINV15-177.
 
-\section[Descripción General del Sistema]{Descripción General del Sistema}
-
-El modelo conceptual del sistema, está compuesto por varios subsistemas o bloques escalables, independientes y que se pueden comunican entre s\'i, mediante un un intermediario que se encarga de coordinar los datos entre los distintos bloques. El sistema general se podr\'ia dividir en tres segmentos principales, por un lado el subsistema central \textit{la sonda}, de mayor complejidad que se encarga de recepci\'on y transmisi\'on de datos y nexo con los otros subsistemas, ejecuta el muestreo con los sensores, almacena en una base local los datos, la \textit{estacion remota}, la sala de monitoreo donde se puede visualizar los datos recibido de la sonda y realizar configuraciones de muestreo, los subsistemas menos complejos se denominar perif\'ericos, son bloques auxiliares escalables en medida que sean necesarios, y de esa forma aumentar las funcionalidades del sistema, en el presente TFG de desarrollaron e implementaron los perif\'ericos que ayuden para el muestreo a multiniveles como ser perif\'ericos de \textit{batimetr\'ia}, para conocer la profundidad del lugar de muestreo y perif\'erico de \textit{gr\'ua} que le otorga a la sonda la posibilidad de desplazamiento vertical para pueda tomar muestras a multiniveles y el perif\'erico \textit{ASV}, provee la ubicaci\'on georeferenciada del punto de muestreo y otorga a la sonda la posibilidad de desplazamiento horizontal sobre toda la superficie a ser analizada. Los modos de operaci\'on pueden ser autom\'aticos, donde ejecuta un algoritmo en sincron\'ia con el ASV o manual donde el usuario desde la estaci\'on remota puede configurar los par\'ametros que requiera.  
-El diagrama de funcionamiento del sistema se pude apreciar en la Figura \ref{fig:3.1}.
-
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=150mm, height=70mm]{Imagenes/2021/img31.pdf}
-    \caption[Diagrama General del Sistema]{Diagrama General del Sistema. \textbf{Fuente:} Elaboración Propia.}
-    \label{fig:3.1}
-\end{figure}
-
-
-
-\subsubsection{Sonda}
-\section[Bloque de Control]{Bloque de Control}
-Este bloque es el encargado de realizar el procesamiento de los datos recibidos a través de los sensores y la configuración de parámetros adquirida por la Interfaz de Usuario.
-
+\section[Consideraciones del sistema]{Consideraciones de Dise\~no}
+Para el desarrollo de la soluci\'on presentada, se tuvo en cuenta las siguientes consideraciones:
 \begin{itemize}
-    \item \textbf{Hardware:}
-    En la Figura \ref{fig:4.4} se observa la placa de desarrollo low cost escogida para el presente proyecto, la Raspberry Pi 3 model B desarrollado por la fundación Raspberry Pi. La misma cuenta con un procesador multimedia Broadcom BCM2835 system-on-chip (SoC).
-    \newline
-    \hfill
-    La CPU Contiene un ARM1176JZFS, con unidad de coma flotante, que funciona a 700Mhz y es capaz de soportar overclock a 1GHZ en modo “TURBO” que hace que el SoC de más rendimiento sin reducir el tiempo de vida de la placa y sin perder la garantía. 
-    La memoria RAM es de 512MB de SDRAM (en su modelo B), en un único módulo, el cual, funciona a 400Mhz en su modo normal y alcanzando los 600Mhz en su versión “TURBO”.
-    La  Raspberry Pi no tiene un disco duro tradicional, para ello dispone de un lector para memorias SD, un sistema de almacenamiento en estado sólido. El arranque del sistema se hará desde la propia tarjeta SD, con lo que, debido a que tiene que albergar todo el sistema operativo, es necesario que la tarjeta sea de al menos 2 GB de capacidad para almacenar todos los archivos requeridos.
-    La placa carece de botón de encendido y apagado, con lo que la energía le llega mediante un conector microUSB estándar de 5V. El consumo de la placa es de 700mA, (3,5W).
-    La Raspberry Pi, está diseñada para ejecutar el sistema operativo GNU/Linux y la version mas extendido es el Raspberry Pi OS .
-    \begin{figure}[t]
-        \centering
-        \includegraphics[width=100mm, height=70mm]{Imagenes/2021/imag35.jpg}
-        \caption[Placa Raspberry Pi 3 model B]{Placa Raspberry Pi 3 model B.\textbf{Fuente:} Página Web del Fabricante.}
-        \label{fig:4.4}
-    \end{figure}
-
-
-    Se optó por este controlador por sus prestaciones prestaciones t/'ecnicas, suficientes para las tareas a ser ejecutadas, con un almacenamiento externa de 32 Gb con una memoria tipo microSD de alto rendimiento, sus dimensiones reducidas eran acorde a los requerimientos necesarios y por tener un gran soporte y comunidad activa en linea.
- 
-    En la Tabla \ref{tab:carac_rasp} se detallan las principales características técnicas de la Raspberry Pi 3 model B.
- 
- \begin{table}[t]
-      \protect\caption[Características Técnicas. Raspberry Pi 3 model B]{Características Técnicas. Raspberry Pi 3 model B.  \label{tab:carac_rasp}}
-    
-     \centering
-     \begin{tabular}{|l|c|}
-        \hline
-           Sistema Operativo & Raspberry Pi OS\\
-          \hline
-          Juego de Instrucciones & RISC 64 bits\\
-          \hline
-          Procesador & RQuad Core 1.2GHz Broadcom BCM2837\\
-          \hline
-          RAM  & 1 GB\\
-          \hline
-          Bluetooth &  4.2 Low Energy (BLE)\\
-          \hline
-          Puertos USB 2.0 & 4\\
-          \hline
-          GPIO& 40\\
-          \hline
-          UART& 2\\
-          \hline
-          I2C& 4\\
-          \hline
-          Stero/Video & 1\\
-          \hline
-          HDMI & 1\\
-          \hline
-          CSI(RPI Camera) & 1\\
-          \hline
-          DSI(RSP Touchscreen display) & 1\\
-          \hline
-          Dimensiones & 85.60 mm x 53.98 mm\\
-          \hline
-          Peso & 50 g\\
-          \hline
-          Consumo energ\'etico & 4 W\\
-          \hline
-          Alimentaci\'on & 5 V\\
-          \hline
-        
-     \end{tabular}
-     \vspace{5mm}
-     \newline
-     \hfill \textbf{Fuente:} Elaboración Propia. Información recopilada de \cite{rasp}
-\end{table}
-    Por otra parte, para eliminar la necesidad de cableado, multiplexación y aislamiento eléctrico en la lectura de los sensores, se optó por la utilización de la placa open source Tentacle Shield para arduino de Whitebox labs, la cual se muestra en la Figura \ref{fig:4.5}.
-\begin{figure}[t]
-    \centering
-    \includegraphics[width=100mm, height=100mm]{Imagenes/2021/imag26.jpg}
-    \caption[Placa Tentacle para Arduino]{Placa Tentacle para Arduino. \textbf{Fuente:} Página web del Fabricante}
-    \label{fig:4.5}
-\end{figure}
-
-    Es una forma pr\'actica y fácil de leer múltiples sensores de la empresa Atlas Scientific, la placa puede alojar hasta 4 dispositivos EZO de Atlas Scientific para medir pH(Potencial de Hidrógeno), Oxígeno Disuelto(DO por sus siglas en inglés), conductividad eléctrica(CE), Temperatura(T), Potencial de Reducción de Oxidación(ORP por sus siglas en inglés)
-
-    \textbf{Aislamiento:}
-    Los circuitos de medición y las líneas de comunicación aislados individualmente evitan el ruido y los bucles de tierra para obtener mediciones precisas incluso en sistemas de bucle cerrado.Los sensores no interferirán entre sí y la mayoría del ruido eléctrico exterior que puede interferir con las lecturas se reducirá.
-
-    \item \textbf{Software:}El software de control fue desarrollado en el lenguaje de programación Python. Este es un lenguaje interpretado multiparadigma, soporta programación orientada a objetos, imperativa y funcional.
-    Python ya viene instalado en el sistema operativo Raspberry Pi OS para Raspberry Pi.Tiene la ventaja de poder utilizar los pines GPIO de la placa de desarrollo para conectar el mundo digital con el mundo físico mediante la programación, facilitando de esta manera el control de la lectura de los distintos sensores y el accionamiento de los actuadores utilizados.
-    
-    El administrador de Base de Datos utilizado fue Sqlite3, es un sistema de gestión de base de datos ampliamente difundido en el mundo de la programación de aplicaciones móviles.
-    La utilización de este gestor fue debido a su gran portabilidad y su capacidad  de gestionar bases de datos de hasta 2 terabyte de tamaño.
-    En la Tabla \ref{tab:caract_sqlite} se muestran las características más relevantes de la Base de Datos Sqlite.
-
-    \begin{table}[H]
-    \protect\caption[Características del Gestor de Base de Datos SQLITE]{Características del Gestor de Base de Datos SQLITE.\label{tab:caract_sqlite}}
-        \centering
-        \begin{tabular}{|l|l|}
-            \hline
-            Soporte & Múltiples tablas,\textit{triggers} y vistas   \\
-            \hline
-             Lectura y Escritura& \multicolumn{1}{|l|}{\begin{tabular}[c]{@{}l@{}}  Directamente sobre archivos que se encuentran en el disco \\ duro.\end{tabular}} 
-             \\
-             \hline
-             Formato & 
-             \multicolumn{1}{|l|}{\begin{tabular}[c]{@{}l@{}}  Multiplataforma. Puede ser utilizado en sistemas de 32 bits \\ o 64 bits.\end{tabular}} 
-           \\
-             \hline
-             Operaciones &\multicolumn{1}{|l|}{\begin{tabular}[c]{@{}l@{}} Realiza operaciones de manera más eficiente y rápido que  \\ MySql y PostgreSQL.\end{tabular}} 
-            \\
-             \hline
-             Interfaz API &\multicolumn{1}{|l|}{\begin{tabular}[c]{@{}l@{}}Opera con diversas Interfaces API lo que permite trabajar  \\con C++, PHP, Python, Groovy, etc.\end{tabular}} 
-            \\
-             \hline
-             Dependencias Externas & No\\
-             \hline
-             Librerías & Cuentan con acceso para muchos lenguajes de programación.\\
-             \hline
-             UDF & Soporta funciones SQL definidas por el usuario.\\
-             \hline
-             Código Fuente & Dominio público y documentación extensa.\\
-             \hline
-        
-        \end{tabular}
-        \vspace{5mm}
-        \newline
-        \hfill \textbf{Fuente: }Pagina Web del desarrollador.\cite{sqlite}
-        
-    \end{table}
+    \item Portabilidad: Se espera que la sonda sea transportable por una persona sin mucho problema, el di\'ametro debe ser menor a 150[mm].
+    \item Asequibilidad: Se espera que el costo final pueda ser reducido menor al 20\% del costo de una soluci\'on comercial parecida(Libelium Smart Water Xtreme), valorada en \$ 11.200 (once mil doscientos d\'olares americanos) \cite{storeLibelium}, sin contar los impuestos y gastos de importaci\'on.  
+    \item Escalable: Se espera que la soluci\'on pueda ser escalable y configurable, seg\'un la necesidad. Vers\'atil para que pueda ser compatible con otros sensores con peque\~nos o ningún cambio en la sonda.
+    \item Compatibilidad: Se espera que la sonda pueda ser compatibles con varios protocolos de comuncic\'on y con otros sensores, con la menor cantidad de adaptaciones mec\'anicas o electr\'onicas. 
+    \item Rangos de medici\'on: Considerando que el lugar de despliegue de la sonda, ser\'a en el lago Ypakarai, se espera que la soluci\'on pueda desenvolverse sin problemas hasta 4 metros de profundidad, considerando el estudio de batimetr\'ia realizado por el laboratorio de Soluciones tecnol\'ogicas para la gesti\'on Integral de los Recursos H\'idricos. Anexo \ref{fig:BatimetriaItaipu}
+    \item Adaptable: Se espera que la soluci\'on pueda ser utilizado con diferentes sistemas de despliegue.
+    \item Open Source: Se espera que durante el desarrollo de la soluci\'on se prioricen los sistemas open source para reducir costos y poder contribuir al ecosistema. 
+    \item Autonom\'ia: Se espera que la soluci\'on presentada se pueda utilizar sin necesidad de estar sujeto a otros sistemas y que cuenta con una fuente de alimentaci\'on independiente y recargable para permitir muestro de hasta por lo menos 10 horas continuas, que es la duraci\'on promedio de luz natural \cite{ClimaSol}. 
     
 \end{itemize}
 
-\section[Interfaz de Sensores]{Interfaz de Sensores}
-Es el bloque donde se adquiere toda la información respecto caracteristicas f\'isico - qu\'imica del recurso h\'idrica, para su posterior procesamiento, almacenamiento y transmici\'on a base remoto.
+Teniendo en cuenta las consideraciones y criterios antes expuestas y luego de la revisi\'on de los trabajos de otros autores, estudiados en el cap\'itulo anterior. A continuaci\'on se abordar\'a el proceso de desarrollo involucrado, a modo de orden se dividi\'o todo el proceso en tres grandes secciones, los cuales son Disen\~no, en el cual se detallan los planos y diagramas m\'ecanicos de cada uno de los elementos del sistema en la subsecci\'on de dise\~nos m\'ecanico, los diagramas, planos y esquemas de conexi\'on el\'ectrica en la subsecci\'on de dise\~no el\'ectrico, en la subsecci\'on de dise\~no electr\'onico se abarcara lo concerniente al diseño electr\'onico circuitos de adquisici\'on de datos de los sensores, drivers y otros elementos, en la subsecci\'on de la base de datos y control. 
 
-\subsection{Sensor de pH}
+\section{Dise\~no}
+
+\subsection[Dise\~no M\'ecanico]{Dise\~no M\'ecanico}
+\subsubsection[Sonda]{Sonda}
+
+El dise\~no final fue un proceso evolutivo resultado de varias iteraciones y resultado de procesos evolutivos iniciado en el proyecto Cormor\'an-I detallado en el anexo \ref{Anexo:Cormoran},  partiendo el modelo utilizado por Hitz y otros\cite{hitz2012design}, %% Colocar Graficos o referenciar del cap2
+
+hasta la versi\'on final, aunque esta soluci\'on est\'a pensada principalmente para el proyecto PIN15-177, la idea tras este trabajo es adem\'as, contar con un dispositivo capaz de funcionar de forma independiente a cualquier otro tipo de veh\'iculo, extendiendo as\'i sus posibles tipos de usos, como el monitoreo de acu\'iferos, esto supone que la sonda deba contar con todos los elementos necesarios para su correcto desenvolvimiento, la funci\'on principal de la sonda es brindar soporte a cada uno de los sensores, el soporte incluye el procesamiento de se\~nal, alimentaci\'on, almacenamiento de datos, protecci\'on contra impactos y transmisi\'on a una estaci\'on base remota los datos sensados.
+
+Para el proyecto PIN15-177, la sonda a ser implementada debe de dar soportes a inicialmente cinco sensores (ph,CE,OD,OPR,T) y el dise\~no debe soportar la incorporaci\'on y/o retiro de alg\'un sensor, sin que esto conlleve adaptaciones importantes en la sonda, por ese motivo se opt\'o por un dise\~no modular de tal forma que, cuando sea necesario modificar alg\'un sensor se tenga que reemplazar simplemente uno de los m\'odulos y de esta forma reducir los costos. Los tres mo\'dulos est\'an compuestos por:
+\begin{itemize}
+    \item \textbf{Frente}: Este m\'odulo es la pieza frontal de la sonda, cuya funci\'on principal es de protecci\'on a cada uno de los sensores contra basuras u objetos con que puede entrar en contacto directo y adem\'as de crear un entorno de volumen de agua constante y reducir en la mayor medida posible la formaci\'on de turbulencias alrededor de los sensores para evitar los fallos o errores de lecturas de los sensores que se podr\'ian registrar a causas de burbujas de aire en los cabezales de los sensores. Tal como indica en la figura \ref{fig:Frente}, la zona comprendida dentro del recuadro rojo. As\'i como se indica en el plano del anexo \ref{fig:ModuloFrontal}, para el dise\~no de est\'e m\'odulo, se parti\'o de una forma cil\'indrica hueco de altura suficiente para poder cubrir totalmente cada uno de los sensores, con aberturas longitudinales equidistantes en las paredes laterales en forma de ranuras con bordes redondeados, una de las bases totalmente libre para que se pueda acoplar a los otros m\'odulos y  la otra base redondeado de forma esf\'eorico hueco, a fin favorecer el efecto hidrodin\'amico al momento del contacto con el agua, como se presentara m\'as adelante con las simulaciones realizadas.
+    
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=110mm, height=40mm]{Imagenes/cap3/CompletoV5_Frente.png}
+        \caption[Corte Transversal]{Corte Transversal Sonda. M\'odulo: Frente.}\textbf{Fuente:} Elaboración Propia.
+        \label{fig:Frente}
+    \end{figure}
+    \item \textbf{Base}: Este m\'odulo, es la parte posterior de la sonda, su función principal es de almacenar de forma segura todo el equipamiento electr\'onico de control, el\'ectrico, almentaci\'on y placas necesarias para los sensores, tal como se indica en la figura \ref{fig:Base2020}, la base est\'a conformada por un cilindro hueco de 270 [mm] de altura, 120[mm] de di\'ametro exterior, espesor de las paredes internas laterales de 10[mm] y un espesor de la base 15[mm],  para sellar de forma herm\'etica, se utilizó un roscado Whitworth fino, utilizada para tuber\'ias de gas y de agua\cite{falk_metalotecnia_1986}, de paso 1,154 [mm].
+    
+    \begin{figure}[h]
+    \centering
+    \fbox{\includegraphics[scale=0.45]{Imagenes/2019/Base2019.PDF} }
+    \caption{Dise\~no final de la base. \textbf{Fuente}: Elaboraci\'on propia}
+    \label{fig:Base2020}
+    \end{figure}
+    \item \textbf{Anillo}: Tercer m\'odulo, es la parte centrar de la sonda, adem\'as de servir como enlace entre las otras dos piezas, tiene dos funciones principales, en primer lugar acoplarse a la base cerr\'andolo de forma herm\'etica y la segunda de sostener los sensores en sus posiciones fijas en la sonda. Este es el m\'odulo m\'as peque\~no en relaci\'on a las otras dos, se dise\~no de esta forma para ser el \'unico m\'odulo que se espera se tenga que reemplazar en el caso de ser necesario una reconfiguraci\'on u modificaci\'on de los sensores. Tal como se muestra en la figura \ref{fig:Anillo2019} el dise\~no parte de un cilindro macizo de 70 [mm] de altura y 120[mm] de di\'ametro exterior, se utiliz\'o Whitworth fino al igual que la base a fin de que pueda enroscarse  perfectamente, con el roscado se asegura hasta cierto punto el cierre herm\'etico entre los dos m\'odulos, como medida de seguridad extra se introducen los o-ring, para crear otro  sello hermético al momento del contacto entre las dos m\'odulos, con estos dos sistemas se espera que el ingreso de l\'iquidos sea nulo o m\'inimo, para la implementaci\'on de la sonda en este trabajo se utilizaran 5 sensores, y como esta secci\'on es la encargada que mantener en su posici\'on cada uno de los sensores, se realizan cinco perforaciones en este m\'odulo a fin de poder colocarlos de forma perpendicular. Como estas perforaciones para los sensores implicar\'ia posibles en \'areas de ingreso de l\'iquido, considerando adem\'as que el uso de o-ring se tornan un poco complicados para la posterior fabricaci\'on, se opt\'o por utilizar juntas hidr\'aulicas estandarizadas con el di\'ametro interno compatible con el di\'ametro del los sensores, dispuesta en pares por cada uno de los sensores a fin de 
+    
+    \begin{figure}[h]
+    \centering
+    \fbox{\includegraphics[scale=0.6]{Imagenes/2019/anillo2019.PDF} }
+    \caption{Dise\~no final del anillo. Fuente: elaboración propia}
+    \label{fig:Anillo2019}
+    \end{figure}
+\end{itemize}
+
+\subsubsection[Batimetr\'ia]{Batimetr\'ia}
+Este subsistema auxiliar, está pensado por la capacidad de medici\'on a multi niveles, cuando se requiera que la sonda descienda el subsistema se encargara de censar la profundidad en el punto de descenso y mandar la informaci\'on a la sonda para seteo de la carrera de la gr\'ua. Se opt\'o por una estructura simple, de bajo costo,  modular y vers\'atil para varios modos de uso.  
+La estructura est\'a compuesta por
+
+\subsubsection[Gr\'ua ]{Gr\'ua}
+
+
+\subsection[Dise\~no El\'ectrico]{Dise\~no El\'ectrico}
+\subsubsection[Sonda]{Sonda}
+Para lograr autonom\'ia energ\'etica para la sonda se opto por utilizar bater\'ias LiPo Nano-Tech por sus caracter\'isticas t\'ecnicas que permitir\'an alimentar de forma suficiente a toda los componentes que conforman la sonda, como se aprecia en la Figura \ref{fig:4.17}. 
+
+Las baterias Turnigy nano-tech Lipoly bater\'ias fueron dise\~nados para alto rendimiento . Utilizando un avanzado sustrato electrones que permite pasar m\'as libremente de \'anodo a c\'atodo con menos impedancia interna.
+ Las ventajas que presenta la utilización de esta fuente son la posibilidad de tener tensiones de +/- 3.3V, +/-5V y +/-12V sin la necesidad de realizar circuitos para la obtención de estos voltajes en comparación a la utilización de baterías de litio.
+ \newline
+ \hfill
+Las ventajas sobre las bater\'ias tradicionales LIPOLY;
+\begin{itemize}
+    \item La densidad de potencia alcanza 7,5 kW / kg.
+    \item Menos hueco de tensi\'on durante la descarga de alta velocidad, dando m\'as poder bajo carga.
+    \item Impedancia interna puede llegar tan bajo como 1.2 m${\Omega }$ en comparación con la de 3 m${\Omega }$ de un Lipoly estándar
+    \item Control t\'ermico m\'as, paquete por lo general no supera 60 $^{\circ}$C.
+    \item Hinchazón durante la carga pesada no supera 5\%, en comparación con 15\% de un Lipoly normal.
+    \item Mayor capacidad durante la descarga pesada. M\'as del 90\% a la tasa de 10O\% C.
+    \item Carga r\'apida capaz, hasta 15$^{\circ}$C en algunas baterías.
+    \item Mayor duraci\'on del ciclo, casi el doble que el de la tecnolog\'ia LiPoly est\'andar.
+\end{itemize}
+
+
+La tecnolog\'ia de nano-core en las bater\'ias de litio es la aplicaci\'on de aditivos conductores nan\'ometros. Los aditivos nan\'ometros conductora forman redes ultra-fuertes de electrones de conducci\'on en los electrodos que pueden aumentar la conductividad electr\'onica.
+
+Estos aditivos crean la capacidad de imbibici\'on en el l\'iquido portador para suministrar m\'as canales de iones. Esto mejora la capacidad de transmisi\'on de iones y la difusi\'on de iones. A trav\'es de la mejora de la conductividad y de iones de transmisi\'on electr\'onica, la impedancia se reduce y la polarizaci\'on de la descarga de alta tasa disminuye en gran medida.
+
+\hfill
+\begin{table}[t]
+\protect\caption[Caracter\'isticas de bater\'ia Lipo Nano-Tech ]{Caracter\'isticas de bater\'ia Lipo Nano-Tec 5100mAh.}
+\label{tab:caract_bat}
+\begin{center}
+\begin{tabular}{|l|l|}
+\hline
+Capacidad    &  5100 mAh \\
+\hline
+Voltaje      &  2S3P/ 7.4 V \\
+\hline
+Descarga &  65C / 135C \\
+\hline
+Peso  & 290 g\\
+\hline
+Dimensi\'on   &  69x47x25 mm\\
+\hline
+Conector equilibrio	& JST\\
+\hline
+\end{tabular}
+\vspace{5mm}
+\newline
+\hfill \textbf{Fuente:} P\'agina Web del Fabricante\cite{bateria}
+\end{center}
+\end{table}
+
+En contrapartida, limitará a nuestro sistema, ya que deberá ir conectado a la red eléctrica todo el tiempo que se requiera del uso de la misma.
+\section[Características Técnicas de los módulos]{Características Técnicas del módulo Sonda}
+La Tabla \ref{tab:carac_general} detalla las características técnicas del mecanismo a ser desarrollado, teniendo en cuenta los objetivos planteados en la Sección 1.3.
+
+\begin{table}[H]
+\protect\caption[Datos Técnicos]{Datos Técnicos. \label{tab:carac_general}}
+    \centering
+    \scalebox{0.9}{\begin{tabular}{|c|c|}
+        \hline
+        \textbf{Característica} & \textbf{Valor}  \\
+        \hline
+        \multicolumn{2}{|c|}{\textbf{Sensores}} \\
+        \hline
+        Cantidad & $ 5 $   \\
+        \hline
+        \multicolumn{2}{|c|}{\textbf{Físico}} \\
+        \hline
+        Dimensiones & $< 50 [cm]$  $< \phi 15[cm]$   \\
+        \hline
+        Peso &  $ > 6 kg$ \\
+        \hline
+        Caja Electrónica & Herm\'etica  \\
+        \hline
+        \multicolumn{2}{|c|}{\textbf{Eléctrico}} \\
+        \hline
+         Alimentación & 5 V DC  \\
+        \hline
+         Autonomía & LiPo 5100mAh  \\
+        \hline
+         \multicolumn{2}{|c|}{\textbf{Interfaz}} \\
+         \hline
+         Configuración de Parámetros & Por Interfaz Gráfica, SSH, VNC  \\
+        \hline
+         Transmisi\'on Remota  & Si  \\
+        \hline
+    \end{tabular}}
+    \vspace{5mm}
+    \newline
+    \hfill \textbf{Fuente:} Elaboración Propia
+\end{table}
+
+\subsubsection[Batimetr\'ia]{Batimetr\'ia}
+\subsubsection[Gr\'ua ]{Gr\'ua}
+
+
+\subsection[Dise\~no Electr\'onico]{Dise\~no Electr\'onico}
+\subsubsection[Sonda]{Sonda}
+\paragraph[Interfaz de Sensores]{Interfaz de Sensores}
+Es el bloque donde se obtiene las mediciones de las caracter\'isticas f\'isico - qu\'imica del recurso h\'idrica, para su posterior procesamiento, almacenamiento y transmici\'on a base remoto.
+
+\subparagraph{Sensor de pH}
 En la Figura \ref{fig:4.8} se puede apreciar el sensor de pH por el que se optó fabricado por la empresa Atlas Scientfic.
     \begin{figure}[t]
     \centering
@@ -248,7 +262,7 @@ Dimensiones & 12mm x 150 mm\\
 \end{table} 
 
 
-\subsection{Sensor de Conductividad}
+\subparagraph{Sensor de Conductividad}
 El sensor utilizado para las lecturas de conductividad se puede apreciar en la Figura \ref{fig:4.12}, también de la empresa Atlas Scientific.
 \begin{figure}[t]
 \centering
@@ -271,20 +285,22 @@ El módulo emitirá lecturas de conductividad donde los primeros 4 dígitos son 
     \protect\caption[Resolución de Escala Sensor de Conductividad]{Resolución de Escala Sensor de Conductividad.}
     \label{tab:resol_ce}
     \centering
-    \begin{tabular}{|c|c|}
-           \hline
+    \begin{tabular}{ c c }
+         \toprule
          \textbf{Valor}&\textbf{Resolución}  \\
-         \hline
+         \midrule
+%         \hline
          0.07-99.99 & 0.01$ \mu S/cm$ \\
-         \hline
+%         \hline
          100.1-999.9 & 0.1 $\mu S/cm $\\
-         \hline
+%         \hline
          1,000-9,999 & 1.0 $\mu S/cm$ \\
-         \hline
+%         \hline
          10,000-99,990 & 10.0 $\mu S/cm $\\
-         \hline
+%         \hline
          100,000-999,99 & 100 $\mu S/cm$ \\
-         \hline
+%         \hline
+        \bottomrule
     \end{tabular}
    \vspace{5mm}
    \newline
@@ -350,13 +366,13 @@ Seguro en Alimentos	& Si\\
 \end{table}
 
 %%%%%%%%%%%%%%%%%%%%%%%%CAMBIAR
-\subsection{Sensor de Temperatura}
+\subparagraph{Sensor de Temperatura}
 En la Figura \ref{fig:4.15}  se puede apreciar el sensor de Temperatura utilizado fabricado por la empresa Atlas Scientific.
 
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width=90mm, height=70mm]{imagenes/imag39.png}
+    \includegraphics[width=90mm, height=70mm]{Imagenes/2021/imag39.png}
     \caption[Sensor de Temperatura PT 1000]{Sensor de Temperatura PT 1000. \textbf{Fuente: } Página Web del Fabricante. }
     \label{fig:4.15}
 \end{figure}
@@ -376,170 +392,195 @@ Para convertir la resistencia de la sonda a la temperatura, se utiliza la siguie
 Donde $T$ esta en grados Celsius y $R$ es el valor de la resistencia medida por el sensor.
 
 El módulo utilizado para el tratamiento de las señales es el mostrado en la Figura \ref{fig:4.16} también fabricado por la empresa Atlas Scientific.
+
 \begin{figure}[t]
     \centering
-    \includegraphics[width=90mm, height=70mm]{imagenes/imag38.png}
+    \includegraphics[width=90mm, height=70mm]{Imagenes/2021/imag38.png}
     \caption[EZO-RTD Circuito Integrado de Temperatura]{EZO-RTD Circuito Integrado de Temperatura.\textbf{Fuente: }Pagina Web del Fabricante.}
     \label{fig:4.16}
 \end{figure}
+
 Es un sistema informático de tamaño reducido que está diseñado específicamente para ser utilizado en aplicaciones donde se requiera mediciones exactas y precisas de la temperatura a través de una sonda de temperatura genérica PT-100 / PT-1000. Se conecta directamente a la placa Tentacle T3 y no necesita de aislamiento a diferencia de los otros módulos de sensores.
 
 En la Tabla \ref{tab:caract_temp} se visualizan las características del Sensor de Temperatura PT-1000.
-Entre las aplicaciones de uso común de este sensor están el uso estándar de laboratorio, uso en el campo, en el suelo, acuaponía, hidroponía, en bebidas como cerveza, vino u otro licor.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Entre las aplicaciones de uso común de este sensor están el uso estándar de laboratorio, uso en el campo, en el suelo, acuapon\'ia, hidroponía, en bebidas como cerveza, vino u otro licor.
 
-\section[Bloque de Alimentación]{Bloque de Alimentación}
+% Sensor REDOX
+% Sensor OD
 
-Para lograr autonom\'ia energ\'etica para la sonda se opto por utilizar bater\'ias LiPo Nano-Tech por sus caracter\'isticas t\'ecnicas que permitir\'an alimentar de forma suficiente a toda los componentes que conforman la sonda, como se aprecia en la Figura \ref{fig:4.17}. 
 
-Las baterias Turnigy nano-tech Lipoly bater\'ias fueron dise\~nados para alto rendimiento . Utilizando un avanzado sustrato electrones que permite pasar m\'as libremente de \'anodo a c\'atodo con menos impedancia interna.
- Las ventajas que presenta la utilización de esta fuente son la posibilidad de tener tensiones de +/- 3.3V, +/-5V y +/-12V sin la necesidad de realizar circuitos para la obtención de estos voltajes en comparación a la utilización de baterías de litio.
- \newline
- \hfill
-Las ventajas sobre las bater\'ias tradicionales LIPOLY;
+\textbf{Bloque de Control}
+Este bloque es el encargado de realizar el procesamiento de los datos recibidos a través de los sensores y la configuración de parámetros adquirida por la Interfaz de Usuario.
+
 \begin{itemize}
-    \item La densidad de potencia alcanza 7,5 kW / kg.
-    \item Menos hueco de tensi\'on durante la descarga de alta velocidad, dando m\'as poder bajo carga.
-    \item Impedancia interna puede llegar tan bajo como 1.2 m${\Omega }$ en comparación con la de 3 m${\Omega }$ de un Lipoly estándar
-    \item Control t\'ermico m\'as, paquete por lo general no supera 60 $^{\circ}$C.
-    \item Hinchazón durante la carga pesada no supera 5\%, en comparación con 15\% de un Lipoly normal.
-    \item Mayor capacidad durante la descarga pesada. M\'as del 90\% a la tasa de 10O\% C.
-    \item Carga r\'apida capaz, hasta 15$^{\circ}$C en algunas baterías.
-    \item Mayor duraci\'on del ciclo, casi el doble que el de la tecnolog\'ia LiPoly est\'andar.
-\end{itemize}
+    \item \textbf{Hardware:}
+    En la Figura \ref{fig:4.4} se observa la placa de desarrollo low cost escogida para el presente proyecto, la Raspberry Pi 3 model B desarrollado por la fundación Raspberry Pi. La misma cuenta con un procesador multimedia Broadcom BCM2835 system-on-chip (SoC).
+    \newline
+    \hfill
+    La CPU Contiene un ARM1176JZFS, con unidad de coma flotante, que funciona a 700Mhz y es capaz de soportar overclock a 1GHZ en modo “TURBO” que hace que el SoC de más rendimiento sin reducir el tiempo de vida de la placa y sin perder la garantía. 
+    La memoria RAM es de 512MB de SDRAM (en su modelo B), en un único módulo, el cual, funciona a 400Mhz en su modo normal y alcanzando los 600Mhz en su versión “TURBO”.
+    La  Raspberry Pi no tiene un disco duro tradicional, para ello dispone de un lector para memorias SD, un sistema de almacenamiento en estado sólido. El arranque del sistema se hará desde la propia tarjeta SD, con lo que, debido a que tiene que albergar todo el sistema operativo, es necesario que la tarjeta sea de al menos 2 GB de capacidad para almacenar todos los archivos requeridos.
+    La placa carece de botón de encendido y apagado, con lo que la energía le llega mediante un conector microUSB estándar de 5V. El consumo de la placa es de 700mA, (3,5W).
+    La Raspberry Pi, está diseñada para ejecutar el sistema operativo GNU/Linux y la version mas extendido es el Raspberry Pi OS .
+    \begin{figure}[t]
+        \centering
+        \includegraphics[width=100mm, height=70mm]{Imagenes/2021/imag35.jpg}
+        \caption[Placa Raspberry Pi 3 model B]{Placa Raspberry Pi 3 model B.\textbf{Fuente:} Página Web del Fabricante.}
+        \label{fig:4.4}
+    \end{figure}
 
-
-La tecnolog\'ia de nano-core en las bater\'ias de litio es la aplicaci\'on de aditivos conductores nan\'ometros. Los aditivos nan\'ometros conductora forman redes ultra-fuertes de electrones de conducci\'on en los electrodos que pueden aumentar la conductividad electr\'onica.
-
-Estos aditivos crean la capacidad de imbibici\'on en el l\'iquido portador para suministrar m\'as canales de iones. Esto mejora la capacidad de transmisi\'on de iones y la difusi\'on de iones. A trav\'es de la mejora de la conductividad y de iones de transmisi\'on electr\'onica, la impedancia se reduce y la polarizaci\'on de la descarga de alta tasa disminuye en gran medida.
-
- \newline
- \hfill
-\begin{table}[t]
-\protect\caption[Caracter\'isticas de bateria Lipo Nano-Tech ]{Caracter\'isticas de bateria Lipo Nano-Tec 5100mAh.}
-\label{tab:caract_bat}
-\begin{center}
-\begin{tabular}{|l|l|}
-\hline
-Capacidad    &  5100 mAh \\
-\hline
-Voltaje      &  2S3P/ 7.4 V \\
-\hline
-Descarga &  65C / 135C \\
-\hline
-Peso  & 290 g\\
-\hline
-Dimensi\'on   &  69x47x25 mm\\
-\hline
-Conector equilibrio	& JST\\
-\hline
-\end{tabular}
-\vspace{5mm}
-\newline
-\hfill \textbf{Fuente:} Pagina Web del Fabricante\cite{bateria}
-\end{center}
+    Se optó por este controlador por sus prestaciones,  t\'ecnicas, suficientes para las tareas a ser ejecutadas, con un almacenamiento externa de 64 Gb con una memoria tipo microSD de alto rendimiento, por sus dimensiones reducidas, la raspberry  eran acorde a los requerimientos necesarios y por tener un gran soporte y comunidad activa en l\'inea.
+ 
+    En la Tabla \ref{tab:carac_rasp} se detallan las principales características técnicas de la Raspberry Pi 3 model B.
+ 
+ \begin{table}[t]
+      \protect\caption[Características Técnicas. Raspberry Pi 3 model B]{Características Técnicas. Raspberry Pi 3 model B.  \label{tab:carac_rasp}}
+    
+     \centering
+     \begin{tabular}{l c}
+        \toprule
+           Sistema Operativo & Raspberry Pi OS\\
+%          \hline
+          Juego de Instrucciones & RISC 64 bits\\
+%          \hline
+          Procesador & RQuad Core 1.2GHz Broadcom BCM2837\\
+%          \hline
+          RAM  & 1 GB\\
+%          \hline
+          Bluetooth &  4.2 Low Energy (BLE)\\
+%          \hline
+          Puertos USB 2.0 & 4\\
+%          \hline
+          GPIO& 40\\
+%          \hline
+          UART& 2\\
+%          \hline
+          I2C& 4\\
+%          \hline
+          Stero/Video & 1\\
+%          \hline
+          HDMI & 1\\
+%          \hline
+          CSI(RPI Camera) & 1\\
+%          \hline
+          DSI(RSP Touchscreen display) & 1\\
+%          \hline
+          Dimensiones & 85.60 mm x 53.98 mm\\
+%          \hline
+          Peso & 50 g\\
+%          \hline
+          Consumo energ\'etico & 4 W\\
+%          \hline
+          Alimentaci\'on & 5 V\\
+%          \hline
+     \bottomrule   
+     \end{tabular}
+     \vspace{5mm}
+     \newline
+     \hfill \textbf{Fuente:} Elaboración Propia. Información recopilada de \cite{rasp}
 \end{table}
-
-
-
-
-\begin{figure}[H]
-\centering
-	\includegraphics[width=90mm, height=70mm]{Imagenes/2021/imag29.jpg}%\textwidth%
-    \caption[Bateria Turnigy Nano]{Bateria Turnigy Nano.\textbf{Fuente: } Pagina Web del Fabricante\cite{bateria}.}
-	\label{fig:4.17}
+    Por otra parte, para eliminar la necesidad de cableado, multiplexación y aislamiento eléctrico en la lectura de los sensores, se optó por la utilización de la placa open source Tentacle Shield para arduino de Whitebox labs, la cual se muestra en la Figura \ref{fig:4.5}.
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=100mm, height=70mm]{{Imagenes/2021/imag26.jpg}}
+    \caption[Placa Tentacle para Arduino]{Placa Tentacle para Arduino. \textbf{Fuente:} Página web del Fabricante}
+    \label{fig:4.5}
 \end{figure}
 
+    Es una forma pr\'actica y fácil de leer múltiples sensores de la empresa Atlas Scientific, la placa puede alojar hasta 4 dispositivos EZO de Atlas Scientific para medir pH(Potencial de Hidrógeno), Oxígeno Disuelto(DO por sus siglas en inglés), conductividad eléctrica(CE), Temperatura(T), Potencial de Reducción de Oxidación(ORP por sus siglas en inglés)
+
+    \textbf{Aislamiento:}
+    Los circuitos de medición y las líneas de comunicación aislados individualmente evitan el ruido y los bucles de tierra para obtener mediciones precisas, incluso en sistemas de bucle cerrado.Los sensores no interferirán entre sí y la mayoría del ruido eléctrico exterior que puede interferir con las lecturas se reducirá.
+
+    \item \textbf{Software:}El software de control fue desarrollado en el lenguaje de programación Python. Este es un lenguaje interpretado multiparadigma, soporta programación orientada a objetos, imperativa y funcional.
+    Python ya viene instalado en el sistema operativo Raspberry Pi OS para Raspberry Pi.Tiene la ventaja de poder utilizar los pines GPIO de la placa de desarrollo para conectar el mundo digital con el mundo físico mediante la programación, facilitando de esta manera el control de la lectura de los distintos sensores y el accionamiento de los actuadores utilizados.
+    
+    El administrador de Base de Datos utilizado fue Sqlite3, es un sistema de gestión de base de datos ampliamente difundido en el mundo de la programación de aplicaciones móviles.
+    La utilización de este gestor fue debido a su gran portabilidad y su capacidad  de gestionar bases de datos de hasta 2 terabyte de tamaño.
+    En la Tabla \ref{tab:caract_sqlite} se muestran las características más relevantes de la Base de Datos Sqlite.
+
+    \begin{table}[H]
+    \protect\caption[Características del Gestor de Base de Datos SQLITE]{Características del Gestor de Base de Datos SQLITE.\label{tab:caract_sqlite}}
+        \centering
+        \begin{tabular}{|l|l|}
+            \hline
+            Soporte & Múltiples tablas,\textit{triggers} y vistas   \\
+            \hline
+             Lectura y Escritura& \multicolumn{1}{|l|}{\begin{tabular}[c]{@{}l@{}}  Directamente sobre archivos que se encuentran en el disco \\ duro.\end{tabular}} 
+             \\
+             \hline
+             Formato & 
+             \multicolumn{1}{|l|}{\begin{tabular}[c]{@{}l@{}}  Multiplataforma. Puede ser utilizado en sistemas de 32 bits \\ o 64 bits.\end{tabular}} 
+           \\
+             \hline
+             Operaciones &\multicolumn{1}{|l|}{\begin{tabular}[c]{@{}l@{}} Realiza operaciones de manera más eficiente y rápido que  \\ MySql y PostgreSQL.\end{tabular}} 
+            \\
+             \hline
+             Interfaz API &\multicolumn{1}{|l|}{\begin{tabular}[c]{@{}l@{}}Opera con diversas Interfaces API lo que permite trabajar  \\con C++, PHP, Python, Groovy, etc.\end{tabular}} 
+            \\
+             \hline
+             Dependencias Externas & No\\
+             \hline
+             Librerías & Cuentan con acceso para muchos lenguajes de programación.\\
+             \hline
+             UDF & Soporta funciones SQL definidas por el usuario.\\
+             \hline
+             Código Fuente & Dominio público y documentación extensa.\\
+             \hline
+        
+        \end{tabular}
+        \vspace{5mm}
+        \newline
+        \hfill \textbf{Fuente: }P\'agina Web del desarrollador.\cite{sqlite}
+        
+    \end{table}
+    
+\end{itemize}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection[Batimetr\'ia]{Batimetr\'ia}
+\subsubsection[Gr\'ua ]{Gr\'ua}
 
 
- En contrapartida, limitará a nuestro sistema, ya que deberá ir conectado a la red eléctrica todo el tiempo que se requiera del uso de la misma.
-
-
-
-\section[Características Técnicas de los módulos]{Características Técnicas del módulo Sonda}
-La Tabla \ref{tab:carac_general} detalla las características técnicas del mecanismo a ser desarrollado, teniendo en cuenta los objetivos planteados en la Sección 1.3.
-
-\begin{table}[H]
-\protect\caption[Datos Técnicos]{Datos Técnicos. \label{tab:carac_general}}
-    \centering
-    \scalebox{0.9}{\begin{tabular}{|c|c|}
-        \hline
-        \textbf{Característica} & \textbf{Valor}  \\
-        \hline
-        \multicolumn{2}{|c|}{\textbf{Sensores}} \\
-        \hline
-        Cantidad & $ 5 $   \\
-        \hline
-        \multicolumn{2}{|c|}{\textbf{Físico}} \\
-        \hline
-        Dimensiones & $< 50 [cm]$  $< \phi 15[cm]$   \\
-        \hline
-        Peso &  $ > 6 kg$ \\
-        \hline
-        Caja Electrónica & Herm\'etica  \\
-        \hline
-        \multicolumn{2}{|c|}{\textbf{Eléctrico}} \\
-        \hline
-         Alimentación & 5 V DC  \\
-        \hline
-         Autonomía & LiPo 5100mAh  \\
-        \hline
-         \multicolumn{2}{|c|}{\textbf{Interfaz}} \\
-         \hline
-         Configuración de Parámetros & Por Interfaz Gráfica, SSH, VNC  \\
-        \hline
-         Transmisi\'on Remota  & Si  \\
-        \hline
-    \end{tabular}}
-    \vspace{5mm}
-    \newline
-    \hfill \textbf{Fuente:} Elaboración Propia
-\end{table}
-
+\subsection[Dise\~no Control]{Dise\~no Control}
+\subsubsection[Sonda]{Sonda}
 \begin{table}[t]
 \protect\caption[Funciones Generales]{Funciones Generales. \label{tab:fun_general}}
     \centering
-    \begin{tabular}{|l|l|l|}
-        \hline
+    \begin{tabular}{l l l}
+        \toprule
         \textbf{Descripción} & \textbf{Decisión} & \textbf{Característica} \\
-        \hline
-         Comunicaci\'on  Perif\'ericos  & Algoritmo comunicaci\'on & \multicolumn{1}{|l|}{\begin{tabular}[c]{@{}l@{}} Env\'io y recipci\'oon de estados \\ funcionamiento y datos de los \\ dispositivos conectados a la red \end{tabular}}
+        \midrule
+         Comunicaci\'on  Perif\'ericos  & Algoritmo comunicaci\'on & \multicolumn{1}{ l}{\begin{tabular}[c]{@{}l@{}} Env\'io y recipci\'oon de estados \\ funcionamiento y datos de los \\ dispositivos conectados a la red \end{tabular}}
          \\
-        \hline
-        Lectura de Sensores & Algoritmo muestreo & \multicolumn{1}{|l|}{\begin{tabular}[c]{@{}l@{}} Se Lectura secuencial de los\\ sensores pH, CE,\\ OD, OPR, T\end{tabular}}
+%        \hline
+        Lectura de Sensores & Algoritmo muestreo & \multicolumn{1}{l}{\begin{tabular}[c]{@{}l@{}} Se Lectura secuencial de los\\ sensores pH, CE,\\ OD, OPR, T\end{tabular}}
          \\
-        \hline
+%        \hline
         Almacenamiento datos & Algoritmo datos &
-        \multicolumn{1}{|l|}{\begin{tabular}[c]{@{}l@{}} Consulta y registro as\'incrono \\ 
+        \multicolumn{1}{l}{\begin{tabular}[c]{@{}l@{}} Consulta y registro as\'incrono \\ 
         del muestreo\end{tabular}}
-          \\
-        \hline
+         \\
+%        \hline
         Transmisi\'on datos  & Algoritmo transmisi\'on &
-        \multicolumn{1}{|l|}{\begin{tabular}[c]{@{}l@{}} Transmisi\'on asincr\'onica \\ a estaci\'on remota \end{tabular}}
+        \multicolumn{1}{l}{\begin{tabular}[c]{@{}l@{}} Transmisi\'on asincr\'onica \\ a estaci\'on remota \end{tabular}}
            \\
-        \hline
+        \bottomrule
     \end{tabular}
     \vspace{5mm}
     \newline
     \hfill \textbf{Fuente:} Elaboración Propia
 \end{table}
-
 \section{Descripci\'on  sistema }
-
 \section[Descripción General del Sistema]{Descripción General del Sistema}
-
-En referencia al modelo conceptual del sistema, éste está constituido, en general, por una Interfaz de Usuario, un bloque de Control, un bloque de Sensores, un bloque de actuadores y un bloque de Alimentación  como se pude apreciar en la Figura \ref{fig:4.1}.
-
-
-
+En referencia al modelo conceptual del sistema, este está constituido, por un bloque interfaz de usuario, un bloque de control, un bloque de sensores, un bloque de actuadores y un bloque de alimentaci\'on,  como se puede apreciar en la Figura \ref{fig:4.1}.
 \section[Características Técnicas de los módulos]{Características Técnicas del módulo Despliegue}
 La Tabla \ref{tab:carac_general} detalla las características técnicas del mecanismo a ser desarrollado, teniendo en cuenta los objetivos planteados en la Sección 1.3.
 \begin{table}[H]
-\protect\caption[Datos Técnicos]{Datos Técnicos. \label{tab:carac_general}}
+\protect\caption[Datos T\'ecnicos]{Datos T\'ecnicos. \label{tab:carac_general}}
     \centering
     \scalebox{0.9}{\begin{tabular}{|c|c|}
         \hline
-        \textbf{Característica} & \textbf{Valor}  \\
+        \textbf{Caracter\'istica} & \textbf{Valor}  \\
         \hline
         \multicolumn{2}{|c|}{\textbf{F\'isico}} \\
         \hline
@@ -549,196 +590,39 @@ La Tabla \ref{tab:carac_general} detalla las características técnicas del meca
         \hline
         Peso &  $ < 15 kg$ \\
         \hline
-        Caja Electrónica & Herm\'etica  \\
+        Caja Electr\'onica & Herm\'etica  \\
         \hline
         \multicolumn{2}{|c|}{\textbf{Eléctrico}} \\
         \hline
-         Alimentación & 12 V DC  \\
+         Alimentaci\'on & 12 V DC  \\
         \hline
-         Autonomía & No  \\
+         Autonom\'ia & No  \\
         \hline
          \multicolumn{2}{|c|}{\textbf{Interfaz}} \\
          \hline
-         Configuración de Parámetros & Por Interfaz Gráfica  \\
+         Configuraci\'on de Par\'ametros & Por Interfaz Gr\'afica  \\
         \hline
          Transmisi\'on Remota  & Si  \\
         \hline
     \end{tabular}}
     \vspace{5mm}
     \newline
-    \hfill \textbf{Fuente:} Elaboración Propia
+    \hfill \textbf{Fuente:} Elaboraci\'on Propia
 \end{table}
+\subsubsection[Batimetr\'ia]{Batimetr\'ia}
+\subsubsection[Gr\'ua ]{Gr\'ua}
 
 
-\section{Aspectos Generales}
-El desarrollo de la sonda implic\'o una serie de desaf\'ios t\'ecnicos, por ese motivo esa secci\'on se organiza de la siguiente manera
-
-\begin{itemize}
-    \item Dise\~no Mec\'anico: abarca todos los criterios considerados al dise\~no de la sonda y sistema de despliegue. 
-    \item Fabricaci\'on Mec\'anica: abarca las t\'ecnicas y materiales empleadas para la fabricaci\'on de los componentes.
-    \item Programaci\'on e Integraci\'on de los sensores: en esta secci\'on abarca lo referente a los distintos script desarrollados para lograr el funcionamiento del dispositivo.
-\end{itemize}
-
-\section{Dise\~no Mec\'anico}
-Para el proceso de dise\~no se siguieron los procedimientos de XXX donde agrupan el proceso de dise\~no en las siguientes etapas:
-Etapas del dise\~no: 
-
-\subsection{Sonda}
-\subsubsection{Conceptualizaci\'on}
-Conceptualmente se definen los requerimientos m\'inimos para el correcto funcionamiento de la sonda.
-\begin{itemize}
-    \item versatilidad: su implementación debe de ser independiente a la dispositivo de soporte, pudiendo operar en cualquier medio de transporte.
-    \item 
-    \item Energ\'ia: la donde deber\'a tener autonom\'ia energ\'etica para sus operaciones de monitoreo,  
-\end{itemize}
-la donde deberá de contener en su interior al menos cinco sensores  (ph,CE,OD,OPR,T), adem\'as de toda la electr\'onica necesaria para la operaci\'on de estos. La sonda deber\'a tener autonom\'ia energ\'etica y poder sumergirse hasta una profundidad m\'inima de 5 metros , teniendo en cuenta que la profundidad promedio del lago Ypakarai es de 3 metros [\cite{hidrologiaItaipu}].
-   
-\subsubsection{An\'alisis}
-En base a las conceptualizaci\'on de la secci\'on aterior y los materiales disponibles en el pa\'is se concluyen  :
+\subsection[Dise\~no de Interfaz]{Dise\~no de Interfaz}
+\subsubsection[Sonda]{Sonda}
+\subsubsection[Batimetr\'ia]{Batimetr\'ia}
+\subsubsection[Gr\'ua ]{Gr\'ua}
 
 
-
-
-\subsection{Despliegue}
-\subsubsection{Conceptualizaci\'on}
-
-deber\'a brindar soporte para que la sonda pueda hacer mediciones a varios niveles, dise\~no simple y adaptativo para ser instalado en embarcaciones de investigaci\'on.
-
-\subsubsection{An\'alisis}
-En base a las conceptualizaci\'on de la secci\'on aterior y los materiales dispobibles en el pa\'is se concluyen  :
-\begin{itemize}
-    \item Sonda: .
-    \item Despliegue: deber\'a brindar soporte para que la sonda pueda hacer mediciones a varios niveles, dise\~no simple y adaptativo para ser instalado en embarcaciones de investigaci\'on.
-\end{itemize}
-
-
-\section{Fabricaci\'on de la Sonda.}
-
-\subsection{Diseño, Mecanizado de Piezas}
-El diseño final de la sonda, fue el resultado de varias versiones que fueron modificándose de tal manera que resulte mejor y se adapte a los requerimientos del proyecto.
-Partiendo de un diseño de un misil militar por su dise\~no din\'amico , similar al propuesto por [1], modificado hasta la versión final con el cual se realizaron las pruebas. Su diseño modular esta pensado para el caso que se le requiera sacar o añadir uno o mas sensores, se pueda seguir utilizando la sonda con cambios mínimos para adaptación.
-La primera sonda fue impresa en su totalidad con una impresora 3D, en material Acrilonitrilo butadieno Estireno(ABS), por sus propiedades de alta resistencia al impacto y su baja degradación en presencia de líquidos. 
-El diseño de la sonda (Sonda V4.3) utilizado en el Cormoran-I, esta disen\~ado para ser albergar a seis sensores específicos de la empresa Atlas Scientific.
-
-\begin{itemize}
-    \item Sonda PH de Plata/cloruro de plata de calidad científica, EZO pH Circuit.
-    \item Sonda ORP de barra de platino, EZO OPR Circuit.
-    \item Sonda de conductividad: 5 [\(\mu S/cm\)] a 200,000 [\(\mu S/cm\)], EZO Conductivity Circuit.
-    \item EZO RGB, Sensor de color integrado 8bit.
-    \item Sonda de oxígeno disuelto, EZO OD Circuit.
-    \item Sensor de Temperatura DS18B20. Sparkfun.
-\end{itemize}
-    
-\subsection{Versiones de la Sonda }
-Se desarrollaron cuatro versiones de la sonda, con el programa de diseño CAD 3D SolidWorks 2015. La sonda es un un ensamble de tres piezas principales, denominadas:
-
-\begin{itemize}
-\item \textbf{Frente} : Pieza frontal de la sonda, la función de esta pieza es principalmente de protección contra basura o objetos que puedan dañar a los sensores. Se diseño de forma cilíndrica hueca de base circular para las versiones de la sonda Figura1-a y Figura1-b, las de base elipsoidal para las versiones Figura1-d y Figura1-e, Posee ranuras laterales para que el agua ingrese dentro de la cavidad hueca de esta pieza y los sensores puedan hacer las mediciones.  
-\item \textbf{Anillo} : Pieza central de la sonda y enlace de las otras dos piezas, la función de esta pieza es servir de soporte a las sensores y posicionarlos de forma horizontal. En el caso que se requiera otros sensores, esta es la única pieza que tendría que ser adaptado a los nuevos sensores.
-\item \textbf{Base}  : Pieza posterior de la sonda, su función es de protección de los cables de los sensores. 
-\end{itemize}
-
-\begin{enumerate}
-\item \textbf{Sonda V0.0:} La versión inicial de la sonda, con diseño cilíndrico de base circular, el inconveniente principal de este diseño fue la debilidad estructural de la parte frontal de la sonda por la cantidad de ranuras, ademas el diseño de la punta dificultaba bastante para ser impreso en la impresora 3D.
-\item \textbf{Sonda V1.0:} La siguiente versión, resolvía los problemas de debilidad estructural de la parte frontal espaciando mas las ranuras y reemplazando la punta de la pieza frontal con un diseño mas redondeado para que pueda ser impresa con mayor facilidad.   
-\item \textbf{Sonda V2.0:} En esta versión de la sonda, se probaron con otras geometrías para mejorar la dinámica del fluido, de esta forma cargar menos al motor propulsor del Dron. El inconveniente de este diseño fue, que por su geometría era mas grande que el anterior por tanto utilizaba mas material.
-\item \textbf{Sonda V3.0:} La siguiente versión se opto por una base elipsoidal para la sonda, ademas se agrego al diseño un soporte para que pueda ser fijado al Dron con tornillos en la parte inferior, se realizaron cambios en la base para crear un ensamble mas dinámico. Fue la primera aproximación para el diseño final, el inconveniente de esta sonda era el soporte que resultaba poco practico de implementar y podría causar daños estructurales al casco del dron.
-\item \textbf{Sonda V4.0:} La ultima versión resuelve el problemas de soporte, al agregar un riel en la parte superior de toda la sonda para fijarlo cuando se requiera al dron sin la utilización de tornillos o algún elemento fijador que pueda dañar el casco del dron.
-\item \textbf{Sonda V4.1:} En la primera modificación de la versión 4 de la sonda, se optimizo el tamaño de la pieza frontal de la sonda,  para utilizar menos material y ofrecer mayor protección a las puntas de los sensores.
-\item \textbf{Sonda V4.2:} En la segunda revisión de la versión 4, se re diseño la parte posterior de la sonda, para reemplazar el sistema modo inicial que conectar los sensores al dron, que en las versiones anteriores se encontraba en la parte superior, y como esta versión se diseña el riel, se opto por hacer por una perforación e la base para que por ella pueda conectarse al Dron.
-\item \textbf{Sonda V4.3:} En la ultima revisión de la versión 4, se re diseña la pieza central de la sonda para agregarle un juego de juntas de gomas circulares, por los agujeros preparados para los sensores para de esta forma ejercer sobre ellos un mejor agarre, ademas se modifica la dimensión de sensor ubicado en la parte central de la pieza.
-\end{enumerate}
-
-
-\begin{figure}[htbp]
-\centering
-\subfigure[V0.0]{\includegraphics[width=50mm]{Imagenes/Sonda_v0.jpg}}
-
-\subfigure[V1.0]{\includegraphics[width=50mm]{Imagenes/Sonda_v1.jpg}}
-
-\subfigure[V2.0]{\includegraphics[width=50mm]{Imagenes/Sonda_v2.jpg}}
-
-\subfigure[V3.0]{\includegraphics[width=50mm]{Imagenes/Sonda_v3.jpg}}
-
-\subfigure[V4.0]{\includegraphics[width=50mm]{Imagenes/Sonda_v4.jpg}}
-
-\caption{Versiones Sonda. Fuente: elaboración propia} \label{fig:Sonda_Versiones}
-\end{figure}
-
-\begin{figure}[htbp]
-\centering
-\subfigure[V4.3 . Frontal]{\includegraphics[width=40mm]{Imagenes/Sonda_v4_1.jpg}}
-
-\subfigure[V4.3 . Anillo]{\includegraphics[width=40mm]{Imagenes/Sonda_v4_2.jpg}}
-
-\subfigure[V4.3 . Base]{\includegraphics[width=40mm]{Imagenes/Sonda_v4_3.jpg}}
-
-\caption{Versiones Sonda. Fuente: elaboración propia} \label{fig:Sonda_Versiones}
-\end{figure}
-
-\section{Sonda v5.0}
-Para el proyecto PINV15-177, se deberán realizar una serie de cambios al modelo final de la sonda utilizado en el CORMORAN-I, por la operación a multivinel, el material a ser utilizado y la ubicación de la electrónica.
-\subsection{Operación Multinivel}
-Como se introduce la capacidad de poder censar a multiniveles, es necesario cambiar el tipo de material de construcción para que de esta forma se pueda sumergir con su propio peso, y no requiera de otro medio externo para sumergirse. 
-\subsection{Sonda Embebida}
-Considerando que la versión 4.3, la sonda se fija por el casco del dron, el circuito de control y la base de datos se ubica dentro del dron, y los sensores de la sonda se conectan mediante cables coaxiales, segun datos proveídos por el informe de batimetria, realizado en el agosto del 2014  por la Dirección de Coordinación Ejecutiva del Centro Internacional de Hidroinformatica (CIH) dependiente de la Hidroeléctrica Itaipu, la máxima profundidad del lago Ypakarai es de 3,226[m], para la operación multinivel para estas profundidades la implementacion de versión actual resulta poco practica ya que se requerirán cables mas largos, expuestos al ambiente, agua, tracción pudiendo dañarse o registrar lecturas erróneas.\\ Para subsanar este inconveniente se propone que todo la electrónica se encuentre dentro de la sonda, en la parte posterior o base, de esta forma ademas eliminar el uso de cables, la sonda por si sola ya sera capaz de operar.
-
-\subsection{Primera Versi\'on sonda Embebida}
-
-\subsection{Diseño - Modelado}
-El dise\~no y modelado de la sonda se realizo, utilizando el software de modelacion 3D SolidWorks.
-El realizo el diseño de forma modular, de tal forma que que la sonda se adaptar con cambios mínimos en el caso de ser requerido, ante posibles cambios de configuración como ser, adición de otro sensor o modo de operación.    
-La sonda consta de tres partes o módulos principales:
-
-\begin{itemize}
-\item \textbf{Base}: Modulo no reemplazable, a fabricarse en acero inoxidable, en esa sección de la sonda se almacenara toda la electrónica de control, procesamiento de señales provenientes de los sensores, alimentación y la base de datos de las lecturas registradas por los sensores. Este modulo debe de ser hermético 
-
-\item \textbf{Anillo}: Modulo reemplazable, a ser fabricado de acero inoxidable, parte central de la sonda, la función de esta pieza es de mantener a los sensores posicionados correctamente y cumple la función de sello para la base, de esta forma cerrar de forma hermética la base.
-
-\item \textbf{Envolvente}: Modulo reemplazable, a ser fabricado en material ácido poliláctico  láctico (PLA), la envolvente es un pieza que rodea todo la otros dos módulos, y su función principal es de proteger la parte frontal de los sensores y mejorar la dinámica del fluido mediante su geometría impreso totalmente en impresora 3D.  
-
-\end{itemize}
-
-\begin{figure}[h]
-\fbox{\includegraphics[scale=0.4]{Imagenes/2019/CompletoV5_0555.png} }
-\caption{Dise\~no Sonda Completa. Fuente: elaboración propia}
-\label{fig:SondaV5}
-\end{figure}
-
-\begin{figure}[h]
-\fbox{\includegraphics[scale=0.4]{Imagenes/2019/misilv5a.png} }
-\caption{Dise\~no Base y anillo. Fuente: elaboración propia}
-\label{fig:SondaV5}
-\end{figure}
-
-\section{Sonda V6.0}
-\subsection{Diseño - Modificaciones}
-Por la falta de materiales del diseño anterior se realizar\'on modif\'idicaciones para poder fabricar con materiales que s\'i pudimos conseguir en el pa\'is, en el diseño anterior estaba pensado fabricar la sonda en acero inoxidable.
-El material utilizado fue Nylon que requiri\'o de un rediseño de la sonda conformada por dos elementos principales denominados base y anillo. \\ 
-
-\textbf{Base: }
-Para una mejor robustez la base, se ensancharon las paredes internas y se diseño  con  rosca interna Whitworth fina.\\ 
-\begin{figure}[h]
-\centering
-\fbox{\includegraphics[scale=0.35]{Imagenes/2019/Base2019.PDF} }
-\caption{Dise\~no final de la base. Fuente: elaboración propia}
-\label{fig:Base2019}
-\end{figure}
-
-\textbf{Anillo: }
-El diseño anterior Figura: \ref{fig:SondaV5}, se contemplaba el uso de O-ring para el sellado de la sonda, por las dificultades t\'ecnicas para la fabricaci\'on de las ranuras necesarias se opto por otro dispositivo de sellado denominado,  reten hidr\'aulico, dos reten hidr\'aulico por abertura de cada sensor
-\\
-\begin{figure}[h]
-\centering
-\fbox{\includegraphics[scale=0.35]{Imagenes/2019/anillo2019.PDF} }
-\caption{Dise\~no final del anillo. Fuente: elaboración propia}
-\label{fig:Anillo2019}
-\end{figure}
-
-
-\section{Fabricaci\'on}
-La fabricación se realizo en el laboratorio de Metal Mec\'anica de la Facultad de Ingenier\'ia Universidad Nacional de Asunción, con un torno semiatom\'atico, con la t\'ecncia de vaciado progresivo. 
- 
+\section[Fabricaci\'on]{Fabricaci\'on}
+\subsubsection[Sonda]{Sonda}
+La fabricaci\'on de las partes de la sonda se realiz\'o con dos t\'ecnicas desarrollados en el cap\'itulo anterior, la base y el anillo se realizaron con la t\'ecnica de fabricaci\'on sustractiva de   se realiz\'o en el laboratorio de Metal Mec\'anica de la Facultad de Ingenier\'ia Universidad Nacional de Asunci\'on, con un torno semiatom\'atico, con la t\'ecncia de vaciado progresivo. 
+        
 \begin{figure}[h]
 \centering
 \fbox{\includegraphics[scale=0.2]{Imagenes/2019/Sonda_Fab0.jpeg} }
@@ -746,7 +630,7 @@ La fabricación se realizo en el laboratorio de Metal Mec\'anica de la Facultad 
 \label{fig:preparacion}
 \end{figure}
  
-\hfill
+\hfill\section{Fabricaci\'on de la Sonda.}
 \begin{figure}[t]
 \centering
 \fbox{\includegraphics[scale=0.2]{Imagenes/2019/Sonda_Fab.jpeg}}
@@ -754,10 +638,17 @@ La fabricación se realizo en el laboratorio de Metal Mec\'anica de la Facultad 
 \label{fig:preparacion}
 \end{figure}
 
-\section{Programaci\'on e Integraci\'on de los sensores.}
-La programa
-\section{Almacenamiento y visualizaci\'on de las mediciones.}
+\subsubsection[batimetría]{Batimetr\'ia} 
+Tal como se observa en la figura \ref{fig:batimetro} el sistema de medici\'on de profundidad fue dise\~nado de tal forma que permita ser instalado en la parte posterior (popa) del VAS, mediante dos abrazaderas, uno de su sujeci\'on y otra de sujeci\'on - nivelaci\'on para asegurarse  pueda estar en contacto con el agua al momento de instalarse.  Para la correcta  instalci\'on de se debe alinear el sonar con la parte m\'as baja de la popa 
+
+\begin{figure}[h]
+\centering
+\fbox{\includegraphics[scale=0.6]{Imagenes/cap3/Batimetria.pdf}}
+\caption{Dise\~no final de medidor de profundidad. \textbf{Fuente:} elaboración propia}
+\label{fig:batimetro}
+\end{figure}
+
+para estructura del sistema de batimetr\'ia tubos de PVC (Policloruro de Vinilo) roscables para la construcci\'on de la estructura de soporte, la secci\'on m\'as larga tiene una longitud de 1,5 [m], con el objetivo de poder ajustar la distancia de medici\'on inicial y que el sonar ubicado en el extremo est\'e totalmente sumergido. El sistema de fijaci\'on y ajuste est\'a compuesta por dos abrazaderas, una del tipo omega utilizada como gu\'ia de desplazamiento y la otra de abrazadora tipo "O" para el ajuste de profundidad. 
 
 
-
-%-----------------------------------------------------------------------------
+\subsubsection[Gr\'ua ]{Gr\'ua}

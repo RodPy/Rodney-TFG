@@ -13,56 +13,62 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %               Inicio del documento                     %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{minted}
+
 \begin{document}
 
-%%%Introduzca el nombre de los autores
-%\autor[Nombre Corto]{Nombre completo del autor}
-\autor[Rodney Rojas]{Rodney Ruben Rojas Sosa}
-%\autor{Autor 2}
-%%%Introduzca el título del TFG
-\titulo{Diseño de sonda para medici\'on a multiniveles de factores fisicoqu\'imicos de recursos h\'idricos.}
-%%%introduce la carrera
-\carrera{Ingenier\'ia en Mecatr\'onica}
-%%%Nombre del Asesor del TFG %%%%%
-\asesor{Dr. Ing. Derlis Gregor}
-\asesor{Dr. Ing. Mario Arzamendia }
-%\asesor{Ing. Asesor 3}
-%%%%%%Ciudad donde se presenta%%%%%%%%%%%
-\ciudad{San Lorenzo}
-%%%%%% A quien se dedique %%%%%%%%%%%%%%
-\dedicatoria{BLABLA}
-\pagenumbering{roman}
-
-\preliminares
-
-\pagenumbering{arabic}
-\tableofcontents
-\listoffigures
-\listoftables
-%% En caso de no tener anexos comentar la siguiente linea
-\listofappendices
-
-\formatoTitulos
-
-%%% Inician los capítulos de la memoria de TFG%%%%
-%cada capitulo se introduce con \input
-%El primer capitulo siempre es la introducción al TFG
-\input{capitulo01_v2}
-%Luego inican los demas capítulos
-\input{capitulo02}    
-\input{capitulo03}
-\input{capitulo04}
-\input{capitulo05}
-%\input{capitulo06}
-%%%bibliografía%%%%%%%%%
-%Cargar los libros en formato bibtex en el archivo fiuna.bib
-\formatoIndice
-\bibliographystyle{fiuna}
-%\nocite{*}
-\bibliography{fiuna}   
-
-%%%anexos%%%%%%
-%En caso de no tenerlos, comentar la siguiente línea
-\input{anexo}
+    %%%Introduzca el nombre de los autores
+    %\autor[Nombre Corto]{Nombre completo del autor}
+    \autor[Rodney Rojas]{Rodney Ruben Rojas Sosa}
+    %\autor{Autor 2}
+    %%%Introduzca el título del TFG
+    \titulo{Diseño de sonda para medici\'on a multiniveles de factores fisicoqu\'imicos de recursos h\'idricos.}
+    %%%introduce la carrera
+    \carrera{Ingenier\'ia en Mecatr\'onica}
+    %%%Nombre del Asesor del TFG %%%%%
+    \asesor{Dr. Ing. Derlis Gregor}
+    \asesor{Dr. Ing. Mario Arzamendia }
+    %\asesor{Ing. Asesor 3}
+    %%%%%%Ciudad donde se presenta%%%%%%%%%%%
+    \ciudad{San Lorenzo}
+    %%%%%% A quien se dedique %%%%%%%%%%%%%%
+    \dedicatoria{BLABLA}
+    \pagenumbering{roman}
+    
+    \preliminares
+    
+    \pagenumbering{arabic}
+    \tableofcontents
+    \listoffigures
+    \listoftables
+    %% En caso de no tener anexos comentar la siguiente linea
+    %%\listofappendices
+    
+    \formatoTitulos
+    
+    %%% Inician los capítulos de la memoria de TFG%%%%
+    %cada capitulo se introduce con \input
+    %El primer capitulo siempre es la introducción al TFG
+    \input{capitulo01_v2}
+    %Luego inican los demas capítulos
+    \input{capitulo02}    
+    \input{capitulo03}
+    \input{capitulo04}
+    \input{capitulo05}
+    % \input{capitulo06}
+    %%%bibliografía%%%%%%%%%
+    %Cargar los libros en formato bibtex en el archivo fiuna.bib
+    \formatoIndice
+    \bibliographystyle{fiuna}
+    \nocite{*}
+    %%%\bibliography{fiuna}   
+    \bibliography{fiuna.bib}
+    
+    %%%anexos%%%%%%
+    %En caso de no tenerlos, comentar la siguiente línea
+    \input{anexo}
 \end{document}
+
+
+%% Tablas 

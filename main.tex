@@ -15,6 +15,9 @@
 %               Inicio del documento                     %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \usepackage{minted}
+\usepackage{float}
+\usepackage{hyperref}
+
 
 \begin{document}
 
@@ -23,7 +26,7 @@
     \autor[Rodney Rojas]{Rodney Ruben Rojas Sosa}
     %\autor{Autor 2}
     %%%Introduzca el título del TFG
-    \titulo{Diseño de sonda para medici\'on a multiniveles de factores fisicoqu\'imicos de recursos h\'idricos.}
+    \titulo{Dise\~no de sonda para medici\'on a multiniveles de factores fisicoqu\'imicos de recursos h\'idricos.}
     %%%introduce la carrera
     \carrera{Ingenier\'ia en Mecatr\'onica}
     %%%Nombre del Asesor del TFG %%%%%
@@ -50,17 +53,19 @@
     %%% Inician los capítulos de la memoria de TFG%%%%
     %cada capitulo se introduce con \input
     %El primer capitulo siempre es la introducción al TFG
-    \input{capitulo01_v2}
+    % \input{capitulo01_v2}
     %Luego inican los demas capítulos
     \input{capitulo02}    
-    \input{capitulo03}
-    \input{capitulo04}
-    \input{capitulo05}
+    % \input{capitulo03}
+    % \input{capitulo04}
+    % \input{capitulo05}
     % \input{capitulo06}
     %%%bibliografía%%%%%%%%%
     %Cargar los libros en formato bibtex en el archivo fiuna.bib
     \formatoIndice
     \bibliographystyle{fiuna}
+    % \bibliographystyle{report}
+
     \nocite{*}
     %%%\bibliography{fiuna}   
     \bibliography{fiuna.bib}
@@ -74,3 +79,5 @@
 %% Tablas 
 % norma APA
 % https://normas-apa.org/estructura/tablas/
+% https://normas-apa.org/estructura/figuras/
+%https://tex.stackexchange.com/questions/254254/how-to-set-figures-and-tables-captions-in-apa-style-without-using-apa6-class

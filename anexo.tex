@@ -13,6 +13,7 @@
 %Aquí el contenido del anexo B
 \chapter*{Anexo A}
 \addcontentsline{loa}{appendix}{Anexo A: Mapas}
+\label{appendix: a}
 
 \begin{figure}[ht]
     \centering
@@ -23,9 +24,10 @@
 
 \chapter*{Anexo B: Cormor\'an - I}
 \addcontentsline{loa}{appendix}{Anexo B: Cormor\'an -I }
-\label{Anexo:Cormoran}
-El diseño final de la sonda, fue el resultado de varias versio7777777777nes que fueron modificándose de tal manera que resulte mejor y se adapte a los requerimientos del proyecto.
-Partiendo de un diseño de un misil militar por su dise\~no din\'amico , similar al propuesto por [1], modificado hasta la versión final con el cual se realizaron las pruebas. Su diseño modular esta pensado para el caso que se le requiera sacar o añadir uno o mas sensores, se pueda seguir utilizando la sonda con cambios mínimos para adaptación.
+\label{appendix: b}
+
+El diseño final de la sonda, fue el resultado de varias versiones que fueron modificándose de tal manera que resulte mejor y se adapte a los requerimientos del proyecto.
+Partiendo de un diseño de un misil militar por su dise\~no din\'amico , similar al propuesto por [1], modificado hasta la versión final con el cual se realizaron las pruebas. Su diseño modular est\'a pensado para el caso que se le requiera sacar o añadir uno o m\'as sensores, se pueda seguir utilizando la sonda con cambios mínimos para adaptación.
 La primera sonda fue impresa en su totalidad con una impresora 3D, en material Acrilonitrilo butadieno Estireno(ABS), por sus propiedades de alta resistencia al impacto y su baja degradación en presencia de líquidos. 
 El diseño de la sonda (Sonda V4.3) utilizado en el Cormoran-I, esta disen\~ado para ser albergar a seis sensores específicos de la empresa Atlas Scientific.
 
@@ -33,13 +35,13 @@ El diseño de la sonda (Sonda V4.3) utilizado en el Cormoran-I, esta disen\~ado 
     \item Sonda PH de Plata/cloruro de plata de calidad científica, EZO pH Circuit.
     \item Sonda ORP de barra de platino, EZO OPR Circuit.
     \item Sonda de conductividad: 5 [\(\mu S/cm\)] a 200,000 [\(\mu S/cm\)], EZO Conductivity Circuit.
-    \item EZO RGB, Sensor de color integrado 8bit.
+    \item EZO RGB, Sensor de color integrado 8 bit.
     \item Sonda de oxígeno disuelto, EZO OD Circuit.
     \item Sensor de Temperatura DS18B20. Sparkfun.
 \end{itemize}
     
 \subsection{Versiones de la Sonda }
-Se desarrollaron cuatro versiones de la sonda, con el programa de diseño CAD 3D SolidWorks 2015. La sonda es un un ensamble de tres piezas principales, denominadas:
+Se desarrollaron cuatro versiones de la sonda, con el programa de diseño CAD 3D SolidWorks 2015. La sonda es un ensamble de tres piezas principales, denominadas:
 
 \begin{itemize}
 \item \textbf{Frente} : Pieza frontal de la sonda, la función de esta pieza es principalmente de protección contra basura o objetos que puedan dañar a los sensores. Se dise\~no de forma cil\'indrica hueca de base circular para las versiones de la sonda Figura1-a y Figura1-b, las de base elipsoidal para las versiones Figura1-d y Figura1-e, Posee ranuras laterales para que el agua ingrese dentro de la cavidad hueca de esta pieza y los sensores puedan hacer las mediciones.  
@@ -156,6 +158,8 @@ El diseño anterior Figura: \ref{fig:SondaV5}, se contemplaba el uso de O-ring p
 
 \chapter*{Anexo C}
 \addcontentsline{loa}{appendix}{Anexo C: Esquematicos}
+\label{appendix: c}
+
 \begin{figure}[ht]
     \centering
     \includegraphics[width=150mm, height=100mm]{Imagenes/cap3/Batimetria_lago_Ypacarai_TIN_A3.pdf}
@@ -166,6 +170,7 @@ El diseño anterior Figura: \ref{fig:SondaV5}, se contemplaba el uso de O-ring p
 
 \chapter*{Anexo D}
 \addcontentsline{loa}{appendix}{Anexo A: Mapas}
+\label{appendix: d}
 \section[Presupuesto]{Presupuesto}
 En la Tabla \ref{tab:presu} se puede apreciar los materiales utilizados en el presente TFG y los costos de los mismos.
 
@@ -213,7 +218,42 @@ En la Tabla \ref{tab:presu} se puede apreciar los materiales utilizados en el pr
 \multicolumn{2}{|c|}{\textbf{Total general}}                                                                      & \multicolumn{2}{r|}{\textbf{1722,27 USD}}                                         \\ \hline
 \end{tabular}
 \end{table}
-
-
-
 \end{appendices}
+
+\chapter*{Anexo E: Diccionario de t\'opicos}
+\addcontentsline{loa}{appendix}{Anexo E: Diccionario de t\'opicos}
+\label{appendix: e}
+Los t\'opicos se construyeron considerando la ruta de comunicaci\'on e interacci\'on entre los distintos los componentes involucrados. Se estableci\'o como la ra\'iz principal la sonda por ser el elemento principal encargado de centralizar todas las comunicaciones entre todos los dispositivos.
+
+\begin{itemize}
+    \item \textbf{T\'opicos Banderas:} Los t\'opicos banderas se utilizan para verificar que los dispositivos est\'en disponibles. El script consulta en cada ciclo durante se requiera la comunicaci\'on con alg\'un componente.
+    \begin{itemize}
+        \item \textbf{sonda/sonar/flag}: bandera de verificaci\'on de conexi\'on con el subsistema de medici\'on de profundidad, retorna True cuando se solicita la confirmaci\'on de conexi\'on.
+        \item \textbf{sonda/grua/flag}: bandera de verificaci\'on de conexi\'on con el subsistema de la g\'ua, retorna True cuando se solicita la confirmaci\'on de conexi\'on.
+        \item \textbf{sonda/asv/flag}: bandera de verificaci\'on de conexi\'on con el subsistema ASB, retorna True cuando se solicita la confirmaci\'on de conexi\'on.
+        \item \textbf{sonda/remoto/flag}: bandera de verificaci\'on de conexi\'on con el centro de monitoreo remoto, retorna True cuando se solicita la confirmaci\'on de conexi\'on.
+        \item \textbf{sonda/muestro/flag}: bandera de verificaci\'on de conexi\'on con los sensores, retorna True cuando se solicita la confirmaci\'on de conexi\'on y confirma adem\'as que los todos los sensores de la sonda están listos.
+        \item \textbf{sonda/asv/monitoreo/inicio}: bandera utilizada para indicar el inicio del proceso de monitorio, una vez que le ASV se posicione en el lugar de medici\'on, env\'ia un TRUE para iniciar el proceso de muestreo.
+        \item \textbf{sonda/asv/monitoreo/fin}: bandera de utilizada para indicar al ASV que puede avanzar al siguiente punto del mapa, una vez la sonda culmine su algoritmo de muestreo y almacene en su base de datos local, env\'ia un True al ASV para que se pueda desplazar al siguiente punto.
+
+
+    \end{itemize}
+    \item \textbf{T\'opicos recepci\'on de datos}: son t\'opicos que contienen datos espec\'ificos de cada uno de los subsistemas, que son necesarios para realizar alg\'un tipo de accion. 
+        \begin{itemize}
+        \item \textbf{sonda/sonar/cm}: Recibe el dato del subsistema de medici\'on de profundidad con la distancia sensada en ese instante, en formato string que luego el convertido en formato float para mejor manejo. 
+        \item \textbf{sonda/grua/status}:
+        \item \textbf{sonda/raspberry/PH}:
+        \item \textbf{sonda/raspberry/temp}:
+        \item \textbf{sonda/raspberry/DO}:
+        \item \textbf{sonda/raspberry/CE}:
+        \item \textbf{sonda/raspberry/OPR}:
+        \item \textbf{sonda/raspberry/TDS}:
+        \item \textbf{sonda/raspberry/S}:
+    \end{itemize}
+    \item \textbf{T\'opicos env\'io de datos}:
+        \begin{itemize}
+        \item \textbf{sonda/remoto/sensores}:
+        \item \textbf{sonda/remoto/telemetria}:
+    \end{itemize}
+    
+\end{itemize}

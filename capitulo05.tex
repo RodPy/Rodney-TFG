@@ -1,10 +1,28 @@
 \chapter[Conclusi\'on y Trabajos Futuros]{ Conclusión y Trabajos Futuros}
 \pagestyle{fancy}
 
-Se logro dise\~nar un sonda con la capacidad de alojamiento de los sensores de conductividad el\'ectrica, potencial de hidr\'ogeno, oxigeno disuelto, potencial de oxigeno reducci\'on, temperatura, salinidad, y componentes elect\'onicos .
-Empleando t\'ecnicas de mecanizado, se logro fabricar la sonda en material de nylon.
-Se logro dotar de funcionalidad para medici\'on a multinivel mediante el uso motores el\'ectricos y con control programable del usuario.
-Se logro implementar con la herramienta nodeRed una interfaz visual gr\'afica, que despliegue toda la informaci\'on de los sensores y f\'acil e intuitiva.
-Se efectuaron varias pruebas de campo en el lago Ypakarai, laguna Pyta, laboratorio sistemas distribuidos y laboratorios de qu\'imica FIUNA.  
+\section{Conclusi\'on}
+En este trabajo se ha desarrollado una sonda multiparamétrica para la calidad de agua para recursos hídricos, lagos y lagunas, un dispositivo practico, escalable, portátil, inalámbrico, de res puesta rápida, de fácil uso, utilizando en su mayor parte recursos open source, que permita seguir re adaptándose a los requerimientos que se presenten, de esta forma se puedan optimizar las campanas de monitoreo. 
+Las tecnologías empleadas permitieron enlazar satisfactoriamente con los sistema un ASV para poder desplazarse superficialmente del recursos hídrico, y con el sistema de descenso para lograr un desplazamiento vertical en lugares donde sea requerido. 
+Se logro dise\~nar una sonda embebida con la capacidad de alojamiento de los sensores de conductividad el\'ectrica, potencial de hidr\'ogeno, oxigeno disuelto, potencial de oxigeno reducci\'on, temperatura  y total de solidos disueltos, y todos los componentes electrónicos y eléctricos como ser un raspberry pi 3B+, drivers de los sensores y una batería liPo para conservar un autonomía energética.
+Mediante el emple de varias técnicas t\'ecnicas de mecanizado, se logro fabricar el anillo y base de la sonda en material de tefl\'on e imprimir en material polímero poliácido láctico la parte frontal de la sonda.
+Se realizaron muestreos en ambientes controlados para la verificación de las mediciones en el laboratorio de química de FIUNA, con el cual se pudo verificar y constatar las mediciones de los sensores y comparando con los sensores propios del laboratorio, donde se concluyeron que existen correlaciones correlación y las mediciones con valores cercanos, entre ambos sensores.
+Se logro diseñar un sistema de despliegue compuesto por una sonar y una grúa que se comunican entre si, sincronizado con la sonda para sus operaciones de muestreo especialmente diseñando para ser instalador en el ASV de proyecto PINV 15-177. 
+Se desarrollo una interfaz gráfica,aplicación web multi plataforma con la tecnología NodeRed, donde se podrá visualizar los valores que se la sonda este registrando en tiempo real, que también se pudo integrar a la interfaz gráfica de control del ASV diseñado en el LSD.
+Se efectuaron varia campanas de muestreo in situ, en el lago Ypakarai durante el tiempo de desarrollo, con el fin de poder evaluar su funcionamiento en campo y de ser necesario realizar modificaciones en el proceso constructivo.
+Este trabajo trabajo final de grado fue el resultado un trabajo de investigación desarrollado íntegramente en el laboratorio de sistemas distribuidos. 
+\section{Trabajos futuros}
+Como posibles trabajos futuros se sugiere realizar m\'as pruebas de campos y campanas de distintas épocas del ano, para seguir verificando el comportamiento de los sensores, especialmente con el sensor de OPR que no se pudo realizar comparativas con resultados a nivel local.
+Se podría optimizar el consumo energético mediante la utilización de otras tecnologías de comunicación en reemplazo del wifi.
+Se podría reducir el tamaño de la sonda, rediseñando una placas de conexiones a medida e utilizando un raspberry mas pequeño como ser el raspberry pi zero.
+Se podría automatizar todo el proceso de generación de reportes a partir del análisis estadístico de la base de datos.
+Se podrían dotar de m\'as sensores a la sonda, de tal forma de incrementar los parámetros de muestreo.
+El esquema tecnológico desarrollado, podría ser compatible para la interconexión de un sinnúmero de dispositivos, por el cual podría desarrollarse el trabajo de forma genérico, para poder monitores otros parámetros.
 
+\section{Divulgaci\'on}
+Parte de este trabajo fue presentado en la XV Jornada de Jóvenes Investigadores de la UNA 2021 en la sala de innovación y tecnología, fue seleccionado para representar a la UNA, en las XXVIII Jornadas de Jóvenes Investigadores de la Asociación de Universidades Grupo Montevideo (AUGM), donde fue presentado en el marco de la temática Ciencia, tecnología y innovación. 
+En el V Encuentro de Investigadores 2020, organizado por la Sociedad Científica del Paraguay, en ésta edición bajo el lema, «Construyendo el Conocimiento Científico en el Paraguay», se obtuvo el primer lugar en la categoría presentación póster disponible en el anexo: \ref{Fig:poster}, “Aplicación de Sistemas de Información Geográfica (SIG) y Vehículos Autónomos de Superficie (VAS) para el monitoreo hidroquímico del Lago Ypacaraí”, realizado por  Andrea Ríos Benítez y otros , donde se realizaron comparaciones con las mediciones obtenidas de la sonda.
+El trabajo final de grado desarrollado se enmarcada bajo licencia codigo abierta donde queda publicado el codigo fuente implementado, como tambien los codigos utilizados para la generacion de los reporters presentado, disponible en un \href{https://github.com/RodPy/FIUNA-LSD-SONDA}{repositorio p\'ublico}.
 % Divulgación 
+% JJI 
+% po

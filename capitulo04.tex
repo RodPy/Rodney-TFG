@@ -1,55 +1,66 @@
 \chapter[Pruebas y resultados experimentales]{ Pruebas y resultados experimentales}
 \pagestyle{fancy}
 
-En este cap\'itulo se abordar\'a los resultados obtenidos a fin de dar cumplimiento de los objetivos definidos en este TFG, adem\'as de verificación del correcto funcionamiento del sistema dise\~nado, mediantes los reportes y an\'alisis de datos obtenidos a partir de las  pruebas de funcionamiento en ambientes controlados y pruebas de campo en el Lago Ypakarai.  As\'i mismo  las configuraciones correspondientes a fin de obtener las lecturas en tiempo real en la estaci\'on remota, ubicada en la sala de monitoreo del laboratorio de sistemas. distribuido (LSD) en CITEC.
+En este cap\'itulo se abordar\'a los resultados obtenidos a fin de dar cumplimiento de los objetivos definidos en este TFG, adem\'as de verificación del correcto funcionamiento del sistema dise\~nado, mediantes los reportes y an\'alisis de datos obtenidos a partir de las  pruebas de funcionamiento en ambientes controlados y pruebas de campo en el Lago Ypakarai.  
+ As\'i mismo se implement\'o en los servidores del LSD una interfaz gr\'afica con el fin de visualizar en tiempo los parámetros recolectados en las pruebas de campo, ubicada en la sala de monitoreo del LSD en CITEC.
+
 \section{Prueba en ambientes controlados}
-Las pruebas en ambientes controlados, consisti\'o en una serie de pruebas realizados en el laboratorio de sistemas distribuido y en el laboratorio de qu\'imica, a fin de poner a punto todos los elementos que conforman el sistema a ser desplegados, antes de realizar las pruebas en campo, donde se espera que se encuentren m\'as variables a tener en cuenta, que deben prever y probar con anticipaci\'on de tal forma de evitar menos fallas.
+Las pruebas en ambientes controlados, consistieron en una serie de pruebas realizadas en el LSD y en el laboratorio de qu\'imica (QCA) de FIUNA, a fin de poner a punto todos los elementos que conforman el sistema a ser desplegados. 
+Esto antes de realizar las pruebas en campo, donde se espera que se encuentren m\'as variables a tener en cuenta, que deben prever y probar con anticipaci\'on de tal forma de evitar menos fallas.
 En este efecto, en este apartado se abarcar\'an los trabajos realizados para la puesta a punto de los sensores Atlas Scientific.
 
 \subsection{Calibraciones de sensores}
-La calibraci\'on de los sensores, es fundamental para que pueda representar una lectura correcta de los valores a ser medidos, a este efecto los sensores adquiridos para la sonda, fueron prove\'idos en un kit que se puede observar en la figura \ref{fig:kit}, los cuales inclu\'ian l\'iquidos de calibraci\'on para cada uno de los sensores adquiridos. 
-
-El kit de l\'iquidos de calibraciones est\'a compuesta un total de ocho botellas, de las cuales una de ellas contiene un l\'iquido de almacenamiento. Cada sensor posee un tipo de calibraci\'on distinta, que var\'ia seg\'un la cantidad de puntos que requiere para ajustar la curva de lectura de mediciones.
-El caso del sensor de pH requiere de tres puntos de calibración (bajo, medio y alto), para los cuales se utiliza pH=4 para la calibraci\'on del punto bajo, pH=7 para la calibraci\'on del punto medio y pH=10 para la calibraci\'on del punto alto, con estas 3 calibraciones el sensor de pH se encuentra listo.
+La calibraci\'on de los sensores, es fundamental para que pueda representar una lectura correcta de los valores a ser medidos. 
+A este efecto, los sensores adquiridos para la sonda fueron prove\'idos en un kit que se puede observar en la figura \ref{fig:kit}, los cuales inclu\'ian l\'iquidos de calibraci\'on para cada uno de los sensores adquiridos. 
+El kit de l\'iquidos de calibraciones est\'a compuesto por un total de ocho botellas, de las cuales una de ellas contiene un l\'iquido de almacenamiento. 
+Cada sensor posee un tipo de calibraci\'on distinta, que var\'ia seg\'un la cantidad de puntos que requiere para ajustar la curva de lectura de mediciones.
+El caso del sensor de pH requiere de tres puntos de calibración (bajo, medio y alto), para los cuales se utiliza $pH=4$ para la calibraci\'on del punto bajo, $pH=7$ para la calibraci\'on del punto medio y $pH=10$ para la calibraci\'on del punto alto. 
+Con estas 3 calibraciones el sensor de pH se encuentra listo.
 El sensor de OD, requiere dos puntos de calibraci\'on, la primera calibraci\'on que consiste en la calibraci\'on a los niveles de ox\'igeno atmosf\'erico y el segundo con su l\'iquido test correspondiente.
 El sensor de OPR, solo requiere un valor conocido de OPR para su calibraci\'on, para su efecto se utiliza el l\'iquido de calibraci\'on que posee un valor de 225 mV.
 El sensor de conductividad el\'ectrica, requiere de dos puntos de calibraci\'on (alto y bajo), para los cuales se utilizaron CE=12.880 $\mu S/cm$ para la calibraci\'on del punto bajo y CE=80.000 $\mu S/cm$ para la calibraci\'on del punto alto.
+La calibraci\'on se realiza, con la sobrescritura del valor de lectura muestreado al l\'iquido de calibraci\'on con el valor esperado seg\'un los datos proporcionados. 
+Los datos se envían mediante protocolo de comunicaci\'on I2C o serial a la placa driver del sensor con el comando \textbf{CAL,n}, donde CAL es el comando de calibraci\'on y $n$ el valor a ser sobrescrito.
 
-La calibraci\'on se realiza, con la sobrescritura del valor de lectura muestreado al l\'iquido de calibraci\'on, con el valor esperado seg\'un los datos proporcionados, mediante protocolo de comunicaci\'on i2C o serial, a la placa driver del sensor, con el comando \textbf{CAL,n }, donde CAL es el comando de calibraci\'on y n el valor a ser sobrescrito.
 \begin{figure}[H]
         \centering
         \includegraphics[scale=0.5]{Imagenes/cap4/calibracion.jpeg}
         \caption {Calibraci\'on sensor CE. }{\textbf{Fuente:}
         Elaboraci\'on propia}
         \label{fig:kit}
+        
 \end{figure}
-Los sensores se consideran calibrados, si pueden realizar lecturas sobre l\'iquidos cuyos valores sean conocidos con un dentro del error esperado o previsto por el fabricante, en el caso de no conseguir una lectura correcta, se debe de borrar las configuraciones de calibraci\'on con el comando \textbf{Cal, clear} y volver a realizar el procedimiento anterior, una vez limpiado todos los equipos utilizados a fin de equipar contaminación. 
-En el caso de los sensores de pH y OPR, se deben almacenar con su l\'iquido de almacenamiento.
-\subsection{Muestreo en el laboratorio qu\'imica - FIUNA }
-El monitoreo se realiz\'o en el laboratorio de qu\'imica de la facultad de ingenier\'ia de la Universidad Nacional de Asunci\'on [QCA], sede San Lorenzo, de los par\'ametros temperatura[T], conductividad el\'ectrica[CE], potencial de hidr\'ogeno[pH]. A fin de poder contrastar los sensores utilizados con los sensores disponibles en el laboratorio de qu\'imica.
 
+Los sensores se consideran calibrados, si pueden realizar lecturas sobre l\'iquidos cuyos valores sean conocidos con un dentro del error esperado o previsto por el fabricante. 
+En el caso de no conseguir una lectura correcta, se debe de borrar las configuraciones de calibraci\'on con el comando \textbf{Cal, clear} y volver a realizar el procedimiento anterior, una vez limpiado todos los equipos utilizados a fin de equipar contaminación. 
+En el caso de los sensores de pH y OPR, se deben almacenar con su l\'iquido de almacenamiento.
+
+\subsection{Muestreo en el laboratorio qu\'imica - FIUNA }
+El monitoreo se realiz\'o en QCA se realizaron con los siguientes par\'ametros temperatura(T), conductividad el\'ectrica (CE), potencial de hidr\'ogeno (pH). A fin de poder contrastar los sensores utilizados con los sensores disponibles en el laboratorio de qu\'imica.
 
 \subsubsection{Metodolog\'ia }
-La metodolog\'ia de recolección y muestreo consisti\'o en el an\'alisis de tres tipos de muestras distintas, la muestra 1 consisti\'o en agua doble destilada, la muestra 2 consisti\'o en agua de pozo, obtenida de una de las redes de abastecimiento de la zona del campus universitario y la muestra 3 consisti\'o en agua de laguna obtenida en la Facultad de Ciencias Exactas y Naturales (FACEN). Cada una de estas muestras se dividieron equitativamente en tres recipientes distintos, de tal forma de obtener el mismo l\'iquido en tres recientes que ser\'an muestreado y registrado las primeras 5 lecturas estables con el multisensor del laboratorio de qu\'imica e igual n\'umero de veces con los sensores de la sonda disen\~nada.
+La metodolog\'ia de recolección y muestreo consisti\'o en el an\'alisis de tres tipos de muestras distintas. 
+La muestra 1 consisti\'o en agua doble destilada, la muestra 2 consisti\'o en agua de pozo, obtenida de una de las redes de abastecimiento de la zona del campus universitario y la muestra 3 consisti\'o en agua de laguna obtenida en la Facultad de Ciencias Exactas y Naturales (FACEN). 
+Cada una de estas muestras se dividieron equitativamente en tres recipientes distintos, de tal forma de obtener el mismo l\'iquido en tres recipientes que ser\'an muestreados y registrados las primeras 5 lecturas estables con el multisensor del laboratorio de qu\'imica e igual n\'umero de veces con los sensores de la sonda disen\~nada.
 Los par\'ametros a ser analizados en este apartado son pH, CE y T, por la disponibilidad en ese momento de los equipos.
-Las caracter\'isticas de los sensores del laboratorio de qu\'imica utilizados se pueden visualizar en la tabla \ref{tab: Sensores laboratorio de quimica}
-Sensores laboratorio de qu\'imica, las caracter\'isticas de los otros sensores se encuentran en el cap\'itulo 2, correspondientes al sensor de CE,T,Ph de la empresa Atlas Scientific.
+Las caracter\'isticas t\'ecnicas de los sensores de QCA utilizados se pueden visualizar en la tabla \ref{tab: Sensores laboratorio de quimica}, en las tablas \ref{tab: caract_sondaph},\ref{tab:caract_temp},\ref{tab:caract_ce}, se pueden visualizar las características de los sensores de pH, CE y T  de la empresa Atlas Scientific.
 \begin{table}[H]
     \caption{Caracter\'isticas de los sensores de laboratorio de qu\'imica}
-    \label{tab: Sensores laboratorio de quimica}
     \begin{tabular}{l c c}
         \toprule
         Caracter\'isticas & Sensor $pH$ & Sensor  $CE$ \\
         \midrule
         Marca & Ohaus       & Oaklon       \\
         Serie & ST10        & WD-35462-11  \\
-        Intervalo de medici\'on                      & 0.00 – 14 {[}pH{]} & 0.00 – 20.00 {[}mS/cm{]}        \\
-        Resoluci\'on de la medici\'on & 0.1   {[}pH{]}     & TDS 10 {[}ppm{]}, 0,1 {[}ppt{]} \\
-        Precisi\'on                                  & $\pm0,1$ {[}pH{]}  & $\pm0,1$ {[}mS/cm{]}   
+        Intervalo de medici\'on                      & $0.00 – 14$ {[}pH{]} & $0.00 – 20.00$ {[}mS/cm{]}        \\
+        Resoluci\'on de la medici\'on & 0.1   {[}pH{]}     & TDS 10 {[}ppm{]}, 0.1 {[}ppt{]} \\
+        Precisi\'on                                  & $\pm0.1$ {[}pH{]}  & $\pm0.1$ {[}mS/cm{]} \\
+        \hline
     \end{tabular}
+    \label{tab: Sensores laboratorio de quimica}
  \end{table}
-Las lecturas se realizaron de forma secuencial con ambos sensores, figura \ref{fig: Muestreo de CE}, cada vez que terminaba el muestreo en cada uno de el recipiente con una de la muestras, se proced\'ia registrar la lectura estable obtenida, retirar el sensor utilizado, limpiarlo con agua destilada y secar con un pa\~no, e introducir el otro sensor equivalente para repetir el procedimiento hasta completar los cinco muestreos.
-
+Las lecturas se realizaron de forma secuencial con ambos sensores, figura \ref{fig: Muestreo de CE}, cada vez que terminaba el muestreo en cada uno de los recipientes con una de las muestras, se proced\'ia a registrar la lectura estable obtenida, retirar el sensor utilizado, limpiarlo con agua destilada y secar con un pa\~no, e introducir el otro sensor equivalente para repetir el procedimiento hasta completar los cinco muestreos.
+En las figuras \ref{fig:muestreoQCA}, se pueden apreciar parte del procedimiento realizado en QCA, en la figura \ref{fig:calibracionLSD}, se puede apreciar todos los sensores de la sonda, incluyendo DO, y OPR, los cuales no serán utilizados en este procedimiento por no contar con equipos de QCA para comparaciones, por practicidad para los procesos de lectura de los sensores se utilizó un microcontrolador con la placa tentacle \ref{fig:placas_muestreo} con el algoritmo de lectura, para realizar los muestreos tal como se observa en la figura \ref{fig: Muestreo de CE} con ambos equipos sobre la misma muestra.
 \begin{figure}
      \centering
      \begin{subfigure}[b]{0.25\textwidth}
@@ -75,12 +86,9 @@ Las lecturas se realizaron de forma secuencial con ambos sensores, figura \ref{f
         \caption{Muestreo en el laboratorio qu\'imica - FIUNA}
         \label{fig:muestreoQCA}
 \end{figure}
-
-
-\newpage
 \subsubsection{Muestra 1. Sensor de temperatura}
     \begin{table}[H]
-        \protect\caption[Muestra 1: Destilada ]{Muestra 1: Agua de destilada.}
+        \protect\caption[T de muestra 1: Destilada ]{Muestra 1: Agua de destilada.}
         \label{tab:TMuestra1}
         \centering
         \begin{tabular}{c c c}
@@ -138,7 +146,7 @@ Las lecturas se realizaron de forma secuencial con ambos sensores, figura \ref{f
 % Grafico M1T
 \begin{figure}[H]
         \centering
-        \includegraphics[width=0.75\linewidth]{Imagenes/cap4/T_M1.png}
+        \includegraphics[width=0.7\linewidth]{Imagenes/cap4/T_M1.png}
         \caption {Muestreo de temperatura. }{\textbf{Fuente:}
         Elaboraci\'on Propia. }
         \label{fig:M1T}
@@ -146,7 +154,7 @@ Las lecturas se realizaron de forma secuencial con ambos sensores, figura \ref{f
     
 \subsubsection{Muestra 1. Sensor Conductividad El\'ectrica}
     \begin{table}[H]
-        \protect\caption[Muestra 1: Destilada ]{Muestra 1: Agua de destilada.}
+        \protect\caption[CE de muestra 1: Destilada -]{Muestra 1: Agua de destilada.}
         \label{tab:TMuestra1}
         \centering
         \begin{tabular}{c c c}
@@ -158,13 +166,9 @@ Las lecturas se realizaron de forma secuencial con ambos sensores, figura \ref{f
             \textbf{Lectura}&\textbf{LSD ($\mu S/cm$)}&\textbf{Qca ($\mu S/cm$)} \\
             \hline
             {1}& $0$&$0$ \\ 
-            % \hline
             {2}& $0$&$0$ \\ 
-            % \hline
-             {3}& $0$&$0$\\  
-            % \hline
+            {3}& $0$&$0$\\  
             {4}& $0$&$0$\\ 
-            % \hline
             {5}& $0$&$0$ \\
             \hline
                        \multicolumn{3}{c}{\textbf{Recipiente 2}} \\
@@ -172,13 +176,9 @@ Las lecturas se realizaron de forma secuencial con ambos sensores, figura \ref{f
             \textbf{Lectura}&\textbf{LSD ($\mu S/cm$)}&\textbf{Qca ($\mu S/cm$)} \\
             \hline
             {1}& $0$&$0$ \\ 
-            % \hline
             {2}& $0$&$0$ \\ 
-            % \hline
             {3}& $0$&$0$\\  
-            % \hline
             {4}& $0$&$0$\\ 
-            % \hline
             {5}& $0$&$0$ \\
             \hline
             \multicolumn{3}{c}{\textbf{Recipiente 3}} \\
@@ -186,13 +186,9 @@ Las lecturas se realizaron de forma secuencial con ambos sensores, figura \ref{f
             \textbf{Lectura}&\textbf{LSD ($\mu S/cm$)}&\textbf{Qca ($\mu S/cm$)} \\
             \hline
             {1}& $0$&$0$ \\ 
-            % \hline
             {2}& $0$&$0$ \\ 
-            % \hline
-             {3}& $0$&$0$\\  
-            % \hline
+            {3}& $0$&$0$\\  
             {4}& $0$&$0$\\ 
-            % \hline
             {5}& $0$&$0$ \\
             \hline
         \end{tabular}
@@ -212,7 +208,7 @@ Las lecturas se realizaron de forma secuencial con ambos sensores, figura \ref{f
 
 \subsubsection{Muestra 1. Sensor de pH}
     \begin{table}[H]
-        \protect\caption[Muestra 1: Destilada ]{Muestra 1: Agua de destilada.}
+        \protect\caption[pH de muestra 1: Destilada ]{Muestra 1: Agua de destilada.}
         \label{tab:TMuestra1}
         \centering
         \begin{tabular}{c c c}
@@ -224,13 +220,9 @@ Las lecturas se realizaron de forma secuencial con ambos sensores, figura \ref{f
             \textbf{Lectura}&\textbf{LSD ($pH$)}&\textbf{Qca ($pH$)} \\
             \hline
             {1}& $6.898$&$8.27$ \\ 
-            % \hline
             {2}& $6.853$&$7.86$ \\ 
-            % \hline
             {3}& $6.856$&$7.36$\\  
-            % \hline
             {4}& $6.809$&$6.82$\\ 
-            % \hline
             {5}& $6.715$&$6.86$ \\
             \hline
             \multicolumn{3}{c}{\textbf{Recipiente 2}} \\
@@ -238,13 +230,9 @@ Las lecturas se realizaron de forma secuencial con ambos sensores, figura \ref{f
             \textbf{Lectura}&\textbf{LSD ($pH$)}&\textbf{Qca ($pH$)} \\
             \hline
             {1}& $6.555$&$6.59$ \\ 
-            % \hline
             {2}& $6.303$&$6.88$ \\ 
-            % \hline
             {3}& $5.919$&$6.76$\\  
-            % \hline
             {4}& $5.502$&$6.65$\\ 
-            % \hline
             {5}& $5.171$&$6.62$ \\
             \hline
             \multicolumn{3}{c}{\textbf{Recipiente 3}} \\
@@ -252,13 +240,9 @@ Las lecturas se realizaron de forma secuencial con ambos sensores, figura \ref{f
             \textbf{Lectura}&\textbf{LSD ($pH$)}&\textbf{Qca ($pH$)} \\
             \hline
             {1}& $6.495$&$6.86$ \\ 
-            % \hline
             {2}& $6.440$&$6.77$ \\ 
-            % \hline
-             {3}& $6.316$&$6.49$\\  
-            % \hline
+            {3}& $6.316$&$6.49$\\  
             {4}& $6.711$&$6.18$\\ 
-            % \hline
             {5}& $6.613$&$6.37$ \\
             \hline
         \end{tabular}
@@ -270,7 +254,7 @@ Las lecturas se realizaron de forma secuencial con ambos sensores, figura \ref{f
 % Grafico M1Ph
     \begin{figure}[H]
         \centering
-        \includegraphics[width=0.75\linewidth]{Imagenes/cap4/pH_M1.png}
+        \includegraphics[width=0.7\linewidth]{Imagenes/cap4/pH_M1.png}
         \caption {Muestreo de pH. }{\textbf{Fuente:}
         Elaboraci\'on Propia. }
         \label{fig:M1PH}
@@ -280,21 +264,21 @@ Las lecturas se realizaron de forma secuencial con ambos sensores, figura \ref{f
 % Please add the following required packages to your document preamble:
 
 \begin{table}[H]
-\protect\caption[Muestra 1: Destilada ]{Estad\'isticas de mediciones: Muestra 1.}
+\protect\caption[Descripci\'on estad\'istica Muestra 1.]{Descripci\'on estad\'istica Muestra 1.}
 \label{tab:AnalisisM1}
 \begin{tabular}{l ccc|ccc}
 \hline
 \textbf{Muestra 1  }& \multicolumn{3}{c}{LSD} & \multicolumn{3}{c}{QCA}  \\ 
 \begin{tabular}[c]{@{}l@{}}An\'alisis de datos\end{tabular} & \multicolumn{1}{c}{\begin{tabular}[c]{@{}c@{}}T \\$ ^{\circ}C$\end{tabular}} & \multicolumn{1}{c}{pH}        & \begin{tabular}[c]{@{}c@{}}CE\\ $\mu S/cm$\end{tabular} & \multicolumn{1}{c}{\begin{tabular}[c]{@{}c@{}}T \\$ ^{\circ}C$\end{tabular}} & \multicolumn{1}{c}{pH}        & \multicolumn{1}{c}{\begin{tabular}[c]{@{}c@{}}CE\\ $\mu S/cm$\end{tabular}} \\ 
 \hline
-Desviaci\'on Est\'andar & \multicolumn{1}{c}{0.349} & \multicolumn{1}{c}{0.511} & 0                                                  & \multicolumn{1}{c}{0.118}                                       & \multicolumn{1}{c}{0.551} & \multicolumn{1}{c}{0}                                                  \\ 
-Varianza                                                                        & \multicolumn{1}{c}{0.122}                                       & \multicolumn{1}{c}{0.261} & 0                                                  & \multicolumn{1}{c}{0.014}                                      & \multicolumn{1}{c}{0.304} & \multicolumn{1}{c}{0}                                                  \\ 
-Error Estándar                                                                  & \multicolumn{1}{c}{0.090}                                      & \multicolumn{1}{c}{0.132} & 0                                                  & \multicolumn{1}{c}{0.0306}                                      & \multicolumn{1}{c}{0.142} & \multicolumn{1}{c}{0}                                                  \\ 
-Mínimo  &   \multicolumn{1}{c}{24.60}  & \multicolumn{1}{r}{5.171} & 0 & \multicolumn{1}{c}{25.30} & \multicolumn{1}{r}{6.180} & 0 \\
+Desviaci\'on Est\'andar & \multicolumn{1}{c}{0,349} & \multicolumn{1}{c}{0,511} & 0                                                  & \multicolumn{1}{c}{0,118}                                       & \multicolumn{1}{c}{0,551} & \multicolumn{1}{c}{0}                                                  \\ 
+Varianza                                                                        & \multicolumn{1}{c}{0,122}                                       & \multicolumn{1}{c}{0,261} & 0                                                  & \multicolumn{1}{c}{0,014}                                      & \multicolumn{1}{c}{0,304} & \multicolumn{1}{c}{0}                                                  \\ 
+Error Estándar                                                                  & \multicolumn{1}{c}{0,090}                                      & \multicolumn{1}{c}{0,132} & 0                                                  & \multicolumn{1}{c}{0,0306}                                      & \multicolumn{1}{c}{0,142} & \multicolumn{1}{c}{0}                                                  \\ 
+Mínimo  &   \multicolumn{1}{c}{24,60}  & \multicolumn{1}{r}{5,17} & 0 & \multicolumn{1}{c}{25,30} & \multicolumn{1}{r}{6,18} & 0 \\
 % \hline
-Máximo  & \multicolumn{1}{c}{25.90}    & \multicolumn{1}{c}{6.898} & 0 & \multicolumn{1}{c}{25.60}  & \multicolumn{1}{c}{8.270} & 0  \\ 
+Máximo  & \multicolumn{1}{c}{25,90}    & \multicolumn{1}{c}{6,89} & 0 & \multicolumn{1}{c}{25,60}  & \multicolumn{1}{c}{8,27} & 0  \\ 
 % \hline
-Promedio & \multicolumn{1}{c}{25.41}   & \multicolumn{1}{c}{6.410} & 0 & \multicolumn{1}{c}{25.45} & \multicolumn{1}{c}{6.889} & 0 
+Promedio & \multicolumn{1}{c}{25,41}   & \multicolumn{1}{c}{6,41} & 0 & \multicolumn{1}{c}{25,45} & \multicolumn{1}{c}{6,88} & 0 
 \\ 
 \hline
 \end{tabular}
@@ -303,8 +287,14 @@ Promedio & \multicolumn{1}{c}{25.41}   & \multicolumn{1}{c}{6.410} & 0 & \multic
 \hfill \textbf{Fuente: }Elaboración Propia.
 \end{table}
 
-En la tabla \ref{tab:AnalisisM1}, se puede observar algunos par\'metros estad\'isticos calculados, a partir de los registros recolectados en el muestreo de los recipientes de la muestra 1, el cual arrojo los siguientes resultados. La desviaci\'on est\'andar en el caso de la temperatura, presenta en ambos caso un \'indice bajo m\'as aun para el equipo de QCA, por lo cual indica que la mayor parte de los datos de una muestra tienden a estar agrupados cerca de su media. En caso del pH la desviaci\'on est\'andar es un poco mayor, pero de igual manera baja, por lo tanto, tambi\'en tienen tendencia que las lecturas se agrupen cerca de la media. La varianza sigue la misma tendencia de la desviaci\'on est\'andar, por lo tanto, todos los datos recolectados no presentan dispersi\'on. El error est\'andar, presenta valores bajos en todo los par\'ametros, el cual sugiere que los valores recolectados son uniforme y se encuentran cerca de la media. Los valores mínimos recolectados en el caso de la temperatura presentan una deferencia de 0,7 $ ^{\circ}C$ siendo 25.3 $ ^{\circ}C$ la menor lectura registrada por el sensor de QCA, en el caso del pH la diferencia entre los mínimos fue de 1.009 pH, siendo 5.171 pH la menor lectura registrada por el sensor de LSD. Los valores m\'aximo recolectados en el caso de la temperatura presentan una deferencia de 0,3 $ ^{\circ}C$ siendo 25.90 $ ^{\circ}C$ la mayor lectura registrada por el sensor de LSD, en el caso del pH la diferencia entre los m\'aximos fue de 1.372 pH, siendo 8.270 pH la mayor lectura registrada por el sensor de QCA. El promedio de las mediciones fueron cercanas con una diferencia de 7$\%$ en el caso del pH, siendo el promedio de los datos de pH registrado por el sensor de QCA 6.889 pH contra el promedio de pH registrado por el sensor LSD igual a 6.41 pH, en el caso de los resultados promedios registrados de la temperatura la diferencia entre los resultados fue menor al 0.5$\%$ siendo la temperatura promedio del sensor LSD igual a 24.41$ ^{\circ}C$ y la temperatura promedio del sensor de QCA igual a 25.25$^{\circ}C$. En este an\'alisis de datos correspondiente a la muestra 1, no sé describi\'o los datos recolectados por el sensor de CE, ya que en ambos sensores se obtuvieron los mismos resultados iguales a 0 $\mu S/cm$, tal como se espera para este tipo de muestra.
-
+En la tabla \ref{tab:AnalisisM1} se puede observar algunos para\'metros estad\'isticos calculados a partir de los registros recolectados en el muestreo de los recipientes de la muestra 1, el cual arrojó los siguientes resultados. 
+La desviaci\'on est\'andar en el caso de la temperatura, presenta en ambos valores menores a 0,6 m\'as aun para el equipo de QCA, por lo cual indica que la mayor parte de los datos de una muestra tienden a estar agrupados cerca de su media. 
+En el caso del pH la desviaci\'on est\'andar es un poco mayor al de temperatura, pero de igual manera menor a la unidad, por lo tanto, tambi\'en tienen una baja  dispersión alrededor de la media. 
+La varianza sigue la misma tendencia de la desviaci\'on est\'andar, por lo tanto, todos los datos recolectados no presentan dispersi\'on. 
+El error est\'andar, presenta valores bajos en todo los par\'ametros, el cual sugiere que los valores recolectados son uniforme y se encuentran cerca de la media. 
+Los valores mínimos recolectados en el caso de la temperatura presentan una diferencia de 0,7 $ ^{\circ}C$ siendo 25,3 $ ^{\circ}C$ la menor lectura registrada por el sensor de QCA. 
+En el caso del pH la diferencia entre los mínimos fue de 1,00 pH, siendo 5,17 pH la menor lectura registrada por el sensor de LSD. 
+Los valores m\'aximo recolectados en el caso de la temperatura presentan una deferencia de 0,3 $ ^{\circ}C$ siendo 25,90 $ ^{\circ}C$ la mayor lectura registrada por el sensor de LSD, en el caso del pH la diferencia entre los m\'aximos fue de 1,37 pH, siendo 8,27 pH la mayor lectura registrada por el sensor de QCA. El promedio de las mediciones fueron cercanas con una diferencia de 7,00$\%$ en el caso del pH, siendo el promedio de los datos de pH registrado por el sensor de QCA 6.89 pH contra el promedio de pH registrado por el sensor LSD igual a 6,41 pH, en el caso de los resultados promedios registrados de la temperatura la diferencia entre los resultados fue menor al 0,5$\%$ siendo la temperatura promedio del sensor LSD igual a 24,41$ ^{\circ}C$ y la temperatura promedio del sensor de QCA igual a 25,25$^{\circ}C$. En este an\'alisis de datos correspondiente a la muestra 1, no sé describi\'o los datos recolectados por el sensor de CE, ya que en ambos sensores se obtuvieron los mismos resultados iguales a 0 $\mu S/cm$, tal como se espera para este tipo de muestra.
 \begin{table}[]
 \caption{Relaci\'on entre los equipos de sensores}
 \label{tab:VaCoM1}
@@ -313,16 +303,18 @@ En la tabla \ref{tab:AnalisisM1}, se puede observar algunos par\'metros estad\'i
 \toprule
 & T   &  pH    & CE \\
 \midrule
-Covarianza  & 0.0125& 0.111 & 0                \\
-Correlación & 0.301& 0.395 & 0        \\
+Covarianza  & 0,0125& 0,111 & 0                \\
+Correlación & 0,301& 0,395 & 0        \\
 \bottomrule
 \end{tabular}
 \\ \textbf{Fuente: }Elaboración Propia.
 \end{table}     
 % https://sitiobigdata.com/2019/10/26/covarianza-y-correlacion/
-
-
-En la tabla \ref{tab:VaCoM1}, se analizan los resultados de covarianza y correlación de las muestras, en el caso de la temperatura y pH se obtuvieron unas covarianzas positivas el cual indica que ambas lecturas varían en la misma dirección, as\'i mismo en ambos par\'ametros se obtuvieron correlaciones positivas lo cual indica que son directamente proporcionales entre sí, la media varía en la misma dirección con el factor del valor del coeficiente de correlación. Luego de analizar los resultados obtenidos en el caso de la muestra 1, se puede concluir que ambos sensores presentan lecturas cercanas, con baja dispersi\'on. 
+En la tabla \ref{tab:VaCoM1}, se analizan los resultados de covarianza y correlación de las muestras. 
+En el caso de la temperatura y pH se obtuvieron unas covarianzas positivas, el cual indica que ambas lecturas varían en la misma dirección.
+As\'i mismo en ambos par\'ametros se obtuvieron correlaciones positivas, lo cual indica que son directamente proporcionales entre sí. 
+La media varía en la misma dirección con el factor del valor del coeficiente de correlación. 
+Luego de analizar los resultados obtenidos en el caso de la muestra 1, se puede concluir que ambos sensores presentan lecturas cercanas, con baja dispersi\'on. 
 
 %% Muestra nro 2: Agua de Pozo
 \subsubsection{Muestra 2.Temperatura}
@@ -339,13 +331,9 @@ En la tabla \ref{tab:VaCoM1}, se analizan los resultados de covarianza y correla
             \textbf{Lectura}&\textbf{LSD($^{\circ}$C)}&\textbf{Qca($^{\circ}$C)} \\
             \hline
             {1}& $23.6$&$25.1$ \\ 
-            % \hline
             {2}& $22.9$&$24.9$ \\ 
-            % \hline
-             {3}& $22.6$&$24.8$\\  
-            % \hline
+            {3}& $22.6$&$24.8$\\  
             {4}& $22.5$&$24.6$\\ 
-            % \hline
             {5}& $22.3$&$24.6$ \\
             \hline
                        \multicolumn{3}{c}{\textbf{Recipiente 2}} \\
@@ -367,13 +355,9 @@ En la tabla \ref{tab:VaCoM1}, se analizan los resultados de covarianza y correla
             \textbf{Lectura}&\textbf{LSD($^{\circ}$C)}&\textbf{Qca($^{\circ}$C)} \\
             \hline
             {1}& $22.2$&$23.9$ \\ 
-            % \hline
             {2}& $21.9$&$24.0$ \\ 
-            % \hline
-             {3}& $21.5$&$23.8$\\  
-            % \hline
+            {3}& $21.5$&$23.8$\\  
             {4}& $21.4$&$23.7$\\ 
-            % \hline
             {5}& $21.2$&$23.6$ \\ 
             \hline
         \end{tabular}
@@ -404,31 +388,31 @@ En la tabla \ref{tab:VaCoM1}, se analizan los resultados de covarianza y correla
             \hline
             \textbf{Lectura}&\textbf{LSD ($\mu S/cm$)}&\textbf{Qca ($\mu S/cm$)} \\
             \hline
-            {1}& $81.39$&$100$ \\ 
-            {2}& $80.12$&$90$ \\ 
-            {3}&$80.05$&$90$\\  
-            {4}& $80.55$&$100$\\ 
-            {5}& $80.10$&$90$ \\
+            {1}& $81.39$&$100,00$ \\ 
+            {2}& $80.12$&$90,00$ \\ 
+            {3}&$80.05$&$90,00$\\  
+            {4}& $80.55$&$100,00$\\ 
+            {5}& $80.10$&$90,00$ \\
             \hline
                        \multicolumn{3}{c}{\textbf{Recipiente 2}} \\
             \hline
             \textbf{Lectura}&\textbf{LSD ($\mu S/cm$)}&\textbf{Qca ($\mu S/cm$)} \\
             \hline
-            {1}& $80.32$&$80$ \\ 
-            {2}& $80.36$&$80$ \\ 
-            {3}&$80.40$&$80$  \\  
-            {4}& $80.45$&$80$ \\ 
-            {5}& $80.49$&$80$ \\ 
+            {1}& $80.32$&$80,00$ \\ 
+            {2}& $80.36$&$80,00$ \\ 
+            {3}&$80.40$&$80,00$  \\  
+            {4}& $80.45$&$80,00$ \\ 
+            {5}& $80.49$&$80,00$ \\ 
             \hline
             \multicolumn{3}{c}{\textbf{Recipiente 3}} \\
             \hline
             \textbf{Lectura}&\textbf{LSD ($\mu S/cm$)}&\textbf{Qca($\mu S/cm$)} \\
             \hline
-            {1}& $119.60$&$130$ \\ 
-            {2}& $110.30$&$130$ \\ 
-            {3}&$118.90$&$130$  \\  
-            {4}& $117.10$&$130$ \\ 
-            {5}& $118.40$&$130$ \\ 
+            {1}& $119.60$&$130,00$ \\ 
+            {2}& $110.30$&$130,00$ \\ 
+            {3}&$118.90$&$130,00$  \\  
+            {4}& $117.10$&$130,00$ \\ 
+            {5}& $118.40$&$130,00$ \\ 
             \hline
         \end{tabular}
         \vspace{5mm}
@@ -502,13 +486,13 @@ En la tabla \ref{tab:VaCoM1}, se analizan los resultados de covarianza y correla
 \subsection{An\'alsis de Datos. Muestra 2}
 
 \begin{table}[H]
-    \protect\caption[Muestra 2: Agua de pozo ]{Resumen de mediciones: Muestra 2.}
+    \protect\caption[Descripci\'on estad\'istica Muestra 2. ]{Descripci\'on estad\'istica Muestra 2.}
 \label{tab:AnalisisM2}
 
     \begin{tabular}{lccc|ccc}
     \hline
     Muestra 2 & 
-    \multicolumn{3}{c}{LSD} & 
+    \multicolumn{3}{c|}{LSD } & 
     \multicolumn{3}{c}{QCA}  \\
     \textbf{\begin{tabular}[c]{@{}l@{}}An\'alisis de datos
     \end{tabular}} & \multicolumn{1}{c}{\begin{tabular}[c]{@{}c@{}}T \\ $^{\circ} C$ 
@@ -519,45 +503,43 @@ En la tabla \ref{tab:VaCoM1}, se analizan los resultados de covarianza y correla
     \multicolumn{1}{c}{\begin{tabular}[c]{@{}c@{}}CE\\ $\mu S/cm$\end{tabular}} \\ 
     \hline
     M\'inimo & 
-    \multicolumn{1}{c}{21.20} & 
-    \multicolumn{1}{c}{5.157} & 80.05   & \multicolumn{1}{c}{23.60}& 
-    \multicolumn{1}{c}{5.910} & 80.0  \\ 
+    \multicolumn{1}{c}{21,20} & 
+    \multicolumn{1}{c}{5,15} & 80,05   & \multicolumn{1}{c}{23,60}& 
+    \multicolumn{1}{c}{5,91} & 80,00  \\ 
     M\'aximo & 
-    \multicolumn{1}{c}{24.40} & 
-    \multicolumn{1}{c}{5.936} & 119.60 & 
-    \multicolumn{1}{c}{25.10} & 
-    \multicolumn{1}{c}{6.200} & 130.0  \\ Promedio & \multicolumn{1}{c}{22.81} & 
-    \multicolumn{1}{c}{5.556} & 92.57  & \multicolumn{1}{c}{24.23} & 
-    \multicolumn{1}{c}{6.068} & 101.3  \\ 
+    \multicolumn{1}{c}{24,40} & 
+    \multicolumn{1}{c}{5,93} & 119,60 & 
+    \multicolumn{1}{c}{25,10} & 
+    \multicolumn{1}{c}{6,20} & 130,0  \\ Promedio & \multicolumn{1}{c}{22,81} & 
+    \multicolumn{1}{c}{5,55} & 92,57  & \multicolumn{1}{c}{24,23} & 
+    \multicolumn{1}{c}{6,06} & 101,3  \\ 
     Desviaci\'on Est\'andar  & 
-    \multicolumn{1}{c}{1.063}  & 
-    \multicolumn{1}{c}{0.2077} & {17.89} & \multicolumn{1}{c}{0.472} &
-    \multicolumn{1}{c}{0.0934} & 
-    \multicolumn{1}{c}{21.995} \\ 
+    \multicolumn{1}{c}{1,063}  & 
+    \multicolumn{1}{c}{0,207} & {17,89} & \multicolumn{1}{c}{0,472} &
+    \multicolumn{1}{c}{0,0934} & 
+    \multicolumn{1}{c}{21,995} \\ 
     Varianza & 
-    \multicolumn{1}{c}{1.130} &
-    \multicolumn{1}{c}{0.0431} & 320.28  & \multicolumn{1}{c}{0.223} & 
-    \multicolumn{1}{c}{0.00873} & 
+    \multicolumn{1}{c}{1,130} &
+    \multicolumn{1}{c}{0,0431} & 320,28  & \multicolumn{1}{c}{0,223} & 
+    \multicolumn{1}{c}{0,00873} & 
     \multicolumn{1}{c}{483.8}                              \\
     Error Est\'andar & 
-    \multicolumn{1}{c}{0.274}  & 
-    \multicolumn{1}{c}{0.0536} & {4.62} & 
-    \multicolumn{1}{c}{0.122} & 
-    \multicolumn{1}{c}{0.024} & 
-    \multicolumn{1}{c}{5.68}         \\ \hline
+    \multicolumn{1}{c}{0,274}  & 
+    \multicolumn{1}{c}{0,0536} & {4,62} & 
+    \multicolumn{1}{c}{0,122} & 
+    \multicolumn{1}{c}{0,024} & 
+    \multicolumn{1}{c}{5,68}         \\ \hline
     \end{tabular}
 \end{table}
 
-En la tabla \ref{tab:AnalisisM2}, se puede observar algunos par\'ametros estad\'isticos calculados, a partir de los registros recolectados en el muestreo de los recipientes de la muestra 2, el cual arrojo los siguientes resultados. 
-La desviaci\'on est\'andar m\'as elevada se registr\'o en el par\'ametro de conductividad el/éctrica, siendo el mayor el registrado por el sensor de qu/ímica igual a 21.9 un  4\%  mayor a la desviación del LSD, en los resultados de  los otros par\'ametros, se registra un desviaci\'on menor en sensores de QCA,   . 
+En la tabla \ref{tab:AnalisisM2}, se puede observar algunos par\'ametros estad\'isticos calculados, a partir de los registros recolectados en el muestreo de los recipientes de la muestra 2, el cual arroj\'o los siguientes resultados. 
+La desviaci\'on est\'andar m\'as elevada se registr\'o en el par\'ametro de conductividad el\'ectrica, siendo el mayor el registrado por el sensor de qu\'imica igual a 21,9 un  4\%  mayor a la desviación del LSD, en los resultados de  los otros par\'ametros, se registra un desviaci\'on menor en sensores de QCA. 
 La varianza sigue la misma tendencia de la desviaci\'on est\'andar, la conductividad el\'ectrica presenta una mayor dispersi\'on. 
-El error est\'andar, presenta valores bajos en los par\'ametros de pH y QCA, el cual sugiere que los valores recolectados son uniforme y se encuentran cerca de la media. 
-Los valores mínimos recolectados en el caso de la temperatura presentan una deferencia de 2,4 $ ^{\circ}C$ siendo 21.2$ ^{\circ}C$ la menor lectura registrada por el sensor de LSD, en el caso del pH la diferencia entre los mínimos fue de 0.753 pH, siendo 5.157 pH la menor lectura registrada por el sensor de LSD, la m\'inima conductividad el\'ectrica registrado fue de 80.00$\mu S/cm$ con una variaci\'on muy baja entre los sensores. 
-Los valores m\'aximo recolectados en el caso de la temperatura presentan una deferencia de 0,7 $ ^{\circ}C$ siendo 25.1 $ ^{\circ}C$ la mayor lectura registrada por el sensor de QCA, en el caso del pH la diferencia entre los m\'aximos fue de 0.264 pH, siendo 6.20 pH la mayor lectura registrada por el sensor de QCA, la conductividad el\'ectrica m\'as alta registrada fue de 130.00 $\mu S/cm$ con con una diferencia de 10.4 $\mu S/cm$ con respecto a la mayor lectura registrada en el sensor QCA.
-El promedio de las mediciones fueron cercanas con una diferencia de 9.16$\%$ en el caso del pH, siendo el promedio de los datos de pH registrado por el sensor de QCA 5.556 pH contra el promedio de pH registrado por el sensor LSD igual a 6.068 pH, en el caso de los resultados promedios registrados de la temperatura la diferencia entre los resultados fue menor al 9.41$\%$ siendo la temperatura promedio del sensor LSD igual a 22.81$ ^{\circ}C$ y la temperatura promedio del sensor de QCA igual a 24.23$^{\circ}C$, los promedio de las mediciones de los sensores de conductividad eléctrica entre los sensores tienen diferencia de 9.14$\%$, siendo el promedio de los datos de CE registrado por el sensor de QCA 101.3 contra el promedio de CE registrado por el sensor LSD igual a 92.57$\mu S/cm$ .
+El error est\'andar, presenta valores menores a la unidad  en los par\'ametros correspondientes al sensor de pH y T, el cual sugiere que los valores recolectados son uniforme y se encuentran cerca de la media. 
+Los valores mínimos recolectados en el caso de la temperatura presentan una deferencia de 2,4 $ ^{\circ}C$ siendo 21,2$ ^{\circ}C$ la menor lectura registrada por el sensor de LSD, en el caso del pH la diferencia entre los mínimos fue de 0,75 pH, siendo 5,16 pH la menor lectura registrada por el sensor de LSD, la m\'inima conductividad el\'ectrica registrado fue de 80,00 $\mu S/cm$ con una variaci\'on muy baja entre los sensores. 
+Los valores m\'aximo recolectados en el caso de la temperatura presentan una deferencia de 0,7 $ ^{\circ}C$ siendo 25,1 $ ^{\circ}C$ la mayor lectura registrada por el sensor de QCA, en el caso del pH la diferencia entre los m\'aximos fue de 0,264 pH, siendo 6,20 pH la mayor lectura registrada por el sensor de QCA, la conductividad el\'ectrica m\'as alta registrada fue de 130,00 $\mu S/cm$ con una diferencia de 10,4 $\mu S/cm$ con respecto a la mayor lectura registrada en el sensor QCA.
+El promedio de las mediciones fueron cercanas con una diferencia de 9,16$\%$ en el caso del pH, siendo el promedio de los datos de pH registrado por el sensor de QCA 5,56 H contra el promedio de pH registrado por el sensor LSD igual a 6,07 pH, en el caso de los resultados promedios registrados de la temperatura la diferencia entre los resultados fue menor al 9,41$\%$ siendo la temperatura promedio del sensor LSD igual a 22,81$ ^{\circ}C$ y la temperatura promedio del sensor de QCA igual a 24,23$^{\circ}C$, los promedio de las mediciones de los sensores de conductividad eléctrica entre los sensores tienen diferencia de 9,14$\%$, siendo el promedio de los datos de CE registrado por el sensor de QCA 101,3 contra el promedio de CE registrado por el sensor LSD igual a 92,57$\mu S/cm$.
 En este an\'alisis de datos correspondiente a la muestra 2, se observan los mismos patrones, los resultados finales con valores cercanos, con un margen de diferencia menor al 10\% entre ambos sensores. 
-
-
 \begin{table}[H]
 \caption{Relaci\'on entre los equipos de sensores}
 \label{tab:VaCoM2}
@@ -566,14 +548,13 @@ En este an\'alisis de datos correspondiente a la muestra 2, se observan los mism
 \toprule
 & T   &  pH    & CE \\
 \midrule
-Covarianza  &0.168 & 0.00734 & 373.89        \\
-Correlaci\'on & 0.334& 0.3782 & 0.949        \\
+Covarianza  &0,168 & 0,00734 & 373,89        \\
+Correlaci\'on & 0,334& 0,3782 & 0,949        \\
 \bottomrule
 \end{tabular}
 \\ \textbf{Fuente: }Elaboración Propia.
 \end{table} 
-En un analis de la tabla \ref{tab:VaCoM2}, donde se encuentran los resultados de covarianza y correlación de las muestras, en el caso de la temperatura, conductividad el\'ectrica y pH se obtuvieron unos valores de covarianzas positivas el cual indica que ambas lecturas varían en la misma dirección, as\'i mismo en los tres par\'ametros se obtuvieron correlaciones positivas menores a 1, refleja que se da una correlación positiva entre sí, la media varía en la misma dirección con el factor del valor del coeficiente de correlación. Luego de analizar los resultados obtenidos en el caso de la muestra 2, se puede concluir que ambos sensores presentan lecturas cercanas,relacionadas entre s\'i, con baja dispersi\'on. 
-
+En un an\'alisis de la tabla \ref{tab:VaCoM2}, donde se encuentran los resultados de covarianza y correlación de las muestras, en el caso de la temperatura, conductividad el\'ectrica y pH se obtuvieron unos valores de covarianzas positivas, el cual indica que ambas lecturas varían en la misma dirección, as\'i mismo en los tres par\'ametros se obtuvieron correlaciones positivas menores a 1, refleja que se da una correlación positiva entre sí, la media varía en la misma dirección con el factor del valor del coeficiente de correlación. Luego de analizar los resultados obtenidos en el caso de la muestra 2, se puede concluir que ambos sensores presentan lecturas cercanas, relacionadas entre s\'i, con baja dispersi\'on. 
 \subsubsection{Muestra 3. Sensor de Temperatura}
   \begin{table}[H]
         \protect\caption[Muestra 3: Agua de laguna]{Muestra 3: Agua de laguna.}
@@ -618,14 +599,10 @@ En un analis de la tabla \ref{tab:VaCoM2}, donde se encuentran los resultados de
         \newline
         \hfill \textbf{Fuente: }Elaboración Propia.
     \end{table}
-
-
-
-
 % Gráfico M3T
     \begin{figure}[H]
         \centering
-        \includegraphics[width=0.75\linewidth]{Imagenes/cap4/T_M3.png}
+        \includegraphics[width=0.7\linewidth]{Imagenes/cap4/T_M3.png}
         \caption {Muestreo de pH. }{\textbf{Fuente:}
         Elaboraci\'on Propia. }
         \label{fig:M3T}
@@ -745,9 +722,8 @@ En un analis de la tabla \ref{tab:VaCoM2}, donde se encuentran los resultados de
 % \usepackage{multirow}
 
 \begin{table}[H]
-\protect\caption[Muestra 3: Agua de laguna ]{Resumen de mediciones: Muestra 3.}
+\protect\caption[Descripci\'on estad\'istica Muestra 3. ]{Descripci\'on estad\'istica Muestra 3.}
 \label{tab:AnalisisM3}
-
 \begin{tabular}{lccc|ccc}
 \hline
 Muestra 3 & 
@@ -757,33 +733,33 @@ Muestra 3 &
 \begin{tabular}[c]{@{}c@{}}CE\\ $\mu S/cm$\end{tabular} & \multicolumn{1}{c}{\begin{tabular}[c]{@{}c@{}}T \\ $^{\circ} C$\end{tabular}} & \multicolumn{1}{c}{pH}        & 
 \multicolumn{1}{c}{\begin{tabular}[c]{@{}c@{}}CE\\ $\mu S/cm$\end{tabular}}
 \\ \hline
-M\'inimo & \multicolumn{1}{c}{22.10}                            & \multicolumn{1}{c}{6.023} & 32.24                               & \multicolumn{1}{c}{21.80}                                       & 
-\multicolumn{1}{c}{6.610} & 50.00   \\ M\'aximo                 & 
-\multicolumn{1}{c}{22.90}                                       & 
-\multicolumn{1}{c}{6.538} & 44.40                               & \multicolumn{1}{c}{22.90}                                       & 
-\multicolumn{1}{c}{7.20}  & 53.00   \\ Promedio                 & 
-\multicolumn{1}{c}{22.58}                                       & \multicolumn{1}{c}{6.316} & 36.12                               & \multicolumn{1}{c}{22.37}                                       & \multicolumn{1}{c}{7.017} & 51.13  \\ Desviación Est\'andar     & 
-\multicolumn{1}{c}{0.291}                                       & \multicolumn{1}{c}{0.165} & 3.545                               & 
-\multicolumn{1}{c}{0.354}                                       & 
-\multicolumn{1}{c}{0.167}                                       & 
-\multicolumn{1}{c}{1.125} \\ Varianza                           & \multicolumn{1}{c}{0.0845}                                      & \multicolumn{1}{c}{0.027} & 12.57                               & \multicolumn{1}{c}{0.125}                                       & 
-\multicolumn{1}{c}{0.027}                                       & 
-\multicolumn{1}{c}{1.267}  \\ Error Estándar                    & \multicolumn{1}{c}{0.075}                                       & \multicolumn{1}{c}{0.0426} & 0.915                              & 
-\multicolumn{1}{c}{0.0914}                                      & 
-\multicolumn{1}{c}{0.0431}                                      & 
-\multicolumn{1}{c|}{0.290}  \\ 
+M\'inimo & \multicolumn{1}{c}{22,10}                            & \multicolumn{1}{c}{6,02} & 32.24                               & \multicolumn{1}{c}{21.80}                                       & 
+\multicolumn{1}{c}{6,610} & 50,00   \\ M\'aximo                 & 
+\multicolumn{1}{c}{22,90}                                       & 
+\multicolumn{1}{c}{6,538} & 44,40                               & \multicolumn{1}{c}{22,90}                                       & 
+\multicolumn{1}{c}{7,20}  & 53,00   \\ Promedio                 & 
+\multicolumn{1}{c}{22,58}                                       & \multicolumn{1}{c}{6,32} & 36,12                               & \multicolumn{1}{c}{22,37}                                       & \multicolumn{1}{c}{7,017} & 51.13  \\ Desviación Est\'andar     & 
+\multicolumn{1}{c}{0,291}                                       & \multicolumn{1}{c}{0,165} & 3,545                               & 
+\multicolumn{1}{c}{0,354}                                       & 
+\multicolumn{1}{c}{0,167}                                       & 
+\multicolumn{1}{c}{1,125} \\ Varianza                           & \multicolumn{1}{c}{0,0845}                                      & \multicolumn{1}{c}{0,027} & 12,57                               & \multicolumn{1}{c}{0,125}                                       & 
+\multicolumn{1}{c}{0,027}                                       & 
+\multicolumn{1}{c}{1,267}  \\ Error Estándar                    & \multicolumn{1}{c}{0,075}                                       & \multicolumn{1}{c}{0,0426} & 0,915                              & 
+\multicolumn{1}{c}{0,0914}                                      & 
+\multicolumn{1}{c}{0,0431}                                      & 
+\multicolumn{1}{c|}{0,290}  \\ 
 \hline
 \end{tabular}
 \end{table}
 
 En la tabla \ref{tab:AnalisisM3}, se puede observar algunos par\'ametros estad\'isticos calculados, a partir de los registros recolectados en el muestreo de los recipientes de la muestra 3, el cual arrojo los siguientes resultados. 
-La desviaci\'on est\'andar m\'as elevada se registr\'o en el par\'ametro de conductividad el\'ectrica, siendo el mayor el registrado por el sensor de LSD, igual a 3.545 un  3.17\%  mayor a la desviación del sensor de QCA, en los resultados de  los otros par\'ametros, se registra un desviaci\'on parecidas siendo los menor en sensores de LSD,   . 
-La varianza sigue la misma tendencia de la desviaci\'on est\'andar, la conductividad el\'ectrica presenta una mayor dispersi\'on. 
-El error est\'andar, presenta valores bajos en todos los par\'ametros menores a 1, el cual sugiere que los valores recolectados son uniforme y se encuentran cerca de la media. 
-Los valores mínimos recolectados en el caso de la temperatura presentan una deferencia de 0,3 $ ^{\circ}C$ siendo 21.3$ ^{\circ}C$ la menor lectura registrada por el sensor de QCA, en el caso del pH la diferencia entre los mínimos fue de 0,587 pH, siendo 6,023 pH la menor lectura registrada por el sensor de LSD, la m\'inima conductividad el\'ectrica registrado fue de 32,24 $\mu S/cm$ con una diferencia de 17,76 $\mu S/cm$ con respecto al sensor de QCA. 
-Los valores m\'aximo recolectados en el caso de la temperatura no presentaron  deferencia siendo 22,90 $ ^{\circ}C$ la  lectura registrada por los sensores, en el caso del pH la diferencia entre los m\'aximos fue de 0.662 pH, siendo 7.2 pH la mayor lectura registrada por el sensor de QCA, la conductividad el\'ectrica m\'as alta registrada fue de 53 $\mu S/cm$ con con una diferencia de 8.6 $\mu S/cm$ con respecto a la mayor lectura registrada en el sensor QCA.
-El promedio de las mediciones fueron cercanas con una diferencia de 9 $\%$ en el caso del pH, siendo el promedio de los datos de pH registrado por el sensor de QCA 7,017 pH contra el promedio de pH registrado por el sensor LSD igual a 6.316 pH, en el caso de los resultados promedios registrados de la temperatura la diferencia entre los resultados fue menor al 0.93$\%$ siendo la temperatura promedio del sensor LSD igual a 22.58$ ^{\circ}C$ y la temperatura promedio del sensor de QCA igual a 22.37$^{\circ}C$, los promedio de las mediciones de los sensores de conductividad eléctrica entre los sensores tienen diferencia de 29.35 $\%$, siendo el promedio de los datos de CE registrado por el sensor de QCA 51.13 contra el promedio de CE registrado por el sensor LSD igual a 36.12 $\mu S/cm$.
-En este an\'alisis de datos correspondiente a la muestra 3, se observan los mismos patrones, los resultados finales con valores cercanos, con un margen de diferencia menor al 7\% entre ambos sensores de ph - T y menor al 23.35 \% en el sensor de CE.
+La desviaci\'on est\'andar m\'as elevada se registr\'o en el par\'ametro de conductividad el\'ectrica, siendo la desviac\'ion  mayor el registrado por el sensor de LSD, igual a 3,54 un  3,17\%  mayor a la desviación del sensor de QCA, en los resultados de  los otros par\'ametros, se registran  desviaci\'on parecidas menores a 0,4, los sensores de LSD presentan los menores valoes de desviaci\'on est\'andar. 
+La varianza sigue la misma tendencia de la desviaci\'on est\'andar, la conductividad el\'ectrica presenta una mayor dispersi\'on en ambos sensores. 
+El error est\'andar, presenta valores bajos en todos los par\'ametros menores a la unidad, lo cual sugiere que los valores recolectados son uniforme y se encuentran cerca de la media. 
+Los valores m\'inimos registrados en el caso de la temperatura presentan entre s\'i una deferencia de 0,3 $ ^{\circ}C$ siendo 21,3$ ^{\circ}C$ la menor lectura registrada por el sensor de QCA, en el caso del pH la diferencia entre los m\'inimos fue de 0,59 pH, siendo 6,02 pH la menor lectura registrada por el sensor de LSD, la m\'inima conductividad el\'ectrica registrado fue de 32,24 $\mu S/cm$ con una diferencia de 17,76 $\mu S/cm$ con respecto al sensor de QCA. 
+Los valores m\'aximo recolectados en el caso de la temperatura no presentaron deferencia, siendo 22,.90 $ ^{\circ}C$ la  lectura registrada por los sensores, en el caso del pH la diferencia entre los m\'aximos fue de 0,662 pH, siendo 7,2 pH la mayor lectura registrada por el sensor de QCA, la conductividad el\'ectrica m\'as alta registrada fue de 53 $\mu S/cm$ con una diferencia de 8,6 $\mu S/cm$ con respecto a la mayor lectura registrada en el sensor QCA.
+El promedio de las mediciones fueron cercanas con una diferencia de 9 $\%$ en el caso del pH, siendo el promedio de los datos de pH registrado por el sensor de QCA 7,02 pH contra el promedio de pH registrado por el sensor LSD igual a 6,32 pH, en el caso de los resultados promedios registrados de la temperatura la diferencia entre los resultados fue menor al 0,93$\%$ siendo la temperatura promedio del sensor LSD igual a 22,58$ ^{\circ}C$ y la temperatura promedio del sensor de QCA igual a 22,37$^{\circ}C$, los promedio de las mediciones de los sensores de conductividad eléctrica entre los sensores tienen diferencia de 29,35 $\%$, siendo el promedio de los datos de CE registrado por el sensor de QCA 51,13 contra el promedio de CE registrado por el sensor LSD igual a 36,12 $\mu S/cm$.
+En este an\'alisis de datos, correspondiente a la muestra 3, se observan los mismos patrones, los resultados finales con valores cercanos, con un margen de diferencia menor al 7\% entre ambos sensores de ph - T y menor al 23,35 \% en el sensor de CE.
 
 \begin{table}[H]
 \caption{Relaci\'on entre los equipos de sensores}
@@ -793,22 +769,29 @@ En este an\'alisis de datos correspondiente a la muestra 3, se observan los mism
 \toprule
 & T   &  pH    & CE \\
 \midrule
-Covarianza  & 0.05483 & 0.0073 & 0.157                \\
-Correlación & 0.5483& 0.3782 & 0.628        \\
+Covarianza  & 0,05483 & 0,0073 & 0,157                \\
+Correlación & 0,5483& 0,3782 & 0,628        \\
 \bottomrule
 \end{tabular}
 \\ \textbf{Fuente: }Elaboración Propia.
 \end{table}  
 
-En un an\'alisis de la tabla \ref{tab:VaCoM2}, donde se encuentran los resultados de covarianza y correlación de las muestras, en el caso de la temperatura, conductividad el\'ectrica y pH se obtuvieron unos valores de covarianzas positivas el cual indica que ambas lecturas varían en la misma dirección, as\'i mismo en los tres par\'ametros se obtuvieron correlaciones positivas menores a 1, refleja que se da una correlación positiva entre sí, la media varía en la misma dirección con el factor del valor del coeficiente de correlación. Luego de analizar los resultados obtenidos en el caso de la muestra 3, se puede concluir que ambos sensores presentan lecturas cercanas,relacionadas entre s\'i, con baja dispersi\'on. 
-
+En un an\'alisis de la tabla \ref{tab:VaCoM2}, donde se encuentran los resultados de covarianza y correlación de las muestras, en el caso de la temperatura, conductividad el\'ectrica y pH se obtuvieron unos valores de covarianzas positivas, el cual indica que ambas lecturas varían en la misma dirección, as\'i mismo en los tres par\'ametros se obtuvieron correlaciones positivas menores a 1, refleja que se da una correlación positiva entre sí, la media varía en la misma dirección con el factor del valor del coeficiente de correlación. Luego de analizar los resultados obtenidos en el caso de la muestra 3, se puede concluir que ambos sensores presentan lecturas cercanas, relacionadas entre s\'i, con baja dispersi\'on. 
 % resumen de mediciones
-
 %Estadistica de mediciones
-
 \section{Pruebas de campo}
 Las pruebas en campo se realizaron con el fin de verificar el comportamiento de la sonda y sistemas en un entorno de trabajo real. 
-Se realizaron varias pruebas de campos en el lago Ypakarai, los cuales ayudaron a mejorar el dise\~no final, desde el punto de hardware y software, alguna de las mejoras fueron,laincorporaci\'on de una estructura interna de fijado por la base de la sonda, a modo de sostener y mantener ordenado todos los elementos electr\'onicos, evitando con esto que se puedan da\~nar por su manipulaci\'on, incorporaci\'on de un o-ring para mejorar el hermetismo e impedir el ingreso de l\'iquidos, ya que luego de las primeras pruebas se detectaron filtraciones provenientes de la rosca principal uni\'on base-anillo,para la publicaci\'on remota, se agreg\'o al c\'odigo principal, rutinas multi hilos, para cuando la sonda pierda conexi\'on a internet no se pierdan estos paquetes durante, y unan vez recuperada la conexi\'on se env\'ien todos los hilos.
+Se realizaron varias pruebas de campos en el lago Ypakarai, en la figura \ref{fig:lagoRutaInicial}, se observa la ruta de muestreo planificado, 
+\begin{figure}[h]
+        \centering
+        \includegraphics[width=0.75\linewidth]{Imagenes/cap4/Recorrido_inicio.png}
+        \caption {Ruta inicial proyectada. }{\textbf{Fuente:}
+        Elaboraci\'on Propia. }
+     \label{fig:lagoRutaInicial}
+\end{figure}
+los cuales ayudaron a mejorar el dise\~no final, desde el punto de hardware y software. Las pruebas permitieron principalmente la introducción de tres mejoras, primero, la incorporaci\'on de una estructura interna de fijado por la base de la sonda, a modo de sostener y mantener ordenado todos los elementos electr\'onicos, evitando con esto que se puedan da\~nar por su manipulaci\'on.
+Segundo, incorporaci\'on de un o-ring para mejorar el hermetismo e impedir el ingreso de l\'iquidos, ya que luego de las primeras pruebas se detectaron filtraciones provenientes de la rosca principal uni\'on base-anillo.
+Tercero, para la publicaci\'on remota, se agreg\'o al c\'odigo principal, rutinas multi-hilos, para cuando la sonda pierda conexi\'on a internet no se pierdan estos paquetes durante, y unan vez recuperada la conexi\'on se env\'ien todos los hilos. 
 
 \begin{figure}[H]
      \centering
@@ -829,7 +812,8 @@ Se realizaron varias pruebas de campos en el lago Ypakarai, los cuales ayudaron 
     \caption{Prueba de campo - Lago Ypakarai}
     \label{fig:PruebaCampo}
 \end{figure}
-
+En la figura \ref{fig:SondaASV}, se observan los preparativos y puesta en marcha de los sistema de ASV antes de su ingreso al lago, comprobaciones de las conexiones a la estación remota y de los demás sistemas que lo componen.En la figura \ref{fig:PruebaCampo} se puede observar la sonda ya instalada en la gr\'ua del ASV en el lago Ypakarai, antes de iniciar el recorrido . 
+A continuación se desarrollan los resultados de los parámetros obtenidos en la prueba de campo realizada el día 21 de julio del ano 2020.
 
 \subsection{Muestreo de pH. Prueba de Campo}
 
@@ -841,7 +825,7 @@ Se realizaron varias pruebas de campos en el lago Ypakarai, los cuales ayudaron 
         \label{fig:Lago_ph}
 \end{figure}
 
-La Resoluci\'on. SEAM N$ ^{\circ}$ 222/02 estable un l\'imite inferior y superior igual a 6 y 9 respectivamente.Durante esta campa\~na todos los puntos se encuentran acorde a la normativa.
+La Resoluci\'on. SEAM N$ ^{\circ}$ 222/02 estable un l\'imite inferior y superior igual a 6 y 9 respectivamente. Durante esta campa\~na todos los puntos se encuentran acorde a la normativa.
 En la tabla \ref{table:Lago_ph} se presenta un an\'alisis comparativo de los valores obtenidos para el par\'ametro pH correspondientes a la prueba de campo  realizada.
 
 \begin{table}[H]
@@ -853,12 +837,12 @@ En la tabla \ref{table:Lago_ph} se presenta un an\'alisis comparativo de los val
 \multicolumn{3}{r}{Rango} \\ \cline{4-5} & 
 Muestras & Promedio & Mínimo & Máximo \\
 \midrule
-Prueba de campo  &      472 &      7.0 &  6.993 &  7.003 \\
+Prueba de campo  &      472 &      7,0 &  6,99 &  7,00 \\
 \bottomrule
 \end{tabular}
 \end{table}
-Se realizaron 472 mediciones en todo el recorrido, los valores recolectados de potencial de hidr\'ogeno que oscilan en un intervalo entre 6.993 y 7.003.
-En la tercera \cite{3er_Cemit} y cuarta \cite{4to_Cemit} campaña de muestreo del “Monitoreo de Calidad de Agua por Campañas de Muestreo en el Lago Ypacaraí 2019 -2021, correspondientes al periodo de la prueba de campo, realizado por CEMIT-UNA, segun contrato ITAIPÚ/UNA No. 4500054462/2019, se documentan promedios de pH que oscilaron entre 6.0 y 7.98. 
+Se realizaron 472 mediciones en todo el recorrido, los valores recolectados de potencial de hidr\'ogeno que oscilan en un intervalo entre 6,99 y 7,00.
+En la tercera y cuarta campaña de muestreo del “Monitoreo de Calidad de Agua por Campañas de Muestreo en el Lago Ypacaraí 2019 -2021, correspondientes al periodo de la prueba de campo, realizado por CEMIT-UNA, seg\'un contrato ITAIPÚ/UNA No. 4500054462/2019, \cite{3er_Cemit}\cite{4to_Cemit}. Se documentan promedios de pH que oscilaron entre 6,0 y 7,98. 
 Se verifica que par\'ametro recolectados en esta campa\~na se encuentra dentro del intervalo de valores.
 
 \subsection{Muestreo de CE. Prueba de Campo}
@@ -871,7 +855,7 @@ Se verifica que par\'ametro recolectados en esta campa\~na se encuentra dentro d
         \label{fig:Lago_ce}
 \end{figure}
 
-Para aguas de Clase 2 la Resoluci\'on 222/02 no estable ningún l\'imite para el par\'ametro evaluado; se toma como referencia el l\'mite de 1250 $\mu S/cm$ establecido en el Anexo X de la ley 1614/2000 en cual Ley General Del Marco Regulatorio y Tarifario Del Servicio De Agua Potabley Alcantarillado Sanitario. Todas las determinaciones realizadas en la campa\~na se encuentran en conformidad con la normativa de referencia.
+Para aguas de Clase 2 la Resoluci\'on 222/02 no estable ningún l\'imite para el par\'ametro evaluado; se toma como referencia el l\'mite de 1.250 $\mu S/cm$ establecido en el Anexo X de la ley 1614/2000(Ley General Del Marco Regulatorio y Tarifario Del Servicio De Agua Potable y Alcantarillado Sanitario \cite{ministerio_de_hacienda_ley_nodate}). Todas las determinaciones realizadas en la campa\~na se encuentran en conformidad con la normativa de referencia.
 En la tabla \ref{table:Lago_ce} se presenta un an\'alisis comparativo de los valores obtenidos para el par\'ametro CE correspondientes a la prueba de campo  realizada.
 
 \begin{table}[H]
@@ -883,14 +867,14 @@ En la tabla \ref{table:Lago_ce} se presenta un an\'alisis comparativo de los val
 \multicolumn{3}{r}{Rango} \\  \cline{4-5}& 
 Muestras & Promedio & Mínimo & Máximo \\
 \midrule
-Prueba de campo  &      472 &   137.65 &   4.62 &  163.6 \\
+Prueba de campo  &      472 &   137,65 &   4,62 &  163,6 \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-Se realizaron 472 mediciones en todo el recorrido, los valores recolectados de conductividad el\'ectrica que oscilan en  un intervalo entre 4.62 $\mu S/cm$ y 163.6 $\mu S/cm$, en promedio 137.65 $\mu S/cm$.
-En la tercera \cite{3er_Cemit} y cuarta \cite{4to_Cemit} campaña de muestreo del “Monitoreo de Calidad de Agua por Campañas de Muestreo en el Lago Ypacaraí 2019 -2021, correspondientes al periodo de la prueba de campo, realizado por CEMIT-UNA, segun contrato ITAIPÚ/UNA No. 4500054462/2019, se documentan promedios de CE que oscilaron entre $156 \mu S/cm$ y $601 \mu S/cm$. 
-Se verifica que los datos del par\'ametro, recolectados en esta campa\~na se encuentra dentro del intervalo de valores.
+Se realizaron 472 mediciones en todo el recorrido, los valores recolectados de conductividad el\'ectrica que oscilan en  un intervalo entre 4,62 $\mu S/cm$ y 163,6 $\mu S/cm$, en promedio 137,65 $\mu S/cm$.
+En la tercera y cuarta campaña de muestreo del “Monitoreo de Calidad de Agua por Campañas de Muestreo en el Lago Ypacaraí 2019 -2021, correspondientes al periodo de la prueba de campo, realizado por CEMIT-UNA, seg\'un contrato ITAIPÚ/UNA No. 4500054462/2019, \cite{3er_Cemit}\cite{4to_Cemit}. Se documentan promedios de CE que oscilaron entre $156 \mu S/cm$ y $601 \mu S/cm$. 
+Se verifica que los datos del par\'ametro, recolectados en esta campa\~na coinciden con los valores mínimos del CEMIT.
 
 \subsection{Muestreo de OD. Prueba de Campo}
 
@@ -902,7 +886,7 @@ Se verifica que los datos del par\'ametro, recolectados en esta campa\~na se enc
         \label{fig:Lago_od}
 \end{figure}
 
-La Resoluci\'on SEAM 222/02 establece que el ox\'igeno disuelto en aguas de clases 2 debe ser  $> 5 mg O_2/L$. Todas las determinaciones realizadas en la campa\~na se encuentran en conformidad con la normativa de referencia.
+La Resoluci\'on SEAM 222/02 establece que el ox\'igeno disuelto en aguas de clases 2 debe ser  $> 5 mg O_2/L$. Todas las determinaciones realizadas en la campa\~na se encuentran en conformidad con la normativa de referencia. En la figura \ref{fig:Lago_od} se observan que las mediciones son variables y  permanecen entorno a un rango . 
 En la tabla \ref{table:Lago_od} se presenta un an\'alisis comparativo de los valores obtenidos para el par\'ametro OD correspondientes a la prueba de campo  realizada.
 
 \begin{table}[H]
@@ -914,13 +898,13 @@ En la tabla \ref{table:Lago_od} se presenta un an\'alisis comparativo de los val
           & \multicolumn{3}{r}{Rango} \\ \cline{4-5}
           & Muestras & Promedio & Mínimo & Máximo \\
 \midrule
-Prueba de campo  &      472 &     8.05 &   7.65 &   8.43 \\
+Prueba de campo  &      472 &     8,05 &   7,65 &   8,43 \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-Se realizaron 472 mediciones en todo el recorrido, los valores recolectados de oxigeno disuelto que oscilan en  un intervalo entre 7.65   y 8.43 $mg/L$, en promedio 8.05 $mg/L$.
-En la tercera \cite{3er_Cemit} y cuarta \cite{4to_Cemit} campaña de muestreo del “Monitoreo de Calidad de Agua por Campañas de Muestreo en el Lago Ypacaraí 2019 -2021, correspondientes al periodo de la prueba de campo, realizado por CEMIT-UNA, segun contrato ITAIPÚ/UNA No. 4500054462/2019, se documentan promedios de CE que oscilaron entre 7.85 $mg/L$ y 8.9 $mg/L$. 
+Se realizaron 472 mediciones en todo el recorrido, los valores recolectados de ox\'igeno disuelto que oscilan en  un intervalo entre 7,65   y 8,43 $mg/L$, en promedio 8,05 $mg/L$.
+En la tercera y cuarta campaña de muestreo del “Monitoreo de Calidad de Agua por Campañas de Muestreo en el Lago Ypacaraí 2019 -2021, correspondientes al periodo de la prueba de campo, realizado por CEMIT-UNA, seg\'un contrato ITAIPÚ/UNA No. 4500054462/2019, \cite{3er_Cemit}\cite{4to_Cemit}. Se documentan promedios de CE que oscilaron entre 7,85 $mg/L$ y 8.9 $mg/L$. 
 Se verifica que los datos del par\'ametro, recolectados en esta campa\~na se encuentra dentro del intervalo de valores.
 
 \subsection{Muestreo de OPR. Prueba de Campo}
@@ -932,7 +916,7 @@ Se verifica que los datos del par\'ametro, recolectados en esta campa\~na se enc
         Elaboraci\'on Propia. }
         \label{fig:Lago_opr}
 \end{figure}
-La Resoluci\'on. SEAM N$ ^{\circ}$ 222/02 no define un valor límite para OPR La Organización Mundial de la Salud adoptó en 1972 la medida del POTENCIAL REDOX como la medida más fiable para medir la calidad sanitaria del agua potable, estableciendo en \cite{OPR_10665-39989} el valor 650mV como valor adecuado para el agua potable.
+La Resoluci\'on. SEAM N$ ^{\circ}$ 222/02 no define un valor límite para OPR La Organización Mundial de la Salud adoptó en 1972 la medida del POTENCIAL REDOX como la medida más fiable para medir la calidad sanitaria del agua potable, estableciendo en \cite{OPR_10665-39989} el valor 650mV como valor adecuado para el agua potable.En la figura \ref{fig:Lago_opr} se observan que las mediciones son variables y  permanecen entorno a un rango . 
 En la tabla \ref{table:Lago_temp} se presenta un an\'alisis comparativo de los valores obtenidos para el par\'ametro OPR correspondientes a la prueba de campo realizada. 
 \begin{table}[H]
 \centering
@@ -943,12 +927,12 @@ En la tabla \ref{table:Lago_temp} se presenta un an\'alisis comparativo de los v
           & \multicolumn{3}{r}{Rango} \\  \cline{4-5}
           & Muestras & Promedio & Mínimo & Máximo \\
 \midrule
-Prueba de campo  &      472 &  -309.43 & -345.7 & -269.1 \\
+Prueba de campo  &      472 &  -309,43 & -345,7 & -269,1 \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-Se realizaron 472 mediciones en todo el recorrido, los valores recolectados de oxigeno disuelto que oscilan en  un intervalo entre -259.1 $mV$ y -345.7 $mV$, en promedio -309.4 $mV$.
+Se realizaron 472 mediciones en todo el recorrido, los valores recolectados de ox\'igeno disuelto que oscilan en  un intervalo entre -259,1 $mV$ y -345,7 $mV$, en promedio -309,4 $mV$.
 
 \subsection{Muestreo de T. Prueba de Campo}
 
@@ -972,14 +956,14 @@ En la tabla \ref{table:Lago_temp} se presenta un an\'alisis comparativo de los v
           & \multicolumn{3}{r}{Rango} \\ \cline{4-5}
           & Muestras & Promedio & Mínimo & Máximo \\
 \midrule
-Prueba de campo  &      472 &    16.51 & 15.375 & 18.125 \\
+Prueba de campo  &      472 &    16,51 & 15,37 & 18,12 \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-Se realizaron 472 mediciones en todo el recorrido, los valores recolectados de temperatura que oscilan en  un intervalo entre 15.37 $ ^{\circ}$C y 18.12 $ ^{\circ}$C, en promedio 16.51 $^{\circ}$C .
-En la tercera \cite{3er_Cemit} y cuarta \cite{4to_Cemit} campaña de muestreo del “Monitoreo de Calidad de Agua por Campañas de Muestreo en el Lago Ypacaraí 2019 -2021, correspondientes al periodo de la prueba de campo, realizado por CEMIT-UNA, segun contrato ITAIPÚ/UNA No. 4500054462/2019, se documentan promedios de T que oscilaron entre 19.7 $ ^{\circ}$C y 26.2 $ ^{\circ}$C. 
-Se verifica que los datos del par\'ametro, recolectados en esta campa\~na no se encuentra dentro del intervalo de valores.
+Se realizaron 472 mediciones en todo el recorrido, los valores recolectados de temperatura que oscilan en  un intervalo entre 15,37 $ ^{\circ}$C y 18,12 $ ^{\circ}$C, en promedio 16,51 $^{\circ}$C.
+En la tercera y cuarta campaña de muestreo del “Monitoreo de Calidad de Agua por Campañas de Muestreo en el Lago Ypacaraí 2019 -2021, correspondientes al periodo de la prueba de campo, realizado por CEMIT-UNA, seg\'un contrato ITAIPÚ/UNA No. 4500054462/2019, \cite{3er_Cemit}\cite{4to_Cemit}. Se documentan promedios de T que oscilaron entre 19,7 $ ^{\circ}$C y 26,2 $ ^{\circ}$C. 
+Se verifica que los datos del par\'ametro, recolectados en esta campa\~na no se encuentra dentro del intervalo de valores. Pero se encuentra dentro del rango de los datos climatológicos del día. 
 
 \subsection{Muestreo de TDS. Prueba de Campo}
 
@@ -991,7 +975,7 @@ Se verifica que los datos del par\'ametro, recolectados en esta campa\~na no se 
         \label{fig:Lago_tds}
 \end{figure}
 
-La Resoluci\'on SEAM 222/02 establece que el total de solidos disuelto en aguas de aguas del territorio nacional ser menor a  500$ mg /L$. Todas las determinaciones realizadas en la campa\~na se encuentran en conformidad con la normativa de referencia.
+La Resoluci\'on SEAM 222/02 establece que el total de s\'olidos disuelto en aguas de aguas del territorio nacional ser menor a  500$ mg /L$. Todas las determinaciones realizadas en la campa\~na se encuentran en conformidad con la normativa de referencia.
 En la tabla \ref{table:Lago_tds} se presenta un an\'alisis comparativo de los valores obtenidos para el par\'ametro TDS correspondientes a la prueba de campo  realizada.
 
 \begin{table}[H]
@@ -1003,47 +987,49 @@ En la tabla \ref{table:Lago_tds} se presenta un an\'alisis comparativo de los va
           & \multicolumn{3}{r}{Rango} \\ \cline{4-5}
           & Muestras & Promedio & Mínimo & Máximo \\
 \midrule
-Prueba de campo  &      472 &    73.86 &    2.0 &   88.0 \\
+Prueba de campo  &      472 &    73,86 &    2,0 &   88,0 \\
 \bottomrule
 \end{tabular}
 \end{table}
 
 \subsubsection{Resumen del an\'alsis de Datos. Prueba de Campo}
 A continuaci\'on se presenta un resumen de todos los datos obtenidos.
-El muestreo se hizo durante el desplazamiento en un circuito cerrado partiendo de la playa municipal de San Bernardino, pasando por el centro del lago Ypakarai  y la desembocadura del arrollo Piray\'u, tal como se puede observar en la figura \ref{fig:ruta}, el muestreo inicio a las 10:00hs hasta las 12:25hs, durante este periodo se registraron 471 (cuatrocientos setenta y uno) muestras, en intervalos aproximados de 25 segundos, los par\'ametros  recolectados durante el muestreo de pH, conductividad el\'ectrica, ox\'igeno disuelto, total de s\'olidos disueltos, potencial \'oxido reducci\'on y temperatura, los datos de georeferenciaci\'on fueron prove\'idos por el ASV en cada punto de muestreo.
+El muestreo el dia 31 de julio del 2020, durante el desplazamiento en un circuito cerrado partiendo de la playa municipal de San Bernardino, pasando por el centro del lago Ypakarai  y la desembocadura del arroyo Piray\'u, tal como se puede observar en la figura \ref{fig:ruta}, el muestreo inicio a las 10:00h hasta las 12:25h, durante este periodo se registraron 471 (cuatrocientos setenta y uno) muestras, en intervalos aproximados de 25 segundos, los par\'ametros  recolectados durante el muestreo de pH, conductividad el\'ectrica, ox\'igeno disuelto, total de s\'olidos disueltos, potencial \'oxido reducci\'on y temperatura, los datos de georeferenciaci\'on fueron prove\'idos por el ASV en cada punto de muestreo.
 \begin{figure}[H]
         \centering
-        \includegraphics[scale=0.7]{Imagenes/cap4/Recorrido.png}
+        \includegraphics[width=0.8\linewidth]{Imagenes/cap4/Recorrido.png}
         \caption {Ruta de muestreo. }{\textbf{Fuente:}
         Elaboraci\'on Propia. }
         \label{fig:ruta}
 \end{figure}
 
-En la tabla \ref{tab:datos Lago}, se presenta los rsultados de unos an\'alisis estadísticos descriptivos correspondientes a todos los par\'ametros de la prueba de campo realizada.
+En la tabla \ref{tab:datos Lago}, se presenta los resultados de unos an\'alisis estadísticos descriptivos correspondientes a todos los par\'ametros de la prueba de campo realizada.
 
 \begin{table}[H]
 \caption{Muestreo lago Ypakarai. Resumen}
 \label{tab:datos Lago}
 \begin{tabular}{lllllll} \hline& 
 T  $^{\circ}C$ & $pH$     & CE $\mu S/cm$ & TDS $ppm$ & OPR $mV$ & OD $mgL/$  \\ \hline
-M\'inimo & 15.37 & 6.993 & 4.62 & 2    & -345.70  & 7.65     \\
-M\'aximo & 18.12 & 7.0   & 163.6    & 88    & -269.10  & 8.43 \\
-Promedio & 16.51  & 6.99 & 137.65 & 73.85 & -309.42  & 8.047 \\
-Desv. est. & 0.748 & 0.0016   & 17.50   & 9.46     & 21.634   & 0.22     \\
-Varianza                & 0.56           & 0.000003 & 777.14        & 225.07    & 468.03   & 0.050296 \\
-Error est.               & 0.034 & 0.000076 & 1.283154 & 0.690544 & 0.995786 & 0.010323 \\
+M\'inimo & 15,37 & 6,99 & 4,62 & 2    & -345,70  & 7,65     \\
+M\'aximo & 18,12 & 7,0   & 163,6    & 88    & -269,10  & 8,43 \\
+Promedio & 16,51  & 6,99 & 137,65 & 73,85 & -309,42  & 8,047 \\
+Desv. est. & 0,748 & 0,0016   & 17,50   & 9,46     & 21,634   & 0,22     \\
+Varianza                & 0,56           & 0,000003 & 777,14        & 225,07    & 468,03   & 0,050296 \\
+Error est.               & 0,034 & 0,000076 & 1,283154 & 0,690544 & 0,995786 & 0,010323 \\
 \hline
 \end{tabular}
 \end{table}
-Los temperatura maxima registrada fye de 18.12 $^o$C, el potencial de hidrigeno maximo fue de 7pH, el valor maximo de la conductividad electrica fue de 163.6 $\mu S/cm$, el valor maximo de TDS fue 88ppm, en el caso de OPR fue -269.10 $mV$ y el oxigeno disuelto macimo resgrado fue 0.22 $mg/L$.
-Se puede apreciar que los sensores de temperatura, pH, y oxigeno disuelto presentaron resultados de desviación estándar mas bajos, por lo tanto menos disperso. En el caso de la conductividad eléctrica, total de solidos disueltos y opr, presentaron valores de desviación estándar mas altas, por lo que se concluye de su comportamiento mas disperso.
+La temperatura m\'axima registrada fue de 18,12 $^o$C, el potencial de hidr\'ogeno m\'aximo fue de 7pH, el valor m\'aximo de la conductividad el\'ectrica fue de 163,6 $\mu S/cm$, el valor ma\'ximo de TDS fue 88 ppm, en el caso de OPR fue -269,10 $mV$ y el ox\'igeno disuelto máximo registrado fue 0,22 $mg/L$.
+Se puede apreciar que los sensores de temperatura, pH, y ox\'igeno disuelto presentaron resultados de desviación estándar m\'as bajos, por lo tanto, menos disperso. En el caso de la conductividad eléctrica, total de s\'olidos disueltos y opr, presentaron valores de desviación estándar m\'as altas, por lo que se concluye de su comportamiento m\'as disperso.
 El error estándar calculado es bajo para todas las medicines. 
-Todo los datos obtenidos se encuentran en el intervalo de valores obtenidos en otras campa\~nas de muestreo como ser lo desarrollados por CEMIT- Itaipu \cite{3er_Cemit}\cite{4to_Cemit}, realizados en un periodo cercano a esta prueba de campo, y también se encuentran dentro de los valores obtenidos en \cite{lopez_moreira_m_eutrophication_2018}, donde se analizaron algunos de estos parámetros.  
+Todos los datos obtenidos se encuentran en el intervalo de valores obtenidos en otras campa\~nas de muestreo, como ser los desarrollados por CEMIT- Itaipu, \cite{3er_Cemit}\cite{4to_Cemit}, realizados en un periodo cercano a esta prueba de campo, y también se encuentran dentro de los valores obtenidos en \cite{lopez_moreira_m_eutrophication_2018}, donde se analizaron algunos de estos parámetros.  
 
 \section{Interfaz de monitoreo}
-La interfaz gr\'afica fue desarrollada con el objetivo de ofrecer una pre visualizaci\'on de los datos recolectados en tiempo de ejecucion, sin tener que acceder directamente a la base de datos, que sea de f\'acil uso y compatible con la mayor cantidad de dispositivos posibles.
+La interfaz gr\'afica fue desarrollada con el objetivo de ofrecer una pre visualizaci\'on de los datos recolectados en tiempo de ejecuci\'on, sin tener que acceder directamente a la base de datos, que sea de f\'acil uso y compatible con la mayor cantidad de dispositivos posibles.
 Con la tecnolog\'ia NodeRed, fue posible instalar la interfaz gr\'fica mediantes nodos y con el protocolo de comunicaci\'on  MQTT lograr capturar los datos enviados por los t\'opicos antes  establecidos, \appendixautorefname{appendix: Topicos}
-La interfaz gr\'afica es multi plataforma, compatibles con todos los sistemas operativos m\'oviles como de escritorio, ya que al ser una aplicaci\'on web instalada en servidores, es compatible con cualquier dispositivo que tenga instalado alg\'un navegador web donde se ejecutarse. En la figura \ref{fig:Monitoreo} se puede apreciar la interfaz gráfica fue instalada en el raspberry de la sonda y en la sala de monitoreo del laboratorio de sistemas distribuidos de fiuna ubicado en CITEC. 
+La interfaz gr\'afica es multi plataforma, compatibles con todos los sistemas operativos m\'oviles como de escritorio, ya que al ser una aplicaci\'on web instalada en servidores, es compatible con cualquier dispositivo que tenga instalado alg\'un navegador web donde se ejecutará. 
+En la figura \ref{fig:Monitoreo} se puede apreciar la interfaz gráfica fue instalada en la sala de monitoreo del laboratorio de sistemas distribuidos de fiuna ubicado en CITEC. 
+
 \begin{figure}[H]
         \centering
         \includegraphics[scale=0.7]{Imagenes/cap4/SalaMonitoreo.jpg}
@@ -1061,10 +1047,16 @@ La interfaz gr\'afica es multi plataforma, compatibles con todos los sistemas op
         \label{fig:interfaz}
 \end{figure}
 
-Con la idea de conservar un dise\~no m\'inimo, se desarrollaron dos vistas principales. La primera vista, donde se pueda visualizar los datos recolectados por los sensores y otra vista para operaciones manuales. En la figura \ref{fig:interfaz} se puede apreciar el panel principal del monitoreo, donde se despliegan cada uno de los parámetros de temperatura, potencial de hidrógeno, conductividad eléctrica, oxigeno disuelto, potencial de oxigeno reducción y total de solidos disueltos, con gráficos obtenido de la representacion  con cada uno de los puntos obtenidos durante el muestreo de de la la sonda. Además se despliegan las informaci\'ones de la fecha, ubicación en coordenadas de latitud y longitud, del lugar donde se esta obteniendo cada una de las muestras.
-\section[Presupuesto]{Presupuesto}
-En la Tabla \ref{tab:presu} se puede apreciar los materiales utilizados en el presente TFG y los costos de los mismos.
+Con la idea de conservar un dise\~no m\'inimo, se desarrollaron dos vistas principales. 
+La primera vista, donde se pueda visualizar los datos recolectados por los sensores y otra vista para operaciones manuales. 
+En la figura \ref{fig:interfaz} se puede apreciar el panel principal del monitoreo, donde se despliegan cada uno de los parámetros de temperatura, potencial de hidrógeno, conductividad eléctrica, ox\'igeno disuelto, potencial de ox\'igeno reducción y total de s\'olidos disueltos, con gráficos obtenido de la representaci\'on  con cada uno de los puntos obtenidos durante el muestreo de la sonda. 
+Además, se despliegan las informaci\'ones de la fecha, ubicación en coordenadas de latitud y longitud, del lugar donde se est\'a obteniendo cada una de las muestras.
 
+\section[Presupuesto]{Presupuesto}
+En la Tabla \ref{tab:presu} se puede apreciar los materiales utilizados en el presente TFG y los costos de los mismos. 
+El costo total de este prototipo fue de $\$ 3793,27$
+Los sensores utilizados en la parte eléctrica son unos de los elementos mas costosos de la sonda.
+La mano de obra requirió de 100 horas hombre para el desarrollo e implementación de la misma aun calculo de $\$22$ por hora .   
 \begin{table}[t]
 \protect\caption{Presupuesto Final del TFG.}
      \label{tab:presu}
@@ -1133,7 +1125,7 @@ En la Tabla \ref{tab:presu} se puede apreciar los materiales utilizados en el pr
 \multicolumn{1}{r}{157,99}             \\ 
 % \hline
 \multicolumn{1}{c}{1}                             & 
-\multicolumn{1}{l}{Sensor oxigeno disuelto de Atlas Scientific}    & 
+\multicolumn{1}{l}{Sensor ox\'igeno disuelto de Atlas Scientific}    & 
 \multicolumn{1}{r}{217,99}                         & 
 \multicolumn{1}{r}{217,99}             \\ 
 % \hline
@@ -1185,7 +1177,7 @@ En la Tabla \ref{tab:presu} se puede apreciar los materiales utilizados en el pr
 \multicolumn{1}{c}{1}                             & 
 \multicolumn{1}{l}{Conversor DC-DC}                & 
 \multicolumn{1}{r}{10,00}                             & 
-\multicolumn{1}{r}{10,00}                 \\ 
+\multicolumn{1}{r}{10.00}                 \\ 
 % \hline
 \multicolumn{1}{c}{1}                             & 
 \multicolumn{1}{l}{PCB}                            & 

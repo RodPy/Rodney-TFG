@@ -28,17 +28,17 @@
 \addcontentsline{loa}{appendix}{Anexo B: Cormor\'an -I }
 \label{appendix: cormoran}
 \setcounter{figure}{0}    
-
+El Proyecto de nominado Cormoran-I, consistió en el desarrollo de un prototipo para el muestreo de recursos hídricos 
 El diseño final de la sonda, fue el resultado de varias versiones que fueron modificándose de tal manera que resulte mejor y se adapte a los requerimientos del proyecto.
-Partiendo de un diseño de un misil militar por su dise\~no din\'amico , similar al propuesto por [1], modificado hasta la versión final con el cual se realizaron las pruebas. Su diseño modular est\'a pensado para el caso que se le requiera sacar o añadir uno o m\'as sensores, se pueda seguir utilizando la sonda con cambios mínimos para adaptación.
+Partiendo de un diseño de un misil militar por su dise\~no din\'amico, similar al propuesto por [1], modificado hasta la versión final con el cual se realizaron las pruebas. Su diseño modular est\'a pensado para el caso que se le requiera sacar o añadir uno o m\'as sensores, se pueda seguir utilizando la sonda con cambios mínimos para adaptación.
 La primera sonda fue impresa en su totalidad con una impresora 3D, en material Acrilonitrilo butadieno Estireno(ABS), por sus propiedades de alta resistencia al impacto y su baja degradación en presencia de líquidos. 
-El diseño de la sonda (Sonda V4.3) utilizado en el Cormoran-I, esta disen\~ado para ser albergar a seis sensores específicos de la empresa Atlas Scientific.
+El diseño de la sonda (Sonda V4.3) utilizado en el Cormoran-I, está disen\~ado para ser albergar a seis sensores específicos de la empresa Atlas Scientific.
 
 \begin{itemize}
     \item Sonda PH de Plata/cloruro de plata de calidad científica, EZO pH Circuit.
     \item Sonda ORP de barra de platino, EZO OPR Circuit.
     \item Sonda de conductividad: 5 [\(\mu S/cm\)] a 200,000 [\(\mu S/cm\)], EZO Conductivity Circuit.
-    \item EZO RGB, Sensor de color integrado 8 bit.
+    \item EZO RGB, Sensor de color integrado 8 bits.
     \item Sonda de oxígeno disuelto, EZO OD Circuit.
     \item Sensor de Temperatura DS18B20. Sparkfun.
 \end{itemize}
@@ -47,32 +47,33 @@ El diseño de la sonda (Sonda V4.3) utilizado en el Cormoran-I, esta disen\~ado 
 Se desarrollaron cuatro versiones de la sonda, con el programa de diseño CAD 3D SolidWorks 2015. La sonda es un ensamble de tres piezas principales, denominadas:
 
 \begin{itemize}
-\item \textbf{Frente} : Pieza frontal de la sonda, la función de esta pieza es principalmente de protección contra basura o objetos que puedan dañar a los sensores. Se dise\~no de forma cil\'indrica hueca de base circular para las versiones de la sonda Figura1-a y Figura1-b, las de base elipsoidal para las versiones Figura1-d y Figura1-e, Posee ranuras laterales para que el agua ingrese dentro de la cavidad hueca de esta pieza y los sensores puedan hacer las mediciones.  
-\item \textbf{Anillo} : Pieza central de la sonda y enlace de las otras dos piezas, la función de esta pieza es servir de soporte a las sensores y posicionarlos de forma horizontal. En el caso que se requiera otros sensores, esta es la única pieza que tendría que ser adaptado a los nuevos sensores.
+\item \textbf{Frente} : Pieza frontal de la sonda, la función de esta pieza es principalmente de protección contra basura u objetos que puedan dañar a los sensores. Se dise\~no de forma cil\'indrica hueca de base circular para las versiones de la sonda Figura1-a y Figura1-b, las de base elipsoidal para las versiones Figura1-d y Figura1-e, Posee ranuras laterales para que el agua ingrese dentro de la cavidad hueca de esta pieza y los sensores puedan hacer las mediciones.  
+\item \textbf{Anillo} : Pieza central de la sonda y enlace de las otras dos piezas, la función de esta pieza es servir de soporte a los sensores y posicionarlos de forma horizontal. En el caso de que se requiera otros sensores, esta es la única pieza que tendría que ser adaptado a los nuevos sensores.
 \item \textbf{Base}  : Pieza posterior de la sonda, su función es de protección de los cables de los sensores. 
 \end{itemize}
 
 \begin{enumerate}
-\item \textbf{Sonda V0.0:} La versión inicial de la sonda, con diseño cilíndrico de base circular, el inconveniente principal de este diseño fue la debilidad estructural de la parte frontal de la sonda por la cantidad de ranuras, ademas el diseño de la punta dificultaba bastante para ser impreso en la impresora 3D.
+\item \textbf{Sonda V0.0:} La versión inicial de la sonda, con diseño cilíndrico de base circular, el inconveniente principal de este diseño fue la debilidad estructural de la parte frontal de la sonda por la cantidad de ranuras, además el diseño de la punta dificultaba bastante para ser impreso en la impresora 3D.
 \begin{figure}[ht]
     \centering
     \includegraphics[width=50mm]{Imagenes/Sonda_v0.jpg}
-    \caption{Caption}
+    \caption{Modelo sonda V0.0}
     \label{fig:my_label}
 \end{figure}
 
-\item \textbf{Sonda V1.0:} La siguiente versión, resolvía los problemas de debilidad estructural de la parte frontal espaciando mas las ranuras y reemplazando la punta de la pieza frontal con un diseño mas redondeado para que pueda ser impresa con mayor facilidad.   
-\item \textbf{Sonda V2.0:} En esta versión de la sonda, se probaron con otras geometrías para mejorar la dinámica del fluido, de esta forma cargar menos al motor propulsor del Dron. El inconveniente de este diseño fue, que por su geometría era mas grande que el anterior por tanto utilizaba mas material.
-\item \textbf{Sonda V3.0:} La siguiente versión se opto por una base elipsoidal para la sonda, ademas se agrego al diseño un soporte para que pueda ser fijado al Dron con tornillos en la parte inferior, se realizaron cambios en la base para crear un ensamble mas dinámico. Fue la primera aproximación para el diseño final, el inconveniente de esta sonda era el soporte que resultaba poco practico de implementar y podría causar daños estructurales al casco del dron.
-\item \textbf{Sonda V4.0:} La ultima versión resuelve el problemas de soporte, al agregar un riel en la parte superior de toda la sonda para fijarlo cuando se requiera al dron sin la utilización de tornillos o algún elemento fijador que pueda dañar el casco del dron.
-\item \textbf{Sonda V4.1:} En la primera modificación de la versión 4 de la sonda, se optimizo el tamaño de la pieza frontal de la sonda,  para utilizar menos material y ofrecer mayor protección a las puntas de los sensores.
-\item \textbf{Sonda V4.2:} En la segunda revisión de la versión 4, se re diseño la parte posterior de la sonda, para reemplazar el sistema modo inicial que conectar los sensores al dron, que en las versiones anteriores se encontraba en la parte superior, y como esta versión se diseña el riel, se opto por hacer por una perforación e la base para que por ella pueda conectarse al Dron.
-\item \textbf{Sonda V4.3:} En la ultima revisión de la versión 4, se re diseña la pieza central de la sonda para agregarle un juego de juntas de gomas circulares, por los agujeros preparados para los sensores para de esta forma ejercer sobre ellos un mejor agarre, ademas se modifica la dimensión de sensor ubicado en la parte central de la pieza.
+\item \textbf{Sonda V1.0:} La siguiente versión, resolvía los problemas de debilidad estructural de la parte frontal, espaciando más las ranuras y reemplazando la punta de la pieza frontal con un diseño más redondeado para que pueda ser impresa con mayor facilidad.   
+\item \textbf{Sonda V2.0:} En esta versión de la sonda, se probaron con otras geometrías para mejorar la dinámica del fluido, de esta forma cargar menos al motor propulsor del Dron. El inconveniente de este diseño fue, que por su geometría era más grande que el anterior, por tanto, utilizaba más material.
+\item \textbf{Sonda V3.0:} La siguiente versión se optó por una base elipsoidal para la sonda, además se agregó al diseño un soporte para que pueda ser fijado al Dron con tornillos en la parte inferior, se realizaron cambios en la base para crear un ensamble más dinámico. Fue la primera aproximación para el diseño final, el inconveniente de esta sonda era el soporte que resultaba poco práctico de implementar y podría causar daños estructurales al casco del dron.
+\item \textbf{Sonda V4.0:} La última versión resuelve el problema de soporte, al agregar un riel en la parte superior de toda la sonda para fijarlo cuando se requiera al dron sin la utilización de tornillos o algún elemento fijador que pueda dañar el casco del dron.
+\item \textbf{Sonda V4.1:} En la primera modificación de la versión 4 de la sonda, se optimizó el tamaño de la pieza frontal de la sonda,  para utilizar menos material y ofrecer mayor protección a las puntas de los sensores.
+\item \textbf{Sonda V4.2:} En la segunda revisión de la versión 4, se rediseñó la parte posterior de la sonda, para reemplazar el sistema modo inicial que conectar los sensores al dron, que en las versiones anteriores se encontraba en la parte superior, y como esta versión se diseña el riel, se optó por hacer por una perforación en la base para que por ella pueda conectarse al Dron.
+\item \textbf{Sonda V4.3:} En la última revisión de la versión 4, se rediseña la pieza central de la sonda para agregarle un juego de juntas de gomas circulares, por los agujeros preparados para los sensores para de esta forma ejercer sobre ellos un mejor agarre, además se modifica la dimensión de sensor ubicado en la parte central de la pieza.
+\item \textbf{Sonda v5.0:} Para el proyecto PINV15-177, se deberán realizar una serie de cambios al modelo final de la sonda utilizado en el CORMORAN-I, por la operación a multivinel, el material a ser utilizado y la ubicación de la electrónica.
 \end{enumerate}
 
 
-\begin{figure}[htbp]
-    \centering
+% \begin{figure}[htbp]
+%     \centering
  %   \subfigure[V0.0]{\includegraphics[width=50mm]{Imagenes/Sonda_v0.jpg}}
     
  %   \subfigure[V1.0]{\includegraphics[width=50mm]{Imagenes/Sonda_v1.jpg}}
@@ -83,22 +84,21 @@ Se desarrollaron cuatro versiones de la sonda, con el programa de diseño CAD 3D
     
   %  \subfigure[V4.0]{\includegraphics[width=50mm]{Imagenes/Sonda_v4.jpg}}
     
-    \caption{Versiones Sonda. Fuente: elaboración propia} \label{fig:Sonda_Versiones1}
-    \end{figure}
+    % \caption{Versiones Sonda. Fuente: elaboración propia} \label{fig:Sonda_Versiones1}
+    % \end{figure}
     
-    \begin{figure}[htbp]
-    \centering
-%\subfigure[V4.3 . Frontal]{\includegraphics[width=40mm]{Imagenes/Sonda_v4_1.jpg}}
     
-%    \subfigure[V4.3 . Anillo]{\includegraphics[width=40mm]{Imagenes/Sonda_v4_2.jpg}}
+% \begin{figure}[htbp]
+%     \centering
+%     \subfigure[V4.3 . Frontal]{\includegraphics[width=40mm]{Imagenes/Sonda_v4_1.jpg}}
     
-%    \subfigure[V4.3 . Base]{\includegraphics[width=40mm]{Imagenes/Sonda_v4_3.jpg}}
+%     \subfigure[V4.3 . Anillo]{\includegraphics[width=40mm]{Imagenes/Sonda_v4_2.jpg}}
     
-    \caption{Versiones Sonda. Fuente: elaboración propia} \label{fig:Sonda_Versiones2}
-\end{figure}
+%     \subfigure[V4.3 . Base]{\includegraphics[width=40mm]{Imagenes/Sonda_v4_1.jpg}}
+    
+%     \caption{Versiones Sonda. Fuente: elaboración propia} \label{fig:Sonda_Versiones2}
+% \end{figure}
 
-\section*{Sonda v5.0}
-Para el proyecto PINV15-177, se deberán realizar una serie de cambios al modelo final de la sonda utilizado en el CORMORAN-I, por la operación a multivinel, el material a ser utilizado y la ubicación de la electrónica.
 \subsection*{Operación Multinivel}
 Como se introduce la capacidad de poder censar a multiniveles, es necesario cambiar el tipo de material de construcción para que de esta forma se pueda sumergir con su propio peso, y no requiera de otro medio externo para sumergirse. 
 \subsection*{Sonda Embebida}
@@ -167,7 +167,8 @@ El diseño anterior Figura: \ref{fig:SondaV5}, se contemplaba el uso de O-ring p
 \begin{figure}[ht]
     \centering
     \includegraphics[width=150mm, height=100mm]{Imagenes/cap3/Batimetria_lago_Ypacarai_TIN_A3.pdf}
-    \caption[BATIMETRIA TIN lago Ypakarai]{Batimetr\'ia TIN (RED IRREGULAR DE TRIANGULOS), lago Ypakarai} \textbf{Fuente: Itaipu Binacional.}
+    \caption[BATIMETRIA TIN lago Ypakarai]{Batimetr\'ia TIN (RED IRREGULAR DE TRIANGULOS), lago Ypakarai} 
+    \textbf{Fuente: }Itaipu Binacional, \cite{itaipu-binacional-2014}
     \label{fig:ModuloFrontal}
 \end{figure}
 

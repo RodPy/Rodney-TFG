@@ -7,19 +7,19 @@ En este cap\'itulo se abordar\'a los resultados obtenidos a fin de dar cumplimie
 \section{Prueba en ambientes controlados}
 Las pruebas en ambientes controlados, consistieron en una serie de pruebas realizadas en el LSD y en el laboratorio de qu\'imica (QCA) de FIUNA, a fin de poner a punto todos los elementos que conforman el sistema a ser desplegados. 
 Esto antes de realizar las pruebas en campo, donde se espera que se encuentren m\'as variables a tener en cuenta, que deben prever y probar con anticipaci\'on de tal forma de evitar menos fallas.
-En este efecto, en este apartado se abarcar\'an los trabajos realizados para la puesta a punto de los sensores Atlas Scientific.
+A tal efecto, en este apartado se abarcar\'an los trabajos realizados para la puesta a punto de los sensores Atlas Scientific.
 
-\subsection{Calibraciones de sensores}
+\subsection{Calibración de sensores}
 La calibraci\'on de los sensores, es fundamental para que pueda representar una lectura correcta de los valores a ser medidos. 
-A este efecto, los sensores adquiridos para la sonda fueron prove\'idos en un kit que se puede observar en la figura \ref{fig:kit}, los cuales inclu\'ian l\'iquidos de calibraci\'on para cada uno de los sensores adquiridos. 
+Los sensores adquiridos para la sonda fueron prove\'idos en un kit que se puede observar en la figura \ref{fig:kit}, el kit inclu\'ia l\'iquidos de calibraci\'on para cada uno de los sensores adquiridos. 
 El kit de l\'iquidos de calibraciones est\'a compuesto por un total de ocho botellas, de las cuales una de ellas contiene un l\'iquido de almacenamiento. 
-Cada sensor posee un tipo de calibraci\'on distinta, que var\'ia seg\'un la cantidad de puntos que requiere para ajustar la curva de lectura de mediciones.
-El caso del sensor de pH requiere de tres puntos de calibración (bajo, medio y alto), para los cuales se utiliza $pH=4$ para la calibraci\'on del punto bajo, $pH=7$ para la calibraci\'on del punto medio y $pH=10$ para la calibraci\'on del punto alto. 
+Cada sensor posee un tipo de calibraci\'on distinta, el cual que varían seg\'un el parámetro en estudio y la cantidad de puntos que requiere para ajustar la curva de lectura de mediciones.
+El caso del sensor de pH requiere de tres puntos de calibración (ácido, muestro y básico), para los cuales se utiliza $pH=4$, $pH=7$ y $pH=10$.
 Con estas 3 calibraciones el sensor de pH se encuentra listo.
-El sensor de OD, requiere dos puntos de calibraci\'on, la primera calibraci\'on que consiste en la calibraci\'on a los niveles de ox\'igeno atmosf\'erico y el segundo con su l\'iquido test correspondiente.
-El sensor de OPR, solo requiere un valor conocido de OPR para su calibraci\'on, para su efecto se utiliza el l\'iquido de calibraci\'on que posee un valor de 225 mV.
-El sensor de conductividad el\'ectrica, requiere de dos puntos de calibraci\'on (alto y bajo), para los cuales se utilizaron CE=12.880 $\mu S/cm$ para la calibraci\'on del punto bajo y CE=80.000 $\mu S/cm$ para la calibraci\'on del punto alto.
-La calibraci\'on se realiza, con la sobrescritura del valor de lectura muestreado al l\'iquido de calibraci\'on con el valor esperado seg\'un los datos proporcionados. 
+El sensor de OD, requiere dos puntos de calibraci\'on, la primera calibraci\'on que consiste en la calibraci\'on a los niveles de ox\'igeno atmosf\'erico y el segundo con su l\'iquido test correspondiente, líquido standart incluido en el kit.
+El sensor de OPR, solo requiere un valor conocido de OPR para su calibraci\'on, en este caso se utiliza el l\'iquido de calibraci\'on que posee un valor de 225 mV.
+El sensor de conductividad el\'ectrica (CE), requiere de dos puntos de calibraci\'on, basados en la concentración de sales en disolución, se utilizaron CE=12.880 $\mu S/cm$ y CE=80.000 $\mu S/cm$.
+La interpretación de la calibraci\'on se realiza, con la sobrescritura del valor de lectura muestreado al l\'iquido de calibraci\'on con el valor esperado seg\'un los datos proporcionados. 
 Los datos se envían mediante protocolo de comunicaci\'on I2C o serial a la placa driver del sensor con el comando \textbf{CAL,n}, donde CAL es el comando de calibraci\'on y $n$ el valor a ser sobrescrito.
 
 \begin{figure}[H]
@@ -31,16 +31,15 @@ Los datos se envían mediante protocolo de comunicaci\'on I2C o serial a la plac
         
 \end{figure}
 
-Los sensores se consideran calibrados, si pueden realizar lecturas sobre l\'iquidos cuyos valores sean conocidos con un dentro del error esperado o previsto por el fabricante. 
-En el caso de no conseguir una lectura correcta, se debe de borrar las configuraciones de calibraci\'on con el comando \textbf{Cal, clear} y volver a realizar el procedimiento anterior, una vez limpiado todos los equipos utilizados a fin de equipar contaminación. 
+Los sensores se consideran calibrados, si pueden realizar lecturas sobre l\'iquidos cuyos pertenezcan al rango y error esperado o previsto por el fabricante. 
+En el caso de no conseguir una lectura correcta, se debe de borrar las configuraciones de calibraci\'on con el comando \textbf{Cal, clear} y volver a realizar el procedimiento anterior, una vez limpiado todos los equipos utilizados a fin de evitar contaminación. 
 En el caso de los sensores de pH y OPR, se deben almacenar con su l\'iquido de almacenamiento.
 
 \subsection{Muestreo en el laboratorio qu\'imica - FIUNA }
-El monitoreo se realiz\'o en QCA se realizaron con los siguientes par\'ametros temperatura(T), conductividad el\'ectrica (CE), potencial de hidr\'ogeno (pH). A fin de poder contrastar los sensores utilizados con los sensores disponibles en el laboratorio de qu\'imica.
+El monitoreo se realiz\'o en el Laboratorio de química (QCA) ), la evaluación se ha realizado con los siguientes par\'ametros temperatura(T), conductividad el\'ectrica (CE), potencial de hidr\'ogeno (pH). los resultados obtenidos con los sensores utilizados y obtenidos con los sensores disponibles en el laboratorio de química.
 
 \subsubsection{Metodolog\'ia }
-La metodolog\'ia de recolección y muestreo consisti\'o en el an\'alisis de tres tipos de muestras distintas. 
-La muestra 1 consisti\'o en agua doble destilada, la muestra 2 consisti\'o en agua de pozo, obtenida de una de las redes de abastecimiento de la zona del campus universitario y la muestra 3 consisti\'o en agua de laguna obtenida en la Facultad de Ciencias Exactas y Naturales (FACEN). 
+y análisis se ha realizado según la norma estandart internacional para aguas  APHA, AWWA, WEF (2012) consistente en el análisis de tres muestras de agua provenientes de distintas fuentes. La muestra 1 consistió en agua doble destilada, esta muestra se  ha utilizado como control, la muestra 2 consistió en agua de pozo, obtenida de una de las redes de abastecimiento de la zona del campus universitario y la muestra 3 consistió en agua de laguna natural obtenida en la Facultad de Ciencias Exactas y Naturales (FACEN). 
 Cada una de estas muestras se dividieron equitativamente en tres recipientes distintos, de tal forma de obtener el mismo l\'iquido en tres recipientes que ser\'an muestreados y registrados las primeras 5 lecturas estables con el multisensor del laboratorio de qu\'imica e igual n\'umero de veces con los sensores de la sonda disen\~nada.
 Los par\'ametros a ser analizados en este apartado son pH, CE y T, por la disponibilidad en ese momento de los equipos.
 Las caracter\'isticas t\'ecnicas de los sensores de QCA utilizados se pueden visualizar en la tabla \ref{tab: Sensores laboratorio de quimica}, en las tablas \ref{tab: caract_sondaph},\ref{tab:caract_temp},\ref{tab:caract_ce}, se pueden visualizar las características de los sensores de pH, CE y T  de la empresa Atlas Scientific.
@@ -50,7 +49,7 @@ Las caracter\'isticas t\'ecnicas de los sensores de QCA utilizados se pueden vis
         \toprule
         Caracter\'isticas & Sensor $pH$ & Sensor  $CE$ \\
         \midrule
-        Marca & Ohaus       & Oaklon       \\
+        Marca & Ohaus       & Oakton       \\
         Serie & ST10        & WD-35462-11  \\
         Intervalo de medici\'on                      & $0.00 – 14$ {[}pH{]} & $0.00 – 20.00$ {[}mS/cm{]}        \\
         Resoluci\'on de la medici\'on & 0.1   {[}pH{]}     & TDS 10 {[}ppm{]}, 0.1 {[}ppt{]} \\
@@ -59,7 +58,7 @@ Las caracter\'isticas t\'ecnicas de los sensores de QCA utilizados se pueden vis
     \end{tabular}
     \label{tab: Sensores laboratorio de quimica}
  \end{table}
-Las lecturas se realizaron de forma secuencial con ambos sensores, figura \ref{fig: Muestreo de CE}, cada vez que terminaba el muestreo en cada uno de los recipientes con una de las muestras, se proced\'ia a registrar la lectura estable obtenida, retirar el sensor utilizado, limpiarlo con agua destilada y secar con un pa\~no, e introducir el otro sensor equivalente para repetir el procedimiento hasta completar los cinco muestreos.
+Las lecturas se realizaron de forma secuencial con ambos sensores, figura \ref{fig: Muestreo de CE}, cada vez que terminaba la medición  en cada uno de los recipientes con una de las muestras, se proced\'ia a registrar la lectura estable obtenida, retirar el sensor utilizado, limpiarlo con agua destilada y secar con un pa\~no, e introducir el otro sensor equivalente para repetir el procedimiento hasta completar los cinco muestreos.
 En las figuras \ref{fig:muestreoQCA}, se pueden apreciar parte del procedimiento realizado en QCA, en la figura \ref{fig:calibracionLSD}, se puede apreciar todos los sensores de la sonda, incluyendo DO, y OPR, los cuales no serán utilizados en este procedimiento por no contar con equipos de QCA para comparaciones, por practicidad para los procesos de lectura de los sensores se utilizó un microcontrolador con la placa tentacle \ref{fig:placas_muestreo} con el algoritmo de lectura, para realizar los muestreos tal como se observa en la figura \ref{fig: Muestreo de CE} con ambos equipos sobre la misma muestra.
 \begin{figure}
      \centering
@@ -147,7 +146,7 @@ En las figuras \ref{fig:muestreoQCA}, se pueden apreciar parte del procedimiento
 \begin{figure}[H]
         \centering
         \includegraphics[width=0.7\linewidth]{Imagenes/cap4/T_M1.png}
-        \caption {Muestreo de temperatura. }{\textbf{Fuente:}
+        \caption {Muestreo de temperatura. Muestra 1. }{\textbf{Fuente:}
         Elaboraci\'on Propia. }
         \label{fig:M1T}
     \end{figure}
@@ -201,7 +200,7 @@ En las figuras \ref{fig:muestreoQCA}, se pueden apreciar parte del procedimiento
     \begin{figure}[H]
         \centering
         \includegraphics[width=0.75\linewidth]{Imagenes/cap4/CE_M1.png}
-        \caption {Muestreo de conductividad el\'ectrica. }{\textbf{Fuente:}
+        \caption {Muestreo de conductividad el\'ectrica.  Muestra 1. }{\textbf{Fuente:}
         Elaboraci\'on Propia. }
         \label{fig:M1CE}
     \end{figure}
@@ -255,12 +254,13 @@ En las figuras \ref{fig:muestreoQCA}, se pueden apreciar parte del procedimiento
     \begin{figure}[H]
         \centering
         \includegraphics[width=0.7\linewidth]{Imagenes/cap4/pH_M1.png}
-        \caption {Muestreo de pH. }{\textbf{Fuente:}
+        \caption {Muestreo de pH. Muestra 1. }{\textbf{Fuente:}
         Elaboraci\'on Propia. }
         \label{fig:M1PH}
     \end{figure}
 
-\subsubsection{An\'alisis de Datos. Muestra 1}
+\subsection{An\'alisis de Datos. Muestra 1}
+
 % Please add the following required packages to your document preamble:
 
 \begin{table}[H]
@@ -370,7 +370,7 @@ Luego de analizar los resultados obtenidos en el caso de la muestra 1, se puede 
     \begin{figure}[H]
         \centering
         \includegraphics[width=0.75\linewidth]{Imagenes/cap4/T_M2.png}
-        \caption {Muestreo de temperatura. }{\textbf{Fuente:}
+        \caption {Muestreo de temperatura. Muestra 2. }{\textbf{Fuente:}
         Elaboraci\'on Propia. }
         \label{fig:M2T}
     \end{figure}
@@ -424,7 +424,7 @@ Luego de analizar los resultados obtenidos en el caso de la muestra 1, se puede 
     \begin{figure}[H]
         \centering
         \includegraphics[width=0.75\linewidth]{Imagenes/cap4/CE_M2.png}
-        \caption {Muestreo de conductividad el\'ectrica. }{\textbf{Fuente:}
+        \caption {Muestreo de conductividad el\'ectrica. Muestra 2. }{\textbf{Fuente:}
         Elaboraci\'on Propia. }
         \label{fig:M2CE}
     \end{figure}
@@ -478,7 +478,7 @@ Luego de analizar los resultados obtenidos en el caso de la muestra 1, se puede 
     \begin{figure}[H]
         \centering
         \includegraphics[width=0.75\linewidth]{Imagenes/cap4/pH_M2.png}
-        \caption {Muestreo de pH. }{\textbf{Fuente:}
+        \caption {Muestreo de pH. Muestra 2. }{\textbf{Fuente:}
         Elaboraci\'on Propia. }
         \label{fig:M2PH}
     \end{figure}
@@ -603,7 +603,7 @@ En un an\'alisis de la tabla \ref{tab:VaCoM2}, donde se encuentran los resultado
     \begin{figure}[H]
         \centering
         \includegraphics[width=0.7\linewidth]{Imagenes/cap4/T_M3.png}
-        \caption {Muestreo de pH. }{\textbf{Fuente:}
+        \caption {Muestreo de pH. Muestra 3. }{\textbf{Fuente:}
         Elaboraci\'on Propia. }
         \label{fig:M3T}
     \end{figure}
@@ -657,7 +657,7 @@ En un an\'alisis de la tabla \ref{tab:VaCoM2}, donde se encuentran los resultado
     \begin{figure}[H]
         \centering
         \includegraphics[width=0.75\linewidth]{Imagenes/cap4/CE_M3.png}
-        \caption {Muestreo de conductividad el\'ectrica. }{\textbf{Fuente:}
+        \caption {Muestreo de conductividad el\'ectrica. Muestra 3. }{\textbf{Fuente:}
         Elaboraci\'on Propia. }
         \label{fig:M3CE}
     \end{figure}
@@ -711,7 +711,7 @@ En un an\'alisis de la tabla \ref{tab:VaCoM2}, donde se encuentran los resultado
 \begin{figure}[H]
         \centering
         \includegraphics[width=0.75\linewidth]{Imagenes/cap4/pH_M3.png}
-        \caption {Muestreo de pH. }{\textbf{Fuente:}
+        \caption {Muestreo de pH. Muestra 3. }{\textbf{Fuente:}
         Elaboraci\'on Propia. }
         \label{fig:M3PH}
 \end{figure}
@@ -793,7 +793,7 @@ los cuales ayudaron a mejorar el dise\~no final, desde el punto de hardware y so
 Segundo, incorporaci\'on de un o-ring para mejorar el hermetismo e impedir el ingreso de l\'iquidos, ya que luego de las primeras pruebas se detectaron filtraciones provenientes de la rosca principal uni\'on base-anillo.
 Tercero, para la publicaci\'on remota, se agreg\'o al c\'odigo principal, rutinas multi-hilos, para cuando la sonda pierda conexi\'on a internet no se pierdan estos paquetes durante, y unan vez recuperada la conexi\'on se env\'ien todos los hilos. 
 
-\begin{figure}[H]
+\begin{figure}[h]
      \centering
      \begin{subfigure}[b]{0.65\textwidth}
          \centering
@@ -812,8 +812,8 @@ Tercero, para la publicaci\'on remota, se agreg\'o al c\'odigo principal, rutina
     \caption{Prueba de campo - Lago Ypakarai}
     \label{fig:PruebaCampo}
 \end{figure}
-En la figura \ref{fig:SondaASV}, se observan los preparativos y puesta en marcha de los sistema de ASV antes de su ingreso al lago, comprobaciones de las conexiones a la estación remota y de los demás sistemas que lo componen.En la figura \ref{fig:PruebaCampo} se puede observar la sonda ya instalada en la gr\'ua del ASV en el lago Ypakarai, antes de iniciar el recorrido . 
-A continuación se desarrollan los resultados de los parámetros obtenidos en la prueba de campo realizada el día 21 de julio del ano 2020.
+En la figura \ref{fig:PruebaCampo}, se observan los preparativos y puesta en marcha de los sistemas de ASV antes de su ingreso al lago, comprobaciones de las conexiones a la estación remota y de los demás sistemas que lo componen. En la figura \ref{fig:SondaASV} se puede observar la sonda ya instalada en la gr\'ua del ASV en el lago Ypakarai, antes de iniciar el recorrido. 
+A continuación se desarrollan los resultados de los parámetros obtenidos en la prueba de campo realizada en julio del año 2020.
 
 \subsection{Muestreo de pH. Prueba de Campo}
 
@@ -825,7 +825,7 @@ A continuación se desarrollan los resultados de los parámetros obtenidos en la
         \label{fig:Lago_ph}
 \end{figure}
 
-La Resoluci\'on. SEAM N$ ^{\circ}$ 222/02 estable un l\'imite inferior y superior igual a 6 y 9 respectivamente. Durante esta campa\~na todos los puntos se encuentran acorde a la normativa.
+Para el monitoreo de pH la Resoluci\'on. SEAM N$ ^{\circ}$ 222/02 estable un l\'imite inferior y superior igual a 6 y 9 respectivamente. Durante esta campa\~na todos los puntos se encuentran acorde a la normativa.
 En la tabla \ref{table:Lago_ph} se presenta un an\'alisis comparativo de los valores obtenidos para el par\'ametro pH correspondientes a la prueba de campo  realizada.
 
 \begin{table}[H]
@@ -843,7 +843,7 @@ Prueba de campo  &      472 &      7,0 &  6,99 &  7,00 \\
 \end{table}
 Se realizaron 472 mediciones en todo el recorrido, los valores recolectados de potencial de hidr\'ogeno que oscilan en un intervalo entre 6,99 y 7,00.
 En la tercera y cuarta campaña de muestreo del “Monitoreo de Calidad de Agua por Campañas de Muestreo en el Lago Ypacaraí 2019 -2021, correspondientes al periodo de la prueba de campo, realizado por CEMIT-UNA, seg\'un contrato ITAIPÚ/UNA No. 4500054462/2019, \cite{3er_Cemit}\cite{4to_Cemit}. Se documentan promedios de pH que oscilaron entre 6,0 y 7,98. 
-Se verifica que par\'ametro recolectados en esta campa\~na se encuentra dentro del intervalo de valores.
+Se verifica que par\'ametro recolectados en esta campa\~na se encuentra dentro del intervalo de valores esperado.
 
 \subsection{Muestreo de CE. Prueba de Campo}
 
@@ -855,7 +855,7 @@ Se verifica que par\'ametro recolectados en esta campa\~na se encuentra dentro d
         \label{fig:Lago_ce}
 \end{figure}
 
-Para aguas de Clase 2 la Resoluci\'on 222/02 no estable ningún l\'imite para el par\'ametro evaluado; se toma como referencia el l\'mite de 1.250 $\mu S/cm$ establecido en el Anexo X de la ley 1614/2000(Ley General Del Marco Regulatorio y Tarifario Del Servicio De Agua Potable y Alcantarillado Sanitario \cite{ministerio_de_hacienda_ley_nodate}). Todas las determinaciones realizadas en la campa\~na se encuentran en conformidad con la normativa de referencia.
+Para aguas de Clase 2 la Resoluci\'on 222/02 no establece ningún l\'imite para el par\'ametro evaluado; se toma como referencia el l\'imite de 1.250 $\mu S/cm$ establecido en el Anexo X de la ley 1614/2000(Ley General Del Marco Regulatorio y Tarifario Del Servicio De Agua Potable y Alcantarillado Sanitario \cite{ministerio_de_hacienda_ley_nodate}). Todas las determinaciones realizadas en la campa\~na se encuentran en conformidad con la normativa de referencia.
 En la tabla \ref{table:Lago_ce} se presenta un an\'alisis comparativo de los valores obtenidos para el par\'ametro CE correspondientes a la prueba de campo  realizada.
 
 \begin{table}[H]
@@ -992,9 +992,9 @@ Prueba de campo  &      472 &    73,86 &    2,0 &   88,0 \\
 \end{tabular}
 \end{table}
 
-\subsubsection{Resumen del an\'alsis de Datos. Prueba de Campo}
+\subsubsection{Resumen del an\'alisis de Datos. Prueba de Campo}
 A continuaci\'on se presenta un resumen de todos los datos obtenidos.
-El muestreo el dia 31 de julio del 2020, durante el desplazamiento en un circuito cerrado partiendo de la playa municipal de San Bernardino, pasando por el centro del lago Ypakarai  y la desembocadura del arroyo Piray\'u, tal como se puede observar en la figura \ref{fig:ruta}, el muestreo inicio a las 10:00h hasta las 12:25h, durante este periodo se registraron 471 (cuatrocientos setenta y uno) muestras, en intervalos aproximados de 25 segundos, los par\'ametros  recolectados durante el muestreo de pH, conductividad el\'ectrica, ox\'igeno disuelto, total de s\'olidos disueltos, potencial \'oxido reducci\'on y temperatura, los datos de georeferenciaci\'on fueron prove\'idos por el ASV en cada punto de muestreo.
+El muestreo el día 31 de julio del 2020, durante el desplazamiento en un circuito cerrado partiendo de la playa municipal de San Bernardino, pasando por el centro del lago Ypakarai  y la desembocadura del arroyo Piray\'u, tal como se puede observar en la figura \ref{fig:ruta}, el muestreo inicio a las 10:00 h hasta las 12:25 h, durante este periodo se registraron 471 (cuatrocientos setenta y uno) muestras, en intervalos aproximados de 25 segundos, los par\'ametros  recolectados durante el muestreo de pH, conductividad el\'ectrica, ox\'igeno disuelto, total de s\'olidos disueltos, potencial \'oxido reducci\'on y temperatura, los datos de georeferenciaci\'on fueron prove\'idos por el ASV en cada punto de muestreo.
 \begin{figure}[H]
         \centering
         \includegraphics[width=0.8\linewidth]{Imagenes/cap4/Recorrido.png}
@@ -1019,8 +1019,8 @@ Error est.               & 0,034 & 0,000076 & 1,283154 & 0,690544 & 0,995786 & 0
 \hline
 \end{tabular}
 \end{table}
-La temperatura m\'axima registrada fue de 18,12 $^o$C, el potencial de hidr\'ogeno m\'aximo fue de 7pH, el valor m\'aximo de la conductividad el\'ectrica fue de 163,6 $\mu S/cm$, el valor ma\'ximo de TDS fue 88 ppm, en el caso de OPR fue -269,10 $mV$ y el ox\'igeno disuelto máximo registrado fue 0,22 $mg/L$.
-Se puede apreciar que los sensores de temperatura, pH, y ox\'igeno disuelto presentaron resultados de desviación estándar m\'as bajos, por lo tanto, menos disperso. En el caso de la conductividad eléctrica, total de s\'olidos disueltos y opr, presentaron valores de desviación estándar m\'as altas, por lo que se concluye de su comportamiento m\'as disperso.
+
+Se puede apreciar que los sensores de temperatura, pH, y ox\'igeno disuelto presentaron resultados de desviación estándar m\'as bajos, por lo tanto, menos disperso, lo cual implica que los datos recolectados están cercanos al promedio. En el caso de la conductividad eléctrica, total de s\'olidos disueltos y opr, presentaron valores de desviación estándar m\'as altas, por lo que se concluye de su comportamiento m\'as disperso.
 El error estándar calculado es bajo para todas las medicines. 
 Todos los datos obtenidos se encuentran en el intervalo de valores obtenidos en otras campa\~nas de muestreo, como ser los desarrollados por CEMIT- Itaipu, \cite{3er_Cemit}\cite{4to_Cemit}, realizados en un periodo cercano a esta prueba de campo, y también se encuentran dentro de los valores obtenidos en \cite{lopez_moreira_m_eutrophication_2018}, donde se analizaron algunos de estos parámetros.  
 
@@ -1048,15 +1048,16 @@ En la figura \ref{fig:Monitoreo} se puede apreciar la interfaz gráfica fue inst
 \end{figure}
 
 Con la idea de conservar un dise\~no m\'inimo, se desarrollaron dos vistas principales. 
-La primera vista, donde se pueda visualizar los datos recolectados por los sensores y otra vista para operaciones manuales. 
+La primera vista, donde se pueda visualizar los datos recolectados por los sensores. 
 En la figura \ref{fig:interfaz} se puede apreciar el panel principal del monitoreo, donde se despliegan cada uno de los parámetros de temperatura, potencial de hidrógeno, conductividad eléctrica, ox\'igeno disuelto, potencial de ox\'igeno reducción y total de s\'olidos disueltos, con gráficos obtenido de la representaci\'on  con cada uno de los puntos obtenidos durante el muestreo de la sonda. 
 Además, se despliegan las informaci\'ones de la fecha, ubicación en coordenadas de latitud y longitud, del lugar donde se est\'a obteniendo cada una de las muestras.
 
 \section[Presupuesto]{Presupuesto}
 En la Tabla \ref{tab:presu} se puede apreciar los materiales utilizados en el presente TFG y los costos de los mismos. 
 El costo total de este prototipo fue de $\$ 3793,27$
-Los sensores utilizados en la parte eléctrica son unos de los elementos mas costosos de la sonda.
-La mano de obra requirió de 100 horas hombre para el desarrollo e implementación de la misma aun calculo de $\$22$ por hora .   
+Los sensores utilizados en la parte eléctrica son unos de los elementos más costosos de la sonda.
+La mano de obra requirió de 100 horas hombre para el desarrollo e implementación de la misma, aún calculo de $\$22$ por hora. No se pudo encontrar un modelo que tenga las mismas características, comparando con un modelo equivalente más parecido de la marca Libelium, el costo es bastante cercano, aunque este modelo no cuente con base de datos, interfaz gráfica, y todo el sistema de comunicación, electrónica y estructura es propietaria.
+Considerando que todos los scripts desarrollados en este TFG sean liberados y considerando que se emplearon software open source, el costo de una réplica puede reducir el costo en un 40\%.
 \begin{table}[t]
 \protect\caption{Presupuesto Final del TFG.}
      \label{tab:presu}

@@ -1,25 +1,24 @@
-\chapter[Metodolog\'ia.]{Metodologia}
+\chapter[Metodolog\'ia.]{Metodología}
 \pagestyle{fancy}
-
+%[ML] Aqu{i describiría un poco mas el PIV15, algo así como... y el caso de aplicación en el PIV15-177, proyecto denominado "Diseño y lalalala de tatatat", financiado por el Consejo Nacional de Ciencias y Tecnología (CONACYT}
 En este cap\'itulo se describen las consideraciones tenidas en cuenta para el desarrollo de la sonda, el diseño mec\'anico, el\'ectrico, electr\'onico, control y comunicaci\'on de cada uno de los componentes que componen la sonda y su sistema de despliegue. Adem\'as de los diagramas, algoritmos de funcionamiento y el caso de aplicaci\'on en el PINV15-177.
 
 \section[Consideraciones del sistema]{Consideraciones de Dise\~no}
-Para el desarrollo de la soluci\'on presentada, se tuvo en cuenta las siguientes consideraciones:
+Para el desarrollo de la soluci\'on propuesta, se tuvo en cuenta las siguientes consideraciones:
 \begin{itemize}
-    \item Portabilidad: Se espera que la sonda sea transportable por una persona sin mucho problema, el di\'ametro debe ser menor a 150[mm].
-    \item Asequibilidad: Se espera que el costo final pueda ser reducido menor al 20\% del costo de una soluci\'on comercial parecida(Libelium Smart Water Xtreme), valorada en \$ 11.200 (once mil doscientos d\'olares americanos), sin contar los impuestos y gastos de importaci\'on, \cite{storeLibelium}.  
-    \item Escalable: Se espera que la soluci\'on pueda ser escalable y configurable, seg\'un la necesidad. Vers\'atil para que pueda ser compatible con otros sensores con peque\~nos o ningún cambio en la sonda.
-    \item Compatibilidad: Se espera que la sonda pueda ser compatibles con varios protocolos de comunicaci\'on y con otros sensores, con la menor cantidad de adaptaciones mec\'anicas o electr\'onicas. 
-    \item Rangos de medici\'on: Considerando que el lugar de despliegue de la sonda, ser\'a en el lago Ypakarai, se espera que la soluci\'on pueda desenvolverse sin problemas hasta 4 metros de profundidad, considerando el estudio de batimetr\'ia realizado por el laboratorio de Soluciones tecnol\'ogicas para la gesti\'on Integral de los Recursos H\'idricos. Anexo \ref{fig:BatimetriaItaipu}
-    \item Adaptable: Se espera que la soluci\'on pueda ser utilizada con diferentes sistemas de despliegue.
+   \item Portabilidad: Se espera que el tamaño y el peso de la sonda sean transportables con facilidad, el di\'ametro debe ser menor a 150 [mm].
+    \item Asequibilidad: Se espera que el costo final pueda ser reducido en un 20\% del costo de una soluci\'on comercial parecida (Libelium Smart Water), valorada en aproximadamente \$ 3,800 (tres mil ochocientos d\'olares americanos), sin contar los impuestos y gastos de importaci\'on, \cite{storeLibelium}.  
+    \item Escalabilidad: Se espera que la solución pueda ser escalable y configurable según la necesidad, permitiendo la incorporación de otros tipos de sensores. Vers\'atil para que pueda ser compatible con otros sensores con peque\~nos o ningún cambio en la sonda.
+    \item Compatibilidad: Se espera que la sonda pueda ser compatible con varios protocolos de comunicaci\'on y con otros sensores, con la menor cantidad de adaptaciones mec\'anicas o electr\'onicas. 
+    \item Rangos de medici\'on: Considerando que el lugar de despliegue de la sonda, ser\'a en el lago Ypacaraí, se espera que la soluci\'on pueda desenvolverse sin problemas hasta 4 metros de profundidad, considerando el estudio de batimetr\'ia realizado por el laboratorio de Soluciones tecnol\'ogicas para la gesti\'on Integral de los Recursos H\'idricos,\cite{itaipu-binacional-2014}.
+    \item Adaptabilidad: Se espera que la soluci\'on pueda ser utilizada con diferentes sistemas de despliegue.
     \item \textit{Open Source}: Se espera que durante el desarrollo de la soluci\'on se prioricen los sistemas open source para reducir costos y poder contribuir al ecosistema. 
-    \item Autonom\'ia: Se espera que la soluci\'on presentada se pueda utilizar sin necesidad de estar sujeto a otros sistemas y que cuenta con una fuente de alimentaci\'on independiente y recargable para permitir muestro de hasta por lo menos 10 horas continuas, que es la duraci\'on promedio de luz natural, \cite{ClimaSol}. 
+    \item Autonom\'ia: Se espera que la soluci\'on presentada se pueda utilizar sin necesidad de estar sujeto a otros sistemas, y equipado con una fuente de alimentaci\'on independiente y recargable que permita el muestreo de al menos 10 horas de forma continua, que es la duraci\'on promedio de luz natural, \cite{ClimaSol}. 
 \end{itemize}
-Teniendo en cuenta las consideraciones y criterios antes expuestas, luego de la revisi\'on de los trabajos de otros autores, estudiados en los cap\'itulos anteriores. A continuaci\'on se abordar\'a el proceso de desarrollo involucrado, a modo de orden las siguientes secciones de este cap\'itulo estar\'an organizados de la siguiente forma, en primer lugar se hace una descripci\'on de todo el sistema general, luego se pasa a describir cada uno de elementos, todo el proceso dise\~no, en el cual se detallan los planos y diagramas m\'ecanicos de cada uno de los elementos del sistema en la subsecci\'on de dise\~nos m\'ecanicos, los diagramas, planos y esquemas de conexi\'on el\'ectrica en la subsecci\'on de dise\~no el\'ectrico, en la subsecci\'on de dise\~no electr\'onico se abarcará lo concerniente al diseño electr\'onico, circuitos de adquisici\'on de datos de los sensores, \textit{drivers} y otros elementos, en la subsecci\'on de la base de datos y control. 
-
+Teniendo en cuenta las consideraciones y criterios previamente expuestos, luego de la revisi\'on de los trabajos de otros autores, estudiados en las secciones anteriores. A continuaci\'on, se abordar\'a el proceso de desarrollo involucrado, esta secci\'on estará organizada de la siguiente forma, en primer lugar se realiza una descripci\'on de todo el sistema general, y luego se  describe cada uno de los elementos, todo el proceso dise\~no, en el cual se detallan los planos y diagramas m\'ecanicos de cada uno de los elementos del sistema en la subsecci\'on de dise\~nos m\'ecanicos, los diagramas, planos y esquemas de conexi\'on el\'ectrica en la subsecci\'on de dise\~no el\'ectrico, en la subsecci\'on de dise\~no electr\'onico se abarcará lo concerniente al diseño electr\'onico, circuitos de adquisici\'on de datos de los sensores, drivers y otros elementos, en la subsecci\'on de la base de datos y control.
 \section{Descripci\'on  sistema }
-En esta sección se describirá los cada uno de los sistemas que comprende el desarrollo de este TFG, el cual involucran como ser el m\'odulo de la sonda y el sistema del m\'odulo de despliegue.
-En referencia al modelo conceptual del sistema, está constituido de forma modular, de tal forma de facilitar agregar nuevos m\'odulos seg\'un sean necesarios, como se puede apreciar en la figura \ref{fig:DiagramaGeneral}, en este trabajo sé implementaron los subsistemas Sonda, Perif\'ericos, y Estación remota.  
+En esta sección se describen cada uno de los sistemas que comprende el desarrollo de este TFG, como el m\'odulo de la sonda y el sistema del m\'odulo de despliegue.
+En referencia al modelo conceptual del sistema, éste se encuentra constituido de forma modular, de manera a facilitar agregar nuevos m\'odulos seg\'un sean necesarios, como se puede apreciar en la figura \ref{fig:DiagramaGeneral}, en este trabajo se implementaron los subsistemas sonda, perif\'ericos y estación remota.  
 
 \begin{figure}[H]
     \centering
@@ -30,16 +29,16 @@ En referencia al modelo conceptual del sistema, está constituido de forma modul
 
 A continuación se describen los subsistemas.
 \begin{itemize}
-    \item \textbf{Subsistema Sonda}: subsistema principal y punto central de comunicaci\'on, de los dem\'as subsistemas, este subsistema control el control de los diferentes sensores para monitorio, as\'i como el almacenamiento en base de datos y transmisión de los resultados del muestreo obtenido.
-    \item \textbf{Subsistema Perif\'ericos}: subsistemas secundarios, encargados de agregar las capacidades necesarias para lograr los objetivos de muestreo, para el muestreo a multinivel, se desarrollaron los subsistemas Radar, para medir la profundidad, Gr\'ua, para lograr desplazamiento vertical de descenso y ascenso la sonda, ASV, para el desplazamiento horizontal de la sonda y las coordenadas GPS de los puntos de  muestreo. 
+    \item \textbf{Subsistema Sonda}: subsistema principal y punto central de comunicaci\'on de los dem\'as subsistemas, este permite el control de los diferentes sensores para monitorio, as\'i como el almacenamiento en base de datos y transmisión de los resultados del muestreo obtenido.
+    \item \textbf{Subsistema Perif\'ericos}: subsistemas secundarios, encargados de agregar las capacidades necesarias para lograr los objetivos de muestreo, para el muestreo a multinivel se desarrollaron los subsistemas Radar, para medir la profundidad; Gr\'ua, para lograr desplazamiento vertical de descenso y ascenso la sonda; ASV, para el desplazamiento horizontal de la sonda y las coordenadas GPS de los puntos de  muestreo. 
     \item \textbf{Estaci\'on remota}: destino principal de retransmisi\'on de los datos recolectados de la sonda. 
 \end{itemize}
 
 \subsection[Descripción General del Sistema]{Descripción General del Sistema}
-En la figura \ref{fig:diagramaSecuencia} se puede apreciar la secuencia de operaci\'on de cada uno de los elementos, que componen el trabajo desarrollado, como la sonda fue dise\~nada como para ser incorporado, en el asv del proyecto PIN15-177, la secuencia de operaci\'on ser\'a iniciada desde el ASV, donde cuando este llega al punto de muestreo inicia el proceso. 
-Una vez que el ASV da la orden de inicio, la sonda recibe la petici\'on y solicita a sonar la profundidad en ese punto, el valor de la profundidad en de ese punto en cent\'imetros retorna a la sonda, la sonda realiza un c\'alculo donde se limita la profundidad m\'axima de descenso y el valor resultante es enviado a la gr\'ua e inicia el proceso de muestreo que consiste en solicitar a los sensores de forma secuencia sus lecturas en intervalos de 5 segundos, la secuencia de lectura de los sensores se almacena directamente en una base de datos local del raspberry, los datos recolectados se trasmite v\'ia protocolo de comunicaci\'on mqtt. 
-Con los datos recibidos en la gr\'a se ejecuta al algoritmo de descenso, teniendo en cuenta, el valor recibido, al algoritmo genera al menos dos profundidades(menores a 30 cm) de parada, donde la gr\'ua se detiene por un intervalo de 30 segundos, una vez que la gr\'ua desciende hasta la profundidad calculada, el mismo realiza la operaci\'on de ascenso, cuando culmine al algoritmo manda un estatus verdadero al la sonda que lo interpreta como secuencia finalizada.
-La sonda, al recibir la confirmaci\'on  de la gr\'ua, configura todos los sensores a modo sleep, y envia una se\~nal al ASV para indicar que culmino el muestreo en ese punto, para que el ASV pase a uno siguiente donde se repite \'el secuencia. 
+En la figura \ref{fig:diagramaSecuencia} se puede apreciar la secuencia de operaci\'on de cada uno de los elementos que componen el trabajo desarrollado; la sonda fue dise\~nada para ser incorporada en el asv del proyecto PIN15-177, la secuencia de operaci\'on inicia desde el ASV cuando llega al punto de muestreo. 
+Una vez que el ASV da la orden de inicio, la sonda recibe la petici\'on y solicita al sonar la profundidad en ese punto, el valor de la profundidad de ese punto en cent\'imetros retorna a la sonda, la sonda realiza un c\'alculo donde se limita la profundidad m\'axima de descenso y el valor resultante es enviado a la gr\'ua e inicia el proceso de muestreo que consiste en solicitar a los sensores de forma secuencia sus lecturas en intervalos de 5 segundos, la secuencia de lectura de los sensores se almacena directamente en una base de datos local del raspberry, los datos recolectados se trasmite v\'ia protocolo de comunicaci\'on MQTT. 
+Con el dato recibido en la grúa se ejecuta al algoritmo de descenso teniendo en cuenta el valor de profundidad, el algoritmo genera al menos dos profundidades(menores a 30 cm) de parada, donde la gr\'ua se detiene por un intervalo de 30 segundos, una vez que la gr\'ua desciende hasta la profundidad calculada, el mismo realiza la operaci\'on de ascenso, cuando culmine al algoritmo manda un estatus verdadero al la sonda que lo interpreta como secuencia finalizada.
+La sonda, al recibir la confirmaci\'on  de la gr\'ua, configura todos los sensores a modo sleep, y envía una se\~nal al ASV para indicar que finalizó el muestreo en ese punto, para que el ASV pase a uno siguiente donde se repite la secuencia. 
 
 \begin{figure}[H]
     \centering
@@ -75,8 +74,8 @@ La Tabla \ref{tab:carac_general} detalla las caracter\'isticas t\'ecnicas del me
     \newline
     \hfill \textbf{Fuente:} Elaboraci\'on Propia
 \end{table}
-Por motivos energ\'eticos, el m\'odulo de despliegue no debe ser muy pesado, para no sobrecargar m\'as su funcionamiento, ya que el ASV ya posee elementos muy pesados pero imprescindibles para el funcionamiento, ni ocupar mucho espacio, ya que el espacio en el ASV es limitado debido a los paneles que cubren pr\'acticamente todo el casco. 
-Por el disen\~no el\'ectrico adoptado y las configuraciones de los drivers de carga, la alimentación debe de ser de 12 VDC, donde la autonom\'ia esperada es la misma que el ASV. Todos de los sistemas que integran este m\'odulo deben de comunicarse entre s\'i para efectuar procesos automatizados combinados, pero tambi\'en debe ser posible alg\'un tipo de intervenci\'on manual en caso de emergencia, por situaciones no previstas y donde se requiera un tipo de interacci\'on humano - máquina, para ello también debe de ser posible su control mediante el uso de una interfaz que sea simple e intuitivo.
+Por motivos energ\'eticos, el m\'odulo de despliegue no debe ser muy pesado, para no sobrecargar m\'as su funcionamiento, ya que el ASV posee elementos muy pesados, pero imprescindibles para el funcionamiento.
+Por el diseño el\'ectrico adoptado y las configuraciones de los drivers de carga, la alimentación debe de ser de 12 VDC, donde la autonom\'ia esperada es la misma que el ASV. Todos los sistemas que integran este m\'odulo deben de comunicarse entre s\'i para efectuar procesos automatizados combinados, pero tambi\'en debe ser posible alg\'un tipo de intervenci\'on manual en caso de emergencia, por situaciones no previstas y donde se requiera un tipo de interacci\'on humano - máquina, para ello también debe de ser posible su control mediante el uso de una interfaz que sea simple e intuitivo.
 
 \subsection[Características Técnicas del m\'odulo Sonda]{Características Técnicas del m\'odulo Sonda}
 La Tabla \ref{tab:carac_general2} detalla las características técnicas del mecanismo a ser desarrollado, teniendo en cuenta los objetivos planteados en la \autoref{Objetivos}
@@ -121,9 +120,9 @@ La Tabla \ref{tab:carac_general2} detalla las características técnicas del mec
 \end{table}
 
 \subsection{Comunicaci\'on}
-En la propuesta dise/~nada, se sugiere el desarrollo de varios subsistemas auxiliares para poder escalar y agregar nuevas capacidades o caracter\'isticas, seg\'un sea necesario.
+En la propuesta diseñada, se sugiere el desarrollo de varios subsistemas auxiliares para poder escalar y agregar nuevas capacidades o caracter\'isticas, seg\'un sea necesario.
 Con la existencia de estos subsistemas que realicen procesos automatizados, se debe prever un sistema de comunicaci\'on que funcione correctamente bajo un esquema M2M (\textit{machine to machine}) e implementable bajo la tecnolog\'ia IoT (\textit{Internet Of The Things}). 
-Bajo estas consignas, una de las tecnolog\'ias m\'as acordes fue \textit{Message Queing Telemetry Transport} (MQTT) que es un est\'andar OASIS para conectividad IoT. Es un protocolo de mensajer\'ia de publicaci\'on/suscripci\'on, extremadamente simple y liviano, dise\~nado para dispositivos restringidos y redes de bajo ancho de banda. Los principios de dise\~no son minimizar el ancho de banda de la red y los requisitos de recursos del dispositivo, al mismo tiempo que intentan garantizar la confiabilidad y cierto grado de garant\'ia de entrega, \cite{mqtt-no-date}. Estos principios tambi\'en hacen que el protocolo sea ideal para el mundo de los dispositivos conectados del ``Internet de las cosas", y para las aplicaciones m\'oviles donde el ancho de banda y la energ\'ia de bater\'ia es limitada.
+Bajo estas consignas, una de las tecnolog\'ias m\'as acordes fue \textit{Message Queing Telemetry Transport} (MQTT), que es un est\'andar OASIS para conectividad IoT, un protocolo de mensajer\'ia de publicaci\'on/suscripci\'on extremadamente simple y liviano, dise\~nado para dispositivos restringidos y redes de bajo ancho de banda. Los principios de dise\~no son minimizar el ancho de banda de la red y los requisitos de recursos del dispositivo, al mismo tiempo que intentan garantizar la confiabilidad y cierto grado de garant\'ia de entrega, \cite{mqtt-no-date}. Estos principios tambi\'en hacen que el protocolo sea ideal para el mundo de los dispositivos conectados del ``Internet de las cosas", y para las aplicaciones m\'oviles donde el ancho de banda y la energ\'ia de bater\'ia es limitada.
 Los elementos b\'asicos de este protocolo y su interacci\'on est\'an representados en la figura  \ref{fig:mqtt}, a continuaci\'on una descripci\'on de cada uno de ellos:
   \begin{figure}[ht]
         \centering
@@ -133,27 +132,26 @@ Los elementos b\'asicos de este protocolo y su interacci\'on est\'an representad
     \end{figure}
     
 \begin{itemize}
-    \item \textbf{Broker} – El broker es el servidor que distribuye la información a los clientes interesados conectados al servidor.
-    \item \textbf{Client} – Cliente, es el dispositivo que se conecta al broker para enviar o recibir información.
-    \item \textbf{Topic}- T\'opico- El nombre del mensaje. Los clientes publican, se suscriben o hacen ambas cosas a un tema.
-    \item \textbf{Publisher} – El publicador \textit{Clientes} que envían información al broker para distribuirla a los clientes interesados bas\'andonos en el nombre del tema.
-    \item \textbf{Subscribers} – El suscriptor Los clientes le dicen al agente de bolsa qué tema(s) les interesa(n). Cuando un cliente se suscribe a un tema, cualquier mensaje publicado al broker es distribuido a los suscriptores de ese tema. Los clientes también pueden cancelar la suscripción para dejar de recibir mensajes del corredor sobre ese tema.
+    \item \textbf{Broker} – El \textit{broker} es el servidor que distribuye la información a los clientes interesados conectados al servidor.
+    \item \textbf{Client} – Cliente, es el dispositivo que se conecta al \textit{broker} para enviar o recibir información.
+    \item \textbf{Topic}- T\'opico, es el nombre de la ruta que etiquetan los dispositivos. Los clientes publican, se suscriben o hacen ambas cosas a un tema.
+    \item \textbf{Publisher} – El publicador es el que envía los datos del cliente  al \textit{broker} para distribuir a los clientes interesados bas\'andonos en el nombre del t\'opico.
+    \item \textbf{Subscribers} – El suscriptor es el nombre que reciben los  clientes, con el cual reciben los mensajes asociados según el t\'opico. Cuando un cliente se suscribe a un t\'opico, cualquier mensaje publicado al \textit{broker} es distribuido a los suscriptores de ese t\'opico. Los clientes también pueden cancelar la suscripción para dejar de recibir mensajes del \textit{broker} sobre ese tópico.
 \end{itemize}
 
-Considerando los elementos anteriormente expuestos, el sistema de comunicación se implementó en dos niveles, una a nivel local, y otra a nivel remoto mediante servidores distintos, con t\'opicos de mensajes independientes. 
-Un servidor local para tener un sistema robusto de intercambio de mensajes entre los subsistemas que no dependa de tener una conexi\'on estable a internet y a servidor remoto que depende de una conexi\'on a internet para la transmisi\'on de datos recolectados y estados a una estación remota ubicada en cualquier parte del mundo. 
-Para ello fue necesario la elaboraci\'on de un diccionario de t\'opicos para establecer las rutas de informaci\'on y de esta forma lograr la conexi\'on de cada uno de los sistemas. 
-El diccionario completo de t\'opicos se encuentran detallados en 
-\nameref{appendix: Topicos}
-, el formato adoptado en el trabajo fue indicando la ruta de los elementos, por ejemplo, el tópico del cliente gr\'ua seria Sonda/Grua/cm.
-El servicio de broker utilizado como broker remoto y como broker local, es el servidor mosquitto desarrollado por la fundaci\'on Eplicse, \cite{mosquitto_eclipse_2018}. Mosquitto es un intermediario de mensajes de código abierto (con licencia EPL/EDL) que implementa las versiones 5.0, 3.1.1 y 3.1 del protocolo MQTT. Mosquitto es liviano y es adecuado para su uso en todos los dispositivos, desde computadoras de placa única como el Raspberry pi de bajo consumo hasta servidores dedicados.
+Considerando los elementos anteriormente expuestos, el sistema de comunicaci\'on 
+se implement\'o en dos niveles, una a nivel local y otra a nivel remoto, mediante servidores distintos con t\'opicos de mensajes independientes. 
+Un servidor local para tener un sistema robusto de intercambio de mensajes entre los subsistemas que no requiere de una conexi\'on estable a Internet; y un servidor remoto que depende de una conexi\'on a Internet para la transmisi\'on de datos recolectados a una estación remota ubicada en cualquier parte del mundo. 
+Para ello fue necesario la elaboraci\'on de un diccionario de t\'opicos para establecer las rutas de informaci\'on y de esta forma lograr la conexi\'on de cada uno de los sistemas.
+El servicio de \textit{broker} utilizado como \textit{broker} remoto y como \textit{broker} local, es el servidor mosquitto desarrollado por la fundaci\'on Eclipse \cite{mosquitto_eclipse_2018}, Mosquitto es un intermediario de mensajes de código abierto (con licencia EPL/EDL) que implementa las versiones 5.0, 3.1.1 y 3.1 del protocolo MQTT. Mosquitto es liviano y adecuado para su uso en todos los dispositivos, desde computadoras de placa única como el Raspberry Pi de bajo consumo hasta servidores dedicados.
 \begin{figure}[ht]
         \centering
         \includegraphics[scale=0.6]{Imagenes/cap3/esquemaCom.png}
         \caption[ Esquema configuraci\'on mqtt]{Esquema configuraci\'on}\textbf{Fuente:} Elaboración Propia.
         \label{fig:mqttUtil}
     \end{figure}
-El esquema de comunicaci\'on, implementado en este trabajo, ver en la figura \ref{fig:mqttUtil}, est\'a compuesto por 3 (tres) clientes conectados al servidor local y un servidor remoto. La cantidad de clientes responde directamente a la cantidad necesaria de perif\'ericos a ser instalados, pudi\'endose ampliar seg\'un para ot\'orgale alg\'un nuevo tipo de funcionalidad. 
+
+El esquema de comunicaci\'on, implementado en este trabajo, ver en la figura \ref{fig:mqttUtil}, est\'a compuesto por 3 (tres) clientes conectados al servidor local y un servidor remoto. La cantidad de clientes responde directamente a la cantidad necesaria de perif\'ericos a ser instalados, pudiendo ampliarse para otorgarle alg\'un nuevo tipo de funcionalidad. 
 
 \begin{itemize}
     \item \textbf{Cliente 1: Sonar} – Este cliente corresponde al subsistema auxiliar encargado de medir la profundidad en el punto de muestreo,  esta informaci\'on ser\'a utilizado para el registro en base de datos y publicando para los dem\'as clientes mqtt.
@@ -161,13 +159,13 @@ El esquema de comunicaci\'on, implementado en este trabajo, ver en la figura \re
     \item \textbf{Cliente 3:ASV}- Este cliente corresponde al subsistema que otorga el desplazamiento horizontal a la sonda, publica los datos de telemetr\'ia correspondientes al ASV y publica la ubicaci\'on GPS registrado en el momento de la extracci\'on de la muestra.
 \end{itemize}
 
-La conexi\'on entre el servidor remoto y el servidor local ser utiliza OpenVPN, que es un software open source basado en VPN. La VPN (Virtual Private Network) significa red privada virtual. Es un t\'unel encriptado entre dos dispositivos que nos permiten acceder a cada sitio web y servicios en línea de forma privada y segura, es capaz de conectar uno o más dispositivos como si se encontraran físicamente en la misma red local (LAN) y en el mismo lugar, \cite{arora_131_nodate}. Al momento de conectarse a una vpn, se crea un “túnel” entre los diapositivos mediante la conexi\'on a internet, los datos siempre permanecerán cifrados, y accesibles \'unicamente mediante certificados de conexi\'on generados en el programa. 
+Para la conexi\'on entre el servidor remoto y el servidor local ser utiliza OpenVPN, que es un software open source basado en VPN. La VPN (Virtual Private Network) significa red privada virtual. Es un t\'unel encriptado entre dos dispositivos que permite acceder a cada sitio web y servicios en línea de forma privada y segura, es capaz de conectar uno o más dispositivos como si se encontraran físicamente en la misma red local (LAN) y en el mismo lugar, \cite{arora_131_nodate}. Al momento de conectarse a una VPN, se crea un “túnel” entre los diapositivos mediante la conexi\'on a internet, los datos siempre permanecerán cifrados, y accesibles \'unicamente mediante certificados de conexi\'on generados en el programa. 
 
 \section{Sonda}
-El dise\~no final fue un proceso evolutivo resultado de varias iteraciones y resultado de procesos evolutivos iniciado en el proyecto Cormor\'an-I detallado en \'el 
+El dise\~no final fue un proceso evolutivo resultado de varias iteraciones iniciado en el proyecto Cormor\'an-I detallado en \'el 
 \nameref{appendix: cormoran}
-, partiendo el modelo utilizado por Hitz y otros,\cite{hitz2012design},
-hasta la versi\'on final, aunque esta soluci\'on est\'a pensada principalmente para el proyecto PIN15-177, la idea tras este trabajo es adem\'as, contar con un dispositivo capaz de funcionar de forma independiente a cualquier otro tipo de veh\'iculo, extendiendo as\'i sus posibles tipos de usos, como el monitoreo de acu\'iferos, esto supone que la sonda deba contar con todos los elementos necesarios para su correcto desenvolvimiento, la funci\'on principal de la sonda es brindar soporte a cada uno de los sensores, el soporte incluye el procesamiento de se\~nal, alimentaci\'on, almacenamiento de datos, protecci\'on contra impactos y transmisi\'on a una estaci\'on base remota los datos sensados.
+, partiendo del modelo utilizado por Hitz y otros,\cite{hitz2012design}
+hasta la versi\'on final, aunque esta soluci\'on est\'a pensada principalmente para el proyecto PIN15-177, la idea de este trabajo es contar con un dispositivo capaz de funcionar de forma independiente a cualquier otro tipo de veh\'iculo, extendiendo as\'i sus posibles tipos de usos, como el monitoreo de acu\'iferos, ésto supone que la sonda deba contar con todos los elementos necesarios para su correcto desenvolvimiento, la funci\'on principal de la sonda es brindar soporte a cada uno de los sensores, el soporte incluye el procesamiento de se\~nal, alimentaci\'on, almacenamiento de datos, protecci\'on contra impactos y transmisi\'on a una estaci\'on base remota los datos sensados.
 \begin{table}[ht]
 \protect\caption[Funciones Generales]{Funciones Generales. \label{tab:fun_general}}
     \centering
@@ -195,9 +193,9 @@ hasta la versi\'on final, aunque esta soluci\'on est\'a pensada principalmente p
     \newline
     \hfill \textbf{Fuente:} Elaboración Propia
 \end{table}
-Para el proyecto PIN15-177, la sonda a ser implementada debe de dar soportes a inicialmente cinco sensores (ph, CE, OD, OPR, T) y el dise\~no debe soportar la incorporaci\'on y/o retiro de alg\'un sensor, sin que esto conlleve adaptaciones importantes en la sonda, por ese motivo se opt\'o por un dise\~no modular de tal forma que, cuando sea necesario modificar alg\'un sensor se tenga que reemplazar simplemente uno de los m\'odulos y de esta forma reducir los costos. Los tres mo\'dulos est\'an compuestos por:
+Para el proyecto PIN15-177, la sonda a ser implementada debe dar soportes inicialmente a cinco sensores (ph, CE, OD, OPR, T), y el dise\~no debe soportar la incorporaci\'on y/o retiro de alg\'un sensor, sin que esto conlleve adaptaciones importantes en la sonda, por ese motivo se opt\'o por un dise\~no modular de tal forma que, cuando sea necesario modificar alg\'un sensor se tenga que reemplazar simplemente uno de los m\'odulos y de esta forma reducir los costos. Los tres mo\'dulos est\'an compuestos por:
 \begin{itemize}
-    \item \textbf{Frente}: Este m\'odulo es la pieza frontal de la sonda, cuya funci\'on principal es de protecci\'on a cada uno de los sensores contra basuras u objetos con que puede entrar en contacto directo y adem\'as de crear un entorno de volumen de agua constante y reducir en la mayor medida posible la formaci\'on de turbulencias alrededor de los sensores para evitar los fallos o errores de lecturas de los sensores que se podr\'ian registrar a causas de burbujas de aire en los cabezales de los sensores. Tal como indica en la figura \ref{fig:Frente}, la zona comprendida dentro del recuadro rojo. As\'i como se indica en el plano del anexo \ref{fig:ModuloFrontal}, para el dise\~no de est\'e m\'odulo, se parti\'o de una forma cil\'indrica hueco de altura suficiente para poder cubrir totalmente cada uno de los sensores, con aberturas longitudinales equidistantes en las paredes laterales en forma de ranuras con bordes redondeados, una de las bases totalmente libre para que se pueda acoplar a los otros m\'odulos y  la otra base redondeado de forma esf\'eorico hueco, a fin favorecer el efecto hidrodin\'amico al momento del contacto con el agua, como se presentara m\'as adelante con las simulaciones realizadas.
+    \item \textbf{Frente}: Este m\'odulo es la pieza frontal de la sonda, cuya funci\'on principal es de protecci\'on a cada uno de los sensores contra basuras u objetos con que puede entrar en contacto directo y ,adem\'as, crear un entorno de volumen de agua constante y reducir en la mayor medida posible la formaci\'on de turbulencias alrededor de los sensores para evitar los fallos o errores de lecturas de los sensores que se podr\'ian registrar a causa de burbujas de aire en los cabezales de los sensores. Tal como indica en la figura \ref{fig:Frente}, la zona comprendida dentro del recuadro rojo. As\'i como se indica en el plano del anexo \ref{fig:ModuloFrontal}, para el dise\~no de est\'e m\'odulo, se parti\'o de una forma cil\'indrica hueco de altura suficiente para poder cubrir totalmente cada uno de los sensores, con aberturas longitudinales equidistantes en las paredes laterales en forma de ranuras con bordes redondeados, una de las bases totalmente libre para que se pueda acoplar a los otros m\'odulos, y  la otra base redondeada de forma esf\'erica y hueca, a fin favorecer el efecto hidrodin\'amico al momento del contacto con el agua, como se presentara m\'as adelante con las simulaciones realizadas.
     
     \begin{figure}[ht]
         \centering
@@ -205,7 +203,7 @@ Para el proyecto PIN15-177, la sonda a ser implementada debe de dar soportes a i
         \caption[Corte Transversal]{Corte Transversal Sonda. M\'odulo: Frente.}\textbf{Fuente:} Elaboración Propia.
         \label{fig:Frente}
     \end{figure}
-    \item \textbf{Base}: Este m\'odulo, es la parte posterior de la sonda, su función principal es de almacenar de forma segura todo el equipamiento electr\'onico de control, el\'ectrico, almentaci\'on y placas necesarias para los sensores, tal como se indica en la figura \ref{fig:Base2020}, la base est\'a conformada por un cilindro hueco de 270 [mm] de altura, 120[mm] de di\'ametro exterior, espesor de las paredes internas laterales de 10[mm] y un espesor de la base 15[mm],  para sellar de forma herm\'etica, se utilizó un roscado Whitworth fino, utilizada para tuber\'ias de gas y de agua, \cite{falk_metalotecnia_1986}, de paso 1,154 [mm].
+    \item \textbf{Base}: Este m\'odulo, es la parte posterior de la sonda, su función principal es almacenar de forma segura todo el equipamiento electr\'onico de control, el\'ectrico, alimentación y placas necesarias para los sensores, tal como se indica en la figura \ref{fig:Base2020}, la base est\'a conformada por un cilindro hueco de 270 [mm] de altura, 120[mm] de di\'ametro exterior, espesor de las paredes internas laterales de 10[mm] y un espesor de la base 15[mm],  para sellar de forma herm\'etica, se utilizó un roscado Whitworth fino, utilizada para tuber\'ias de gas y de agua, \cite{falk_metalotecnia_1986}, de paso 1,154 [mm].
     
     \begin{figure}[H]
     \centering
@@ -215,8 +213,8 @@ Para el proyecto PIN15-177, la sonda a ser implementada debe de dar soportes a i
     \end{figure}
     
     \item \textbf{Anillo}: Tercer
-    m\'odulo, es la parte centrar de la sonda, adem\'as de servir como enlace 
-    entre las otras dos piezas, tiene dos funciones principales, en primer lugar acoplarse a la base cerr\'andolo de forma herm\'etica y la segunda de sostener los sensores en sus posiciones fijas en la sonda. Este es el m\'odulo m\'as peque\~no en relaci\'on a las otras dos, se dise\~no de esta forma para ser el \'unico m\'odulo que se espera se tenga que reemplazar en el caso de ser necesario una reconfiguraci\'on u modificaci\'on de los sensores. Tal como se muestra en la figura \ref{fig:Anillo2019} el dise\~no parte de un cilindro macizo de 70 [mm] de altura y 120[mm] de di\'ametro exterior, se utiliz\'o Whitworth fino al igual que la base a fin de que pueda enroscarse  perfectamente, con el roscado se asegura hasta cierto punto el cierre herm\'etico entre los dos m\'odulos, como medida de seguridad extra se introducen los o-ring, para crear otro  sello hermético al momento del contacto entre las dos m\'odulos, con estos dos sistemas se espera que el ingreso de l\'iquidos sea nulo o m\'inimo, para la implementaci\'on de la sonda en este trabajo se utilizaran 5 sensores, y como esta secci\'on es la encargada que mantener en su posici\'on cada uno de los sensores, se realizan cinco perforaciones en este m\'odulo a fin de poder colocarlos de forma perpendicular. Como estas perforaciones para los sensores implicar\'ia posibles en \'areas de ingreso de l\'iquido, considerando adem\'as que el uso de o-ring se tornan un poco complicados para la posterior fabricaci\'on, se opt\'o por utilizar juntas hidr\'aulicas estandarizadas con el di\'ametro interno compatible con el di\'ametro del los sensores, dispuesta en pares por cada uno de los sensores a fin de sellar las perforaciones y con esto impedir el ingreso de líquidos al interior de la sonda.
+    m\'odulo, es la parte central de la sonda, adem\'as de servir como enlace 
+    entre las otras dos piezas, tiene dos funciones principales; en primer lugar acoplarse a la base cerr\'andolo de forma herm\'etica y la segunda de sostener los sensores en sus posiciones fijas en la sonda. Este es el m\'odulo m\'as peque\~no en relaci\'on a los otros dos, se diseñó de esta forma para ser el \'unico m\'odulo que se espera que se tenga que reemplazar en el caso de ser necesario una reconfiguraci\'on u modificaci\'on de los sensores. Tal como se muestra en la figura \ref{fig:Anillo2019} el dise\~no parte de un cilindro macizo de 70 [mm] de altura y 120[mm] de di\'ametro exterior, se utiliz\'o Whitworth fino al igual que la base a fin de que pueda enroscarse  perfectamente, con el roscado se asegura hasta cierto punto el cierre herm\'etico entre los dos m\'odulos, como medida de seguridad extra se introducen los o-ring, para crear otro  sello hermético al momento del contacto entre las dos m\'odulos, con estos dos sistemas se espera que el ingreso de l\'iquidos sea nulo o m\'inimo, para la implementaci\'on de la sonda en este trabajo se utilizan 5 sensores, y como esta secci\'on es la encargada de mantener en su posici\'on cada uno de los sensores, se realizan cinco perforaciones en este m\'odulo a fin de poder colocarlos de forma perpendicular. Como estas perforaciones para los sensores implicar\'ia posibles \'areas de ingreso de l\'iquido, considerando adem\'as que el uso de o-ring se tornan un poco complicados para la posterior fabricaci\'on, se opt\'o por utilizar juntas hidr\'aulicas estandarizadas con el di\'ametro interno compatible con el di\'ametro del los sensores, dispuesta en pares por cada uno de los sensores a fin de sellar las perforaciones y con esto impedir el ingreso de líquidos al interior de la sonda.
     
     \begin{figure}[H]
         \centering
@@ -231,27 +229,26 @@ Para lograr autonom\'ia energ\'etica para la sonda se opt\'o por utilizar bater\
     \begin{figure}[H]
         \centering
         \includegraphics[width=0.4\textwidth]{Imagenes/2021/imag29.jpg}
-        \caption{Baterias NanoTech Turnigy 5100 mAh}\textbf{Fuente:} P\'agina web del fabricante.
+        \caption{Baterias NanoTech Turnigy 5100 mAh}\textbf{Fuente:} P\'agina web del fabricante,\cite{bateria}.
         \label{fig:nanoBateria}
     \end{figure}
-Las bater\'ias Turnigy nano-tech Lipoly bater\'ias fueron dise\~nados para alto rendimiento. Utilizando un avanzado sustrato electrones que permite pasar m\'as libremente de \'anodo a c\'atodo con menos impedancia interna.
+Las bater\'ias Turnigy nano-tech Lipoly bater\'ias fueron dise\~nadas para alto rendimiento, utilizando un avanzado sustrato electrones que permite pasar m\'as libremente de \'anodo a c\'atodo con menos impedancia interna.
  
-Las ventajas sobre las bater\'ias tradicionales LIPOLY;
+Las ventajas sobre las bater\'ias tradicionales LIPOLY:
 \begin{itemize}
     \item La densidad de potencia alcanza 7,5 kW / kg.
     \item Menos hueco de tensi\'on durante la descarga de alta velocidad, dando m\'as poder bajo carga.
-    \item Impedancia interna puede llegar tan bajo como 1.2 m${\Omega }$ en comparación con la de 3 m${\Omega }$ de un Lipoly estándar
-    \item Control t\'ermico m\'as, paquete por lo general no supera 60 $^{\circ}$C.
+    \item Impedancia interna puede llegar tan bajo como 1.2 m${\Omega }$ en comparación con la de 3 m${\Omega }$ de un Lipoly estándar.
     \item Hinchazón durante la carga pesada no supera 5\%, en comparación con 15\% de un Lipoly normal.
     \item Mayor capacidad durante la descarga pesada. M\'as del 90\% a la tasa de 100 \% C.
-    \item Carga r\'apida capaz, hasta 15$^{\circ}$C en algunas baterías.
+    \item Carga r\'apida hasta 15$^{\circ}$C en algunas baterías.
     \item Mayor duraci\'on del ciclo, casi el doble que el de la tecnolog\'ia LiPoly est\'andar.
 \end{itemize}
 
 La tecnolog\'ia de nano-core en las bater\'ias de litio es la aplicaci\'on de aditivos conductores nan\'ometros. Los aditivos nan\'ometros conductora forman redes ultra-fuertes de electrones de conducci\'on en los electrodos que pueden aumentar la conductividad electr\'onica.
 Estos aditivos crean la capacidad de imbibici\'on en el l\'iquido portador para suministrar m\'as canales de iones. Esto mejora la capacidad de transmisi\'on de iones y la difusi\'on de iones. A trav\'es de la mejora de la conductividad y de iones de transmisi\'on electr\'onica, la impedancia se reduce y la polarizaci\'on de la descarga de alta tasa disminuye en gran medida.
 \begin{table}[t]
-\protect\caption[Caracter\'isticas de bater\'ia Lipo Nano-Tech ]{Caracter\'isticas de bater\'ia Lipo Nano-Tec 5100mAh.}
+\protect\caption[Caracter\'isticas de bater\'ia Lipo Nano-Tech ]{Caracter\'isticas de bater\'ia Lipo Nano-Tec 5100 mAh.}
 \label{tab:caract_bat}
 \begin{center}
 \begin{tabular}{l l}
@@ -269,11 +266,11 @@ Conector equilibrio	& JST\\
 \hfill \textbf{Fuente:} P\'agina Web del Fabricante\cite{bateria}
 \end{center}
 \end{table}
-\paragraph[Interfaz de Sensores]{Interfaz de Sensores}
-Es el bloque donde se obtiene las mediciones de las caracter\'isticas f\'isico - qu\'imica del recurso h\'idrica, para su posterior procesamiento, almacenamiento y transmici\'on a base remoto.
+\paragraph {Interfaz de Sensores}:
+Es el bloque donde se obtiene las mediciones de las caracter\'isticas f\'isico - qu\'imicas del recurso h\'idrico para su posterior procesamiento, almacenamiento y transmici\'on a base remoto.
 \subparagraph{Sensor de pH}
-En la Figura \ref{fig:sensorpH} se puede apreciar el sensor de pH por el que se optó fabricado por la empresa Atlas Scientfic.
-Los criterios para la selección de este sensor fueron, su simplicidad de uso gracias a su extensa documentación y soporte por parte del fabricante, su popularidad en el ámbito de la automatización y control de calidad de agua para varios tipos de usos y su integración dentro de la placa de desarrollo sin necesidad de cableados externos y compatible con el módulo EZO pH Circuit que se muestra en la Figura \ref{fig:EZOpH}
+En la Figura \ref{fig:sensorpH}: se puede apreciar el sensor de pH por el que se optó fabricado por la empresa Atlas Scientfic.
+Los criterios para la selección de este sensor fueron su simplicidad de uso debido a su extensa documentación y soporte por parte del fabricante, su popularidad en el ámbito de la automatización y control de calidad de agua para varios tipos de usos y su integración dentro de la placa de desarrollo sin necesidad de cableados externos y compatible con el módulo EZO pH Circuit que se muestra en la Figura \ref{fig:EZOpH}
 
 \begin{figure}[H]
 \caption[Sensor y EZO de pH.]{Sensor y EZO de pH de la empresa Atlas Scientific. }
@@ -281,7 +278,7 @@ Los criterios para la selección de este sensor fueron, su simplicidad de uso gr
      \begin{subfigure}[b]{0.6\textwidth}
          \centering
          \includegraphics[width=\textwidth]{Imagenes/2021/imag23.png}
-	    \caption[Sensor de pH.]{Sensor de pH . }
+	    \caption[Sensor de pH.]{Sensor de pH. }
         \label{fig:sensorpH}
      \end{subfigure}
      \hfill
@@ -310,7 +307,7 @@ Al leer el pH y la conductividad u oxígeno disuelto juntos, el fabricante recom
 En la Figura \ref{fig:4.10} se muestra  el esquema del circuito interno del módulo, cómo están aislados datos y la potencia con el ADM3260, que es el chip encargado de realizar la aislación de los canales I2C utilizados y algunos componentes pasivos. El ADM3260 puede generar una potencia aislada de hasta 150 mW e incorpora dos canales de datos bidireccionales.
 Esta tecnología funciona mediante el uso de pequeños transformadores para inducir el voltaje a través de un espacio de aire. Los dos canales de datos tienen una resistencia de extracción de 4.7 $k\Omega$ tanto en las líneas aisladas como en las no aisladas (R1, R2, R3 y R4). El voltaje de salida se configura mediante un divisor de voltaje (R5, R6 y R, 7). produce un voltaje de 3.9 V independientemente de su voltaje de entrada.
 
-\textbf{Principio de Operación: }Una sonda de pH mide la actividad del ion de hidrógeno en un líquido, en el extremo inferior de esta hay una membrana de vidrio que permite a los iones de hidrógeno del líquido que se está midiendo depositarse en la capa exterior del vidrio, mientras que los iones más grandes permanecen en la solución. En la Figura \ref{fig:phGrafico} se puede apreciar el comportamiento de los iones de hidrógeno de acuerdo al tipo de solución que se tiene. La diferencia en la concentración de iones de hidrógeno (fuera de la sonda y en el interior de la sonda) crea una corriente muy pequeña. Esta corriente es proporcional a la concentración de iones de hidrógeno en el líquido que se mide.
+\textbf{Principio de operación: }Una sonda de pH mide la actividad del ion de hidrógeno en un líquido, en el extremo inferior de ésta hay una membrana de vidrio que permite a los iones de hidrógeno del líquido que se está midiendo depositarse en la capa exterior del vidrio, mientras que los iones más grandes permanecen en la solución. En la Figura \ref{fig:phGrafico} se puede apreciar el comportamiento de los iones de hidrógeno de acuerdo al tipo de solución que se tiene. La diferencia en la concentración de iones de hidrógeno (fuera de la sonda y en el interior de la sonda) crea una corriente muy pequeña. Esta corriente es proporcional a la concentración de iones de hidrógeno en el líquido que se mide.
 La corriente que se genera a partir de la actividad del ion hidrógeno es el recíproco de esa actividad y se puede predecir usando esta ecuación:
 \begin{equation}
 E=E^0 + \frac{RT}{F}\times \ln\alpha_{H+} = E^0 - \frac{2.303RT}{F}\rho H
@@ -341,17 +338,17 @@ Rango    &  0 - 14\\
 Exactitud      &  +/-0.002\\
 Conector &  BNC macho\\
 Resolución   &  +/-0.0001\\
-Tiempo de Respuesta   &  95\% en 1s\\
+Tiempo de Respuesta   &  95\% en 1 s\\
 Presión Máxima    &  100PSI\\
-Profundidad Máxima	& 60m\\
+Profundidad Máxima	& 60 m\\
 Rango de Temperatura $^{\circ}$C	& 1- 99\\
-Longitud del Cable	& 1m\\
+Longitud del Cable	& 1 m\\
 Sensor de Temperatura Interno	& NO\\
 Tiempo antes de recalibraci\'on	& 1 año\\
 Tiempo de Vida	& aprox. 2.5 años\\
 Seguro en Alimentos & Si\\
 Peso & 49 gramos\\
-Dimensiones & 12mm x 150 mm\\
+Dimensiones & 12 mm x 150 mm\\
 \hline
 \end{tabular}
 \vspace{5mm}
@@ -362,7 +359,7 @@ Dimensiones & 12mm x 150 mm\\
 \end{table} 
 
 \subparagraph{Sensor de Conductividad}
-El sensor utilizado para las lecturas de conductividad se puede apreciar en la Figura \ref{fig:sensorCE}, de la empresa Atlas Scientific. Los criterios de selecci\'on fueron su extendido uso para control de calidad de aguas para varios usos, buen soporte y extensa documentaci\'on disponible en la web, la homogeneidad en los dispositivos electr\'onicos, al utilizar sensores ya compatibles (Sensor de pH y Sensor de CE) y con los debidos aislamientos requeridos entre estos. El m\'odulo emitir\'a lecturas de conductividad el\'ectrica, total de s\'olidos disuelto y salinidad.
+El sensor utilizado para las lecturas de conductividad se puede apreciar en la Figura \ref{fig:sensorCE}, de la empresa Atlas Scientific. Los criterios de selecci\'on fueron su extendido uso para el control de calidad de aguas para varios usos, buen soporte y extensa documentaci\'on disponible en la web, la homogeneidad en los dispositivos electr\'onicos, al utilizar sensores ya compatibles (Sensor de pH y Sensor de CE) y con los debidos aislamientos requeridos entre estos. El m\'odulo emitir\'a lecturas de conductividad el\'ectrica, total de s\'olidos disuelto y salinidad.
 
 \begin{figure}[H]
 \caption[Sensor y EZO de CE.]{Sensor y EZO de CE de la empresa Atlas Scientific. }
@@ -435,15 +432,15 @@ Rango    &  5 - 200.000 $\mu S\/cm$\\
 Exactitud      &  +/-2\% \\
 Conector &  BNC macho\\
 Resolución   &  +/-0.0001\\
-Tiempo de Respuesta   &  90\% en 1s\\
+Tiempo de Respuesta   &  90\% en 1 s\\
 Presión Máxima    &  3,447 kPa (500 PSI) \\
 Profundidad Máxima	& 343 metros\\
 Rango de Temperatura $^{\circ}$C	& 1- 110\\
-Longitud del Cable	& 1m\\
+Longitud del Cable	& 1 m\\
 Sensor de Temperatura Interno	& NO\\
 Tiempo antes de recalibraci\'on	& 10 año\\
 Tiempo de Vida	& aprox. 10 años\\
-Dimensiones	& 12mm x 152mm\\
+Dimensiones	& 12 mm x 152 mm\\
 Peso	& 51 gramos\\
 Superficie de medición	& Grafito\\
 Seguro en Alimentos	& Si\\
@@ -490,6 +487,31 @@ Es un sistema informático de tamaño reducido que está diseñado específicame
 En la Tabla \ref{tab:caract_temp} se visualizan las características del Sensor de Temperatura PT-1000.
 Entre las aplicaciones de uso común de este sensor están el uso est\'andar de laboratorio, uso en el campo, en el suelo, acuapon\'ia, hidroponía, en bebidas como cerveza, vino u otro licor.
 
+\begin{table}[H]
+\protect\caption[Características del sensor de temperatura]{Características del sensor de temperatura.}
+\label{tab:caract_temp}
+\begin{center}
+\begin{tabular}{l l}
+\hline
+Rango    &  -55 $^{\circ}$C a 125 $^{\circ}$C\\
+Precisión      &  +/- 0.5 $^{\circ}$C \\
+Conector &  BNC macho\\
+Tiempo de Respuesta   &  95\% en 1 s\\
+Longitud del Cable	& 1 m\\
+Tiempo antes de recalibraci\'on	& 1 año\\
+Tiempo de Vida	& aprox. 2.5 años\\
+Seguro en Alimentos & Si\\
+Peso & 49 gramos\\
+Dimensiones & 12 mm x 150 mm\\
+\hline
+\end{tabular}
+\vspace{5mm}
+\newline
+\hfill
+\textbf{Fuente: }P\'agina Web del Fabricante,\cite{ezotemp}. 
+\end{center}
+\end{table} 
+
 \subparagraph{Sensor de OPR/REDOX}
 ORP significa potencial de oxidación/reducci\'on, se puede observar en la figura \ref{fig:sensorOPR}, de la empresa Atlas Scientific. La oxidación es la pérdida de electrones y la reducción es la ganancia de electrones. La salida de la sonda se representa en milivoltios y puede ser positivo o negativo.
 
@@ -515,8 +537,8 @@ ORP significa potencial de oxidación/reducci\'on, se puede observar en la figur
 
 \textbf{Principio de funcionamiento:}
 Al igual que una sonda de pH mide la actividad de los iones de hidrógeno en un líquido; una sonda de redox mide la actividad de electrones en un líquido. Las lecturas de ORP representan la fuerza de los electrones transferidos hacia o desde sustancias en un líquido. Teniendo en cuenta que las lecturas no indicar la cantidad de electrones disponibles para la transferencia.
-En la figura \ref{fig:OPR_prove} se observa la composición interna de una sonda ORP  tiene una punta de platino que está conectada a un alambre de plata, rodeada con cloruro de plata. Luego, ese cable plateado se conecta a una solución de referencia KCL. Porque platino es un metal no reactivo, puede "observar en silencio" la actividad electrónica del líquido sin convirtiéndose aparte de cualquier reacción que esté ocurriendo en el líquido.
-Una sonda ORP es un dispositivo pasivo que detecta una corriente generada por la oxidación o reducción de sustancias químicas en el agua. Esta corriente (que puede ser positiva o negativa) es muy débil y no se puede detectar con un multímetro o un convertidor de analógico a digital.
+En la figura \ref{fig:OPR_prove} se observa la composición interna de una sonda ORP  tiene una punta de platino que está conectada a un alambre de plata, rodeada con cloruro de plata. Luego, ese cable plateado se conecta a una solución de referencia KCL. Porque platino es un metal no reactivo, puede observar en silencio la actividad electrónica del líquido sin separarse en partes ante cualquier reacción que esté ocurriendo en el líquido.
+Una sonda ORP es un dispositivo pasivo que detecta una corriente generada por la oxidación o reducción de sustancias químicas en el agua. Esta corriente (que puede ser positiva o negativa) es muy débil, y no se puede detectar con un multímetro o un convertidor de analógico a digital.
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.5\textwidth]{Imagenes/cap3/sondaOPR.png}
@@ -525,7 +547,7 @@ Una sonda ORP es un dispositivo pasivo que detecta una corriente generada por la
     \label{fig:OPR_prove}
 \end{figure}
 
-En la Tabla \ref{tab:caract_OPR} se muestran las principales características del sensor de conductividad. Los usos típicos de este sensor, uso estándar de laboratorio, uso en campo, suelo, muestras que contienen metales pesados, hidroponía, acuaponía, cerveza, vino, alcohol y producción de alimentos.
+En la Tabla \ref{tab:caract_OPR} se muestran las principales características del sensor de conductividad; los usos típicos de este sensor, uso estándar de laboratorio, uso en campo, suelo, muestras que contienen metales pesados, hidroponía, acuaponía, cerveza, vino, alcohol y producción de alimentos.
 
 \begin{table}[H]
 \protect\caption[Características del sensor de DO de AtlasScientific]{Características del sensor de DO de AtlasScientific.}
@@ -540,11 +562,11 @@ Tiempo de Respuesta   &  95\% en 1s         \\
 Presión Máxima    &  689.47 kPa (100 PSI)    \\
 Profundidad Máxima	& 60 metros            \\
 Rango de Temperatura $^{\circ}$C	& 1- 80\\
-Longitud del Cable	& 1m                    \\
+Longitud del Cable	& 1 m                    \\
 Sensor de Temperatura Interno	& NO        \\
 Tiempo antes de recalibración	& aprox. 1 año    \\
 Tiempo de Vida	& aprox. 2 años            \\
-Dimensiones	& 12mm x 150mm                  \\
+Dimensiones	& 12 mm x 150 mm                  \\
 Peso	& 44 gramos                         \\
 Seguro en Alimentos	& Si                    \\
 \hline
@@ -601,15 +623,15 @@ En la Tabla \ref{tab:caract_do} se muestran las principales caracter\'isticas de
 Rango   &  0.01 - 100     $mg/L$         \\
 Conector &  BNC macho                       \\
 Resolución   &  +/-      0.05 $ mg/L$              \\
-Tiempo de Respuesta   &  90\% en 1s         \\
+Tiempo de Respuesta   &  90\% en 1 s         \\
 Presión Máxima    &  3,447 kPa (500 PSI)    \\
 Profundidad Máxima	& 343 metros            \\
 Rango de Temperatura $^{\circ}$C	& 1- 50\\
-Longitud del Cable	& 1m                    \\
+Longitud del Cable	& 1 m                    \\
 Sensor de Temperatura Interno	& NO        \\
 Tiempo antes de recalibración	& aprox. 1 año    \\
 Tiempo de Vida	& aprox. 5 años            \\
-Dimensiones	& 16.57mm x 114mm                  \\
+Dimensiones	& 16.57 mm x 114 mm                  \\
 Peso	& 52 gramos                         \\
 Tipo de membrana	& Tefl\'on           \\
 Seguro en Alimentos	& Si                    \\
@@ -701,7 +723,7 @@ En la Tabla \ref{tab:carac_rasp} se detallan las principales características t�
 \begin{figure}[ht]
     \centering
     \includegraphics[width=0.7\linewidth]{{Imagenes/2021/imag26.jpg}}
-    \caption[Placa Tentacle para Arduino]{Placa Tentacle para Arduino. }{\textbf{Fuente:} Página web del Fabricante}
+    \caption[Placa Tentacle para Arduino]{Placa Tentacle para Arduino. }{\textbf{Fuente:} Página web del Fabricante,\cite{whiteboxes-no-date}}
     \label{fig:4.5}
 \end{figure}
     Es una forma pr\'actica y fácil de leer múltiples sensores de la empresa Atlas Scientific, la placa puede alojar hasta 4 dispositivos EZO de Atlas Scientific para medir pH(Potencial de Hidrógeno), Oxígeno Disuelto(DO por sus siglas en inglés), conductividad eléctrica(CE), Temperatura(T), Potencial de Reducción de Oxidación(ORP por sus siglas en inglés)
@@ -844,6 +866,13 @@ Este subsistema auxiliar, está pensado por la capacidad de medici\'on a multi n
 Tal como se observa en la figura \ref{fig:batimetro} el sistema de medici\'on de profundidad fue dise\~nado de tal forma que permita ser instalado en la parte posterior (popa) del VAS, mediante dos abrazaderas, uno de su sujeci\'on y otra de sujeci\'on - nivelaci\'on para asegurarse  pueda estar en contacto con el agua al momento de instalarse.  Para la correcta  instalaci\'on de se debe alinear el sonar con la parte m\'as baja de la popa para estructura del sistema de batimetr\'ia tubos de PVC (Policloruro de Vinilo) roscables para la construcci\'on de la estructura de soporte, la secci\'on m\'as larga tiene una longitud de 1,5 [m], con el objetivo de poder ajustar la distancia de medici\'on inicial y que el sonar ubicado en el extremo est\'e totalmente sumergido. El sistema de fijaci\'on y ajuste est\'a compuesta por dos abrazaderas, una del tipo omega utilizada como gu\'ia de desplazamiento y la otra de abrazadora tipo anillo para el ajuste de profundidad. 
 \begin{figure}[H]
 \centering
+\fbox{\includegraphics[scale=0.7]{Imagenes/cap3/mecanizado.png} }
+\caption{MB7066 XL-MaxSonar-WRL1}{\textbf{Fuente:}, \cite{maxbotix-inc-2019}}.
+\label{fig:torneado}
+\end{figure}
+
+\begin{figure}[H]
+\centering
 \includegraphics[width=0.9\linewidth]{Imagenes/cap3/Batimetria.pdf}
 \caption{Dise\~no final de medidor de profundidad. }{\textbf{Fuente:} elaboración propia}
 \label{fig:batimetro}
@@ -916,7 +945,7 @@ Los criterios que se tuvo en cuenta al momento del diseño e implementación de 
     \item liviano: se espera que la interfaz gr\'afica pueda ser compatible y ejecutado en dispositivos como ser un raspberry pi, donde los recursos son limitados.
 \end{itemize}
 Tendiendo en cuenta los criterios expuestos, se opt\'o por el uso de la tecnolog\'ia Node-RED que es una herramienta web de programación basada en flujo, desarrollada originalmente por el equipo de Servicios de Tecnología Emergente de IBM y ahora parte de la Fundación OpenJS.
-La programaci\'on basada en flujo, fue inventada por J. Paul Morrison en la década de 1970, la programaci\'on basada en flujo es una forma de describir el comportamiento de una aplicación como una red de cajas negras o "nodos", como se denominan en Node-RED. Cada nodo tiene un prop\'osito bien definido; se le dan algunos datos, hace algo con esos datos y luego los pasa. La red es responsable del flujo de datos entre los nodos, \cite{noauthor_about_nodate}.
+La programaci\'on basada en flujo, fue inventada por J. Paul Morrison en la década de 1970, la programación basada en flujo es una forma de describir el comportamiento de una aplicación como una red de cajas negras o “nodos”, como se denominan en Node-RED. Cada nodo tiene un propósito bien definido; se le dan algunos datos, hace algo con esos datos y luego los pasa. La red es responsable del flujo de datos entre los nodos, \cite{noauthor_about_nodate}.
 Node Red, es un de código abierto desde septiembre de 2013. El entorno de ejecución ligero se basa en Node.js y aprovecha al máximo su modelo sin bloqueo basado en eventos. Esto lo hace ideal para ejecutarse en el borde de la red en hardware de bajo costo como Raspberry Pi, así como en la nube. Con más de 225 000 módulos en el repositorio de paquetes de Node, es fácil ampliar el rango de nodos de paleta para agregar nuevas capacidades.
 
 \begin{figure}[H]
